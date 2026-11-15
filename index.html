@@ -174,10 +174,277 @@ h1{
 .intro svg{flex-shrink:0;margin-top:2px;color:var(--cyan)}
 .intro strong{color:var(--cyan-soft);font-weight:700}
 
-/* ---------- Form sections ---------- */
+/* ---------- Layout: main + sidebar stack ---------- */
 .layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:1.25rem;align-items:start}
 .main{min-width:0;max-width:720px;width:100%}
 
+/* Sidebar column — stacks the Follow up panel and Crew credits panel */
+.side-col{
+  position:sticky;top:1rem;
+  display:flex;flex-direction:column;gap:1rem;
+  max-height:calc(100vh - 2rem);
+}
+.side-col > .panel{flex-shrink:0}
+
+/* Sidebar panels share scroll behaviour */
+.side{
+  overflow-y:auto;
+  padding:1rem;
+  scrollbar-width:thin;
+}
+.side::-webkit-scrollbar{width:6px}
+.side::-webkit-scrollbar-track{background:transparent}
+.side::-webkit-scrollbar-thumb{background:rgba(56,189,248,.3);border-radius:3px}
+.side-head{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.side-head h2{
+  font-family:var(--display);font-size:.78rem;font-weight:800;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--cyan-soft);
+  display:flex;align-items:center;gap:.55rem;
+}
+.side-head h2::before{
+  content:'';width:7px;height:7px;border-radius:50%;
+  background:var(--sky);box-shadow:0 0 8px var(--sky);
+  animation:pulseDot 2.2s ease-in-out infinite;
+}
+.x{
+  display:none;background:transparent;border:1px solid rgba(148,163,184,.25);
+  color:var(--muted);border-radius:8px;width:32px;height:32px;
+  cursor:pointer;transition:all .15s;
+  align-items:center;justify-content:center;
+}
+.x:hover{color:#fff;border-color:rgba(148,163,184,.5);background:rgba(255,255,255,.05)}
+.x svg{width:14px;height:14px}
+.side-sub{color:var(--dim);font-size:.82rem;margin:.5rem 0 .9rem;line-height:1.45}
+
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin-bottom:.8rem;padding:4px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(148,163,184,.12)}
+.tab{
+  background:transparent;border:0;color:var(--muted);border-radius:7px;
+  padding:.5rem .3rem;font-family:var(--sans);font-weight:600;font-size:.82rem;
+  cursor:pointer;transition:all .2s;
+  display:inline-flex;align-items:center;justify-content:center;gap:.4rem;
+}
+.tab b{font-family:var(--mono);font-size:.72rem;font-weight:700;opacity:.7}
+.tab.on{color:#fff;background:linear-gradient(180deg,rgba(34,211,238,.18),rgba(34,211,238,.06));box-shadow:0 0 0 1px rgba(34,211,238,.3) inset}
+.tab.on b{opacity:1;color:var(--cyan-soft)}
+.tab.on.cx{background:linear-gradient(180deg,rgba(251,113,133,.18),rgba(251,113,133,.06));box-shadow:0 0 0 1px rgba(251,113,133,.3) inset}
+.tab.on.cx b{color:#FECDD3}
+
+.side input[type=search]{
+  padding:.6rem .8rem .6rem 2.2rem;font-size:.9rem;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:left 12px center;
+}
+
+.mine{
+  display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--muted);
+  margin:.7rem 0 .9rem;text-transform:none;letter-spacing:0;font-weight:600;
+  cursor:pointer;user-select:none;
+}
+.mine input{
+  width:auto;appearance:none;width:16px;height:16px;
+  border:1.5px solid rgba(148,163,184,.4);border-radius:4px;
+  background:rgba(255,255,255,.04);cursor:pointer;
+  transition:all .15s;position:relative;flex-shrink:0;margin:0;
+}
+.mine input:checked{
+  background:var(--cyan);border-color:var(--cyan);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23040A12' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:center;
+}
+
+.dh{
+  font-family:var(--mono);font-size:.68rem;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--cyan-soft);margin:1rem 0 .5rem;
+  padding-bottom:.35rem;
+  border-bottom:1px solid rgba(34,211,238,.15);
+  display:flex;align-items:center;gap:.5rem;
+}
+.dh::before{content:'▸';opacity:.6}
+
+.rq{
+  border:1px solid rgba(148,163,184,.14);
+  border-left:3px solid var(--rc,#4FC3F7);
+  background:rgba(255,255,255,.025);
+  border-radius:9px;padding:.65rem .8rem;margin-bottom:.5rem;
+  transition:all .18s ease;
+}
+.rq:hover{background:rgba(255,255,255,.05);border-color:rgba(148,163,184,.25)}
+.rq.mine-row{
+  border-left-width:3px;
+  border-color:rgba(34,211,238,.35);
+  background:linear-gradient(135deg,rgba(34,211,238,.05),rgba(34,211,238,.01));
+  box-shadow:0 0 16px rgba(34,211,238,.15);
+}
+.rq .r1{display:flex;justify-content:space-between;align-items:center;gap:.5rem;margin-bottom:.15rem}
+.rq .rn{font-family:var(--display);font-size:.66rem;font-weight:800;color:var(--rc);letter-spacing:.08em;text-transform:uppercase}
+.rq .rp{font-weight:700;font-size:.92rem;overflow-wrap:anywhere;line-height:1.25;color:#F1F5F9}
+.rq .rb{color:var(--dim);font-size:.8rem;overflow-wrap:anywhere;margin-top:.15rem}
+.rq .rt{font-family:var(--mono);font-size:.78rem;color:var(--muted);margin-top:.3rem;letter-spacing:.02em}
+
+.bd{
+  display:inline-flex;align-items:center;gap:4px;
+  font-family:var(--mono);font-size:.6rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:2px 7px;border-radius:20px;white-space:nowrap;
+  border:1px solid;
+}
+.bd.p{background:rgba(251,191,36,.12);color:var(--amber);border-color:rgba(251,191,36,.4)}
+.bd.c{background:rgba(251,113,133,.12);color:#FECDD3;border-color:rgba(251,113,133,.4)}
+.bd.me{background:rgba(34,211,238,.14);color:var(--cyan-soft);border-color:rgba(34,211,238,.45)}
+.rq.cancelled .rp{text-decoration:line-through;opacity:.7}
+
+.side-empty{
+  text-align:center;color:var(--dim);padding:1.6rem .5rem;
+  font-size:.88rem;line-height:1.5;
+}
+.side-empty svg{display:block;margin:0 auto .6rem;opacity:.4}
+.side-foot{
+  font-size:.72rem;color:var(--dim);margin-top:.9rem;line-height:1.4;
+  font-family:var(--mono);letter-spacing:.02em;
+}
+.side-foot + .side-foot{margin-top:.5rem;padding-top:.5rem;border-top:1px dashed rgba(148,163,184,.12)}
+
+/* ---------- Crew Credits (now a standalone sidebar box) ---------- */
+.crew{
+  padding:1rem;
+  display:flex;flex-direction:column;
+  min-height:0;
+}
+.crew-head-row{
+  display:flex;align-items:center;justify-content:space-between;gap:.5rem;
+  margin-bottom:.35rem;
+}
+.crew-head-row h2{
+  font-family:var(--display);font-size:.78rem;font-weight:800;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--cyan-soft);
+  display:flex;align-items:center;gap:.55rem;
+}
+.crew-head-row h2::before{
+  content:'';width:7px;height:7px;border-radius:50%;
+  background:var(--violet);box-shadow:0 0 8px var(--violet);
+  animation:pulseDot 2.4s ease-in-out infinite;
+}
+.crew-sub{color:var(--dim);font-size:.78rem;margin:0 0 .8rem;line-height:1.45}
+
+.crew-panel{
+  max-height:320px;
+  overflow-y:auto;
+  padding-right:6px;
+  display:flex;
+  flex-direction:column;
+  gap:.5rem;
+  scrollbar-width:thin;
+  border-radius:10px;
+  outline:none;
+}
+.crew-panel:focus-visible{box-shadow:0 0 0 2px rgba(34,211,238,.45)}
+.crew-panel::-webkit-scrollbar{width:6px}
+.crew-panel::-webkit-scrollbar-track{background:transparent}
+.crew-panel::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,rgba(34,211,238,.5),rgba(56,189,248,.25));
+  border-radius:3px;
+}
+
+.crew-group{
+  border:1px solid rgba(148,163,184,.14);
+  border-left:3px solid var(--crew-color,var(--cyan));
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+  border-radius:9px;
+  overflow:hidden;
+  transition:border-color .2s;
+}
+.crew-group:hover{border-color:rgba(148,163,184,.28)}
+
+.crew-toggle{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.6rem;
+  padding:.5rem .75rem;
+  background:transparent;
+  border:0;
+  color:#fff;
+  cursor:pointer;
+  font:inherit;
+  text-align:left;
+  transition:background .18s;
+}
+.crew-toggle:hover{background:rgba(255,255,255,.04)}
+
+.crew-role{
+  display:inline-flex;
+  align-items:center;
+  gap:.55rem;
+  font-family:var(--display);
+  font-size:.64rem;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--crew-color,var(--cyan-soft));
+}
+.crew-role .dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--crew-color,var(--cyan));
+  box-shadow:0 0 8px var(--crew-color,var(--cyan));
+  flex-shrink:0;
+}
+.crew-count{
+  font-family:var(--mono);
+  font-size:.6rem;
+  font-weight:700;
+  padding:1px 7px;
+  border-radius:20px;
+  background:rgba(255,255,255,.06);
+  color:var(--dim);
+  border:1px solid rgba(148,163,184,.15);
+}
+
+.crew-chevron{
+  width:13px;height:13px;
+  color:var(--dim);
+  transition:transform .2s ease;
+  flex-shrink:0;
+}
+.crew-group[data-open="true"] .crew-chevron{transform:rotate(180deg)}
+
+.crew-body{display:none;padding:0 .75rem .6rem}
+.crew-group[data-open="true"] .crew-body{display:block}
+
+.crew-names{
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  gap:.3rem;
+  margin:.1rem 0 0;
+}
+.crew-names li{
+  font-size:.74rem;
+  font-weight:500;
+  color:#E2E8F0;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(148,163,184,.18);
+  border-radius:20px;
+  padding:.15rem .55rem;
+  transition:all .15s;
+  white-space:nowrap;
+}
+.crew-names li:hover{
+  background:rgba(34,211,238,.08);
+  border-color:rgba(34,211,238,.35);
+  color:var(--cyan-soft);
+}
+.crew-names .empty{
+  font-size:.74rem;
+  color:var(--dim);
+  font-style:italic;
+  background:none;
+  border:0;
+  padding:0;
+}
+
+/* ---------- Form sections ---------- */
 .sec{padding:1.1rem 1.15rem;margin-bottom:1rem}
 .sec h2{
   font-family:var(--display);font-size:.72rem;font-weight:800;
@@ -353,125 +620,6 @@ input.invalid,textarea.invalid,select.invalid{border-color:var(--rose);box-shado
 .done .btn.ghost{background:transparent;color:var(--cyan-soft);border:1px solid rgba(34,211,238,.4);box-shadow:none}
 .done .btn.ghost:hover{background:rgba(34,211,238,.08);transform:none}
 
-/* ---------- Sidebar ---------- */
-.side{
-  position:sticky;top:1rem;max-height:calc(100vh - 2rem);overflow-y:auto;
-  padding:1rem;
-  scrollbar-width:thin;
-}
-.side::-webkit-scrollbar{width:6px}
-.side::-webkit-scrollbar-track{background:transparent}
-.side::-webkit-scrollbar-thumb{background:rgba(56,189,248,.3);border-radius:3px}
-.side-head{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
-.side-head h2{
-  font-family:var(--display);font-size:.78rem;font-weight:800;
-  letter-spacing:.2em;text-transform:uppercase;color:var(--cyan-soft);
-  display:flex;align-items:center;gap:.55rem;
-}
-.side-head h2::before{
-  content:'';width:7px;height:7px;border-radius:50%;
-  background:var(--sky);box-shadow:0 0 8px var(--sky);
-  animation:pulseDot 2.2s ease-in-out infinite;
-}
-.x{
-  display:none;background:transparent;border:1px solid rgba(148,163,184,.25);
-  color:var(--muted);border-radius:8px;width:32px;height:32px;
-  cursor:pointer;transition:all .15s;
-  align-items:center;justify-content:center;
-}
-.x:hover{color:#fff;border-color:rgba(148,163,184,.5);background:rgba(255,255,255,.05)}
-.x svg{width:14px;height:14px}
-.side-sub{color:var(--dim);font-size:.82rem;margin:.5rem 0 .9rem;line-height:1.45}
-
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin-bottom:.8rem;padding:4px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(148,163,184,.12)}
-.tab{
-  background:transparent;border:0;color:var(--muted);border-radius:7px;
-  padding:.5rem .3rem;font-family:var(--sans);font-weight:600;font-size:.82rem;
-  cursor:pointer;transition:all .2s;
-  display:inline-flex;align-items:center;justify-content:center;gap:.4rem;
-}
-.tab b{font-family:var(--mono);font-size:.72rem;font-weight:700;opacity:.7}
-.tab.on{color:#fff;background:linear-gradient(180deg,rgba(34,211,238,.18),rgba(34,211,238,.06));box-shadow:0 0 0 1px rgba(34,211,238,.3) inset}
-.tab.on b{opacity:1;color:var(--cyan-soft)}
-.tab.on.cx{background:linear-gradient(180deg,rgba(251,113,133,.18),rgba(251,113,133,.06));box-shadow:0 0 0 1px rgba(251,113,133,.3) inset}
-.tab.on.cx b{color:#FECDD3}
-
-.side input[type=search]{
-  padding:.6rem .8rem .6rem 2.2rem;font-size:.9rem;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:left 12px center;
-}
-
-.mine{
-  display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--muted);
-  margin:.7rem 0 .9rem;text-transform:none;letter-spacing:0;font-weight:600;
-  cursor:pointer;user-select:none;
-}
-.mine input{
-  width:auto;appearance:none;width:16px;height:16px;
-  border:1.5px solid rgba(148,163,184,.4);border-radius:4px;
-  background:rgba(255,255,255,.04);cursor:pointer;
-  transition:all .15s;position:relative;flex-shrink:0;margin:0;
-}
-.mine input:checked{
-  background:var(--cyan);border-color:var(--cyan);
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23040A12' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:center;
-}
-
-.dh{
-  font-family:var(--mono);font-size:.68rem;font-weight:700;
-  letter-spacing:.14em;text-transform:uppercase;
-  color:var(--cyan-soft);margin:1rem 0 .5rem;
-  padding-bottom:.35rem;
-  border-bottom:1px solid rgba(34,211,238,.15);
-  display:flex;align-items:center;gap:.5rem;
-}
-.dh::before{content:'▸';opacity:.6}
-
-.rq{
-  border:1px solid rgba(148,163,184,.14);
-  border-left:3px solid var(--rc,#4FC3F7);
-  background:rgba(255,255,255,.025);
-  border-radius:9px;padding:.65rem .8rem;margin-bottom:.5rem;
-  transition:all .18s ease;
-}
-.rq:hover{background:rgba(255,255,255,.05);border-color:rgba(148,163,184,.25)}
-.rq.mine-row{
-  border-left-width:3px;
-  border-color:rgba(34,211,238,.35);
-  background:linear-gradient(135deg,rgba(34,211,238,.05),rgba(34,211,238,.01));
-  box-shadow:0 0 16px rgba(34,211,238,.15);
-}
-.rq .r1{display:flex;justify-content:space-between;align-items:center;gap:.5rem;margin-bottom:.15rem}
-.rq .rn{font-family:var(--display);font-size:.66rem;font-weight:800;color:var(--rc);letter-spacing:.08em;text-transform:uppercase}
-.rq .rp{font-weight:700;font-size:.92rem;overflow-wrap:anywhere;line-height:1.25;color:#F1F5F9}
-.rq .rb{color:var(--dim);font-size:.8rem;overflow-wrap:anywhere;margin-top:.15rem}
-.rq .rt{font-family:var(--mono);font-size:.78rem;color:var(--muted);margin-top:.3rem;letter-spacing:.02em}
-
-.bd{
-  display:inline-flex;align-items:center;gap:4px;
-  font-family:var(--mono);font-size:.6rem;font-weight:700;
-  letter-spacing:.1em;text-transform:uppercase;
-  padding:2px 7px;border-radius:20px;white-space:nowrap;
-  border:1px solid;
-}
-.bd.p{background:rgba(251,191,36,.12);color:var(--amber);border-color:rgba(251,191,36,.4)}
-.bd.c{background:rgba(251,113,133,.12);color:#FECDD3;border-color:rgba(251,113,133,.4)}
-.bd.me{background:rgba(34,211,238,.14);color:var(--cyan-soft);border-color:rgba(34,211,238,.45)}
-.rq.cancelled .rp{text-decoration:line-through;opacity:.7}
-
-.side-empty{
-  text-align:center;color:var(--dim);padding:1.6rem .5rem;
-  font-size:.88rem;line-height:1.5;
-}
-.side-empty svg{display:block;margin:0 auto .6rem;opacity:.4}
-.side-foot{
-  font-size:.72rem;color:var(--dim);margin-top:.9rem;line-height:1.4;
-  font-family:var(--mono);letter-spacing:.02em;
-}
-.side-foot + .side-foot{margin-top:.5rem;padding-top:.5rem;border-top:1px dashed rgba(148,163,184,.12)}
-
 /* ---------- Backdrop ---------- */
 .backdrop{position:fixed;inset:0;background:rgba(2,4,10,.7);backdrop-filter:blur(4px);z-index:40}
 .backdrop[hidden]{display:none}
@@ -479,137 +627,35 @@ input.invalid,textarea.invalid,select.invalid{border-color:var(--rose);box-shado
 /* ---------- Footer ---------- */
 footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;font-family:var(--mono);letter-spacing:.1em}
 
-/* ---------- Crew Credits ---------- */
-.crew-panel{
-  max-height:340px;
-  overflow-y:auto;
-  padding-right:6px;
-  display:flex;
-  flex-direction:column;
-  gap:.55rem;
-  scrollbar-width:thin;
-  border-radius:10px;
-  outline:none;
-}
-.crew-panel:focus-visible{box-shadow:0 0 0 2px rgba(34,211,238,.45)}
-.crew-panel::-webkit-scrollbar{width:6px}
-.crew-panel::-webkit-scrollbar-track{background:transparent}
-.crew-panel::-webkit-scrollbar-thumb{
-  background:linear-gradient(180deg,rgba(34,211,238,.5),rgba(56,189,248,.25));
-  border-radius:3px;
-}
-
-.crew-group{
-  border:1px solid rgba(148,163,184,.14);
-  border-left:3px solid var(--crew-color,var(--cyan));
-  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
-  border-radius:9px;
-  overflow:hidden;
-  transition:border-color .2s;
-}
-.crew-group:hover{border-color:rgba(148,163,184,.28)}
-
-.crew-head{
-  width:100%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:.6rem;
-  padding:.55rem .8rem;
-  background:transparent;
-  border:0;
-  color:#fff;
-  cursor:pointer;
-  font:inherit;
-  text-align:left;
-  transition:background .18s;
-}
-.crew-head:hover{background:rgba(255,255,255,.04)}
-
-.crew-role{
-  display:inline-flex;
-  align-items:center;
-  gap:.55rem;
-  font-family:var(--display);
-  font-size:.66rem;
-  font-weight:800;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--crew-color,var(--cyan-soft));
-}
-.crew-role .dot{
-  width:7px;height:7px;border-radius:50%;
-  background:var(--crew-color,var(--cyan));
-  box-shadow:0 0 8px var(--crew-color,var(--cyan));
-  flex-shrink:0;
-}
-.crew-count{
-  font-family:var(--mono);
-  font-size:.62rem;
-  font-weight:700;
-  padding:1px 7px;
-  border-radius:20px;
-  background:rgba(255,255,255,.06);
-  color:var(--dim);
-  border:1px solid rgba(148,163,184,.15);
-}
-
-.crew-chevron{
-  width:14px;height:14px;
-  color:var(--dim);
-  transition:transform .2s ease;
-  flex-shrink:0;
-}
-.crew-group[data-open="true"] .crew-chevron{transform:rotate(180deg)}
-
-.crew-body{display:none;padding:0 .8rem .7rem}
-.crew-group[data-open="true"] .crew-body{display:block}
-
-.crew-names{
-  list-style:none;
-  display:flex;
-  flex-wrap:wrap;
-  gap:.35rem;
-  margin:.1rem 0 0;
-}
-.crew-names li{
-  font-size:.78rem;
-  font-weight:500;
-  color:#E2E8F0;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(148,163,184,.18);
-  border-radius:20px;
-  padding:.2rem .6rem;
-  transition:all .15s;
-  white-space:nowrap;
-}
-.crew-names li:hover{
-  background:rgba(34,211,238,.08);
-  border-color:rgba(34,211,238,.35);
-  color:var(--cyan-soft);
-}
-.crew-names .empty{
-  font-size:.78rem;
-  color:var(--dim);
-  font-style:italic;
-  background:none;
-  border:0;
-  padding:0;
-}
-
 /* ---------- Responsive ---------- */
 @media (max-width:960px){
   .layout{grid-template-columns:minmax(0,1fr)}
   .sidebtn{display:inline-flex}
   .x{display:inline-flex}
-  .side{
-    position:fixed;top:0;right:0;bottom:0;width:min(92vw,400px);max-height:none;
-    border-radius:14px 0 0 14px;transform:translateX(105%);
-    transition:transform .3s cubic-bezier(.4,0,.2,1);z-index:50;
+
+  /* Sidebar column becomes a slide-in drawer */
+  .side-col{
+    position:fixed;top:0;right:0;bottom:0;
+    width:min(92vw,400px);
+    max-height:none;
+    padding:1rem;
+    gap:1rem;
+    overflow-y:auto;
+    border-radius:14px 0 0 14px;
+    transform:translateX(105%);
+    transition:transform .3s cubic-bezier(.4,0,.2,1);
+    z-index:50;
     background:var(--panel-solid);
     box-shadow:-20px 0 60px -20px rgba(0,0,0,.9);
   }
-  .side.open{transform:none}
+  .side-col.open{transform:none}
+  .side-col > .panel{
+    position:static;
+    max-height:none;
+    background:var(--panel);
+    border-radius:14px;
+  }
+  .crew-panel{max-height:280px}
 }
 @media (max-width:520px){
   body{padding:.9rem}
@@ -619,7 +665,6 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
   .logo-wrap::before{display:none}
   .slots{grid-template-columns:repeat(auto-fill,minmax(80px,1fr))}
   .chips{grid-template-columns:repeat(auto-fit,minmax(95px,1fr))}
-  .crew-panel{max-height:280px}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -711,23 +756,6 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
             </div>
           </div>
 
-          <div class="sec panel">
-            <span class="hairline"></span>
-            <h2><span class="step-num" id="stepCrewNum">4</span> Crew credits</h2>
-            <p class="note" style="margin-top:0;margin-bottom:.8rem">
-              Names by role. Scroll to browse, click a role to expand or collapse.
-            </p>
-            <div
-              id="crewPanel"
-              class="crew-panel"
-              role="region"
-              aria-label="Crew credits by role"
-              tabindex="0"
-            >
-              <!-- populated by JS -->
-            </div>
-          </div>
-
           <div class="msg" id="msg" role="alert" hidden>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
             <span id="msgText"></span>
@@ -758,28 +786,52 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
       </section>
     </div>
 
-    <aside class="side panel" id="side" aria-label="Request status">
-      <span class="hairline"></span>
-      <div class="side-head">
-        <h2>Follow up</h2>
-        <button class="x" id="sideClose" type="button" aria-label="Close panel">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      </div>
-      <p class="side-sub">Upcoming requests waiting for a manager's decision, and cancelled bookings.</p>
+    <!-- Sidebar column: Follow up + Crew credits, stacked -->
+    <div class="side-col" id="sideCol">
 
-      <div class="tabs" role="tablist">
-        <button class="tab on" type="button" data-tab="pending" role="tab">Pending <b id="cPending">0</b></button>
-        <button class="tab cx" type="button" data-tab="cancelled" role="tab">Cancelled <b id="cCancelled">0</b></button>
-      </div>
+      <!-- Follow up panel -->
+      <aside class="side panel" id="side" aria-label="Request status">
+        <span class="hairline"></span>
+        <div class="side-head">
+          <h2>Follow up</h2>
+          <button class="x" id="sideClose" type="button" aria-label="Close panel">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <p class="side-sub">Upcoming requests waiting for a manager's decision, and cancelled bookings.</p>
 
-      <input id="q" type="search" placeholder="Search name or production" maxlength="60" autocomplete="off" aria-label="Search requests">
-      <label class="mine"><input type="checkbox" id="mineOnly"> Only requests sent from this device</label>
+        <div class="tabs" role="tablist">
+          <button class="tab on" type="button" data-tab="pending" role="tab">Pending <b id="cPending">0</b></button>
+          <button class="tab cx" type="button" data-tab="cancelled" role="tab">Cancelled <b id="cCancelled">0</b></button>
+        </div>
 
-      <div id="sideList"></div>
-      <div class="side-foot" id="sideFoot">Loading…</div>
-      <div class="side-foot">Names and production titles are visible to everyone. Phone numbers are never shown.</div>
-    </aside>
+        <input id="q" type="search" placeholder="Search name or production" maxlength="60" autocomplete="off" aria-label="Search requests">
+        <label class="mine"><input type="checkbox" id="mineOnly"> Only requests sent from this device</label>
+
+        <div id="sideList"></div>
+        <div class="side-foot" id="sideFoot">Loading…</div>
+        <div class="side-foot">Names and production titles are visible to everyone. Phone numbers are never shown.</div>
+      </aside>
+
+      <!-- Crew credits panel (standalone box, not part of the booking form) -->
+      <aside class="crew panel" aria-label="Crew credits">
+        <span class="hairline"></span>
+        <div class="crew-head-row">
+          <h2>Crew credits</h2>
+        </div>
+        <p class="crew-sub">Names by role. Scroll to browse, click a role to expand or collapse.</p>
+        <div
+          id="crewPanel"
+          class="crew-panel"
+          role="region"
+          aria-label="Crew credits by role"
+          tabindex="0"
+        >
+          <!-- populated by JS -->
+        </div>
+      </aside>
+
+    </div>
   </div>
 
   <div class="backdrop" id="backdrop" hidden></div>
@@ -1085,7 +1137,7 @@ function showDone(d){
   window.scrollTo(0,0);
 }
 
-/* ---------- Sidebar ---------- */
+/* ---------- Sidebar (Follow up) ---------- */
 let sideRows=[],sideTab='pending',sideOk=true,sideUpdated=null;
 const MINE_KEY='fmc_my_reqs';
 function reqKey(room,date,start,name){return [room,date,String(start).slice(0,5),clean(name).toLowerCase()].join('|');}
@@ -1174,8 +1226,8 @@ function renderSide(){
     ? (sideUpdated?'Updated '+sideUpdated.toLocaleTimeString():'')
     : 'Could not refresh — retrying…';
 }
-function openSide(){$('side').classList.add('open');$('backdrop').hidden=false;}
-function closeSide(){$('side').classList.remove('open');$('backdrop').hidden=true;}
+function openSide(){$('sideCol').classList.add('open');$('backdrop').hidden=false;}
+function closeSide(){$('sideCol').classList.remove('open');$('backdrop').hidden=true;}
 function initSide(){
   document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{sideTab=t.dataset.tab;renderSide();}));
   $('q').addEventListener('input',renderSide);
@@ -1190,7 +1242,7 @@ function initSide(){
   document.addEventListener('visibilitychange',()=>{if(!document.hidden) loadSide();});
 }
 
-/* ---------- Crew credits renderer ---------- */
+/* ---------- Crew credits renderer (standalone box) ---------- */
 function renderCrew(){
   const panel = $('crewPanel');
   if(!panel) return;
@@ -1210,8 +1262,8 @@ function renderCrew(){
     group.style.setProperty('--crew-color', data.color || 'var(--cyan)');
     group.dataset.open = 'true';   // all open by default
 
-    // Header (clickable to collapse)
-    const head = el('button','crew-head');
+    // Header toggle
+    const head = el('button','crew-toggle');
     head.type = 'button';
     head.setAttribute('aria-expanded','true');
     head.setAttribute('aria-controls', `crew-body-${idx}`);
@@ -1243,26 +1295,22 @@ function renderCrew(){
     head.appendChild(rightSide);
     group.appendChild(head);
 
-    // Body (list of names)
+    // Body list
     const body = el('div','crew-body');
     body.id = `crew-body-${idx}`;
 
+    const ul = el('ul','crew-names');
     if(data.names.length){
-      const ul = el('ul','crew-names');
       data.names.forEach(name => {
-        const li = el('li','',name);
-        ul.appendChild(li);
+        ul.appendChild(el('li','',name));
       });
-      body.appendChild(ul);
     } else {
-      const ul = el('ul','crew-names');
       ul.appendChild(el('li','empty','No names listed'));
-      body.appendChild(ul);
     }
-
+    body.appendChild(ul);
     group.appendChild(body);
 
-    // Toggle on header click
+    // Toggle
     head.addEventListener('click', () => {
       const isOpen = group.dataset.open === 'true';
       group.dataset.open = String(!isOpen);
@@ -1273,11 +1321,6 @@ function renderCrew(){
   });
 
   panel.replaceChildren(frag);
-
-  // Mark step 4 as "done" once the user has opened or scrolled the panel
-  const markCrewDone = () => $('stepCrewNum').classList.add('done');
-  panel.addEventListener('click', markCrewDone, { once: true });
-  panel.addEventListener('scroll', markCrewDone, { once: true, passive: true });
 }
 
 /* ---------- Start ---------- */
