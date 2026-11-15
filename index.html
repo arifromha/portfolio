@@ -539,13 +539,13 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
       <div id="formView">
         <div class="intro">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-          <span> a manager will review your request and call to confirm. <strong>Your request is not a booking until a manager approves it.</strong></span>
+          <span>No account needed. Pick a room and time, leave your details, and a manager will review your request and call to confirm. <strong>Your request is not a booking until a manager approves it.</strong></span>
         </div>
 
         <form id="form" novalidate autocomplete="off">
           <div class="sec panel">
             <span class="hairline"></span>
-            <h2><span class="step-num" id="stepRoomNum">1</span> Choose a studio</h2>
+            <h2><span class="step-num" id="stepRoomNum">1</span> Choose a room</h2>
             <div class="chips" id="rooms"></div>
           </div>
 
@@ -653,9 +653,15 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
 <script>
 const SURL='https://zomkvqbknmbkvmaliqkg.supabase.co';
 const SKEY='sb_publishable_rFAc7fyGRDHr78wxTnJoCg_RGTak7mW';
-const ROOMS=['Studio A','Studio B','Studio C','PCR A','PCR B'];
+
+// Canonical list of rooms. Which of these are bookable is decided at runtime
+// by the studio_status table (manager-controlled).
+const ALL_ROOMS=['Studio A','Studio B','Studio C','PCR A','PCR B'];
 const ROOM_COLOR={'Studio A':'#4FC3F7','Studio B':'#FFD600','Studio C':'#00C853','PCR A':'#FF9800','PCR B':'#CE93D8'};
 const FIRST_START=6,LAST_END=23,MAX_DAYS=90,COOLDOWN_MS=15000,MAX_PENDING_NOTE=5;
+
+// Populated at boot from studio_status. Only these rooms are shown on the form.
+let activeRooms=[];
 
 function safeFetch(url,opts={}){
   const h={};
@@ -678,19 +684,54 @@ function niceDate(d){return new Date(d+'T00:00:00').toLocaleDateString(undefined
 
 let room=null,startHour=null,takenHours=new Set(),availKnown=false,seq=0,busy=false;
 
+/* ---------- Load active rooms from studio_status ---------- */
+async function loadActiveRooms(){
+  try{
+    const{data,error}=await sb.from('studio_status').select('studio,active');
+    if(error) throw error;
+
+    const activeSet=new Set(
+      (data||[])
+        .filter(r=>r.active===true && ALL_ROOMS.includes(r.studio))
+        .map(r=>r.studio)
+    );
+
+    // Fallback: if the table is empty or unreachable, show all known rooms so
+    // the form still works. A manager can restrict via studio_status later.
+    activeRooms = activeSet.size > 0
+      ? ALL_ROOMS.filter(r=>activeSet.has(r))
+      : ALL_ROOMS.slice();
+
+    console.info('[FMC] Active rooms:', activeRooms);
+  }catch(err){
+    console.warn('[FMC] Could not load studio_status — falling back to all rooms:',err);
+    activeRooms=ALL_ROOMS.slice();
+  }
+}
+
 /* ---------- Rooms ---------- */
 function buildRooms(){
-  ROOMS.forEach(r=>{
+  const container=$('rooms');
+  container.replaceChildren();
+
+  if(!activeRooms.length){
+    const empty=el('div','note warn','No studios are currently accepting bookings. Please contact the studio directly.');
+    container.appendChild(empty);
+    return;
+  }
+
+  activeRooms.forEach(r=>{
     const b=el('button','chip',r);
     b.type='button';
     b.setAttribute('aria-pressed','false');
-    b.style.setProperty('--rc',ROOM_COLOR[r]);
+    b.style.setProperty('--rc',ROOM_COLOR[r]||'#4FC3F7');
     b.addEventListener('click',()=>{room=r;startHour=null;markRooms();refreshSlots();});
-    $('rooms').appendChild(b);
+    container.appendChild(b);
   });
 }
 function markRooms(){
   [...$('rooms').children].forEach(b=>{
+    if(!b.classList.contains('chip')) return;
     const on=b.textContent===room;
     b.classList.toggle('on',on);
     b.setAttribute('aria-pressed',String(on));
@@ -763,6 +804,11 @@ function renderSlots(){
   updateSummary();
 }
 async function refreshSlots(){
+  // If the manager deactivated the currently selected room, clear it out.
+  if(room && !activeRooms.includes(room)){
+    room=null;
+    startHour=null;
+  }
   markRooms();renderSlots();
   await loadAvailability();
   renderSlots();
@@ -816,6 +862,7 @@ async function submit(){
   if($('website').value){ showDone({room:room||'—',date,start:'',end:'',prod,name,phone:phone||''}); return; }
 
   if(!room) return showMsg('Please choose a room.');
+  if(!activeRooms.includes(room)) return showMsg('That studio is no longer available. Please choose another room.');
   if(!date) return showMsg('Please choose a date.');
   if(date<localDate()) return showMsg('That date has already passed.');
   if(date>localDate(addDays(new Date(),MAX_DAYS))) return showMsg(`Requests can be made up to ${MAX_DAYS} days ahead.`);
@@ -897,7 +944,12 @@ async function loadSide(){
       .order('date',{ascending:true})
       .order('start_time',{ascending:true});
     if(error) throw error;
-    sideRows=(data||[]).filter(isUpcoming);
+    // Filter out pending requests for studios that are now inactive so users
+    // don't see orphaned requests. Cancelled history stays visible.
+    sideRows=(data||[]).filter(isUpcoming).filter(b=>{
+      if(b.status==='pending' && !activeRooms.includes(b.studio)) return false;
+      return true;
+    });
     sideOk=true;sideUpdated=new Date();
   }catch(e){
     console.error('Sidebar load failed:',e&&e.message?e.message:e);
@@ -972,7 +1024,8 @@ function initSide(){
 }
 
 /* ---------- Start ---------- */
-function init(){
+async function init(){
+  await loadActiveRooms();        // must run before buildRooms()
   buildRooms();
   const d=$('date'),today=localDate();
   d.min=today;d.max=localDate(addDays(new Date(),MAX_DAYS));d.value=today;
@@ -988,7 +1041,14 @@ function init(){
   renderSlots();
   initSide();
 }
-init();
+init().catch(err=>{
+  console.error('[FMC] Boot failed:',err);
+  // Degrade gracefully — render the form so the page isn't blank
+  activeRooms=ALL_ROOMS.slice();
+  buildRooms();
+  renderSlots();
+  initSide();
+});
 </script>
 </body>
 </html>
