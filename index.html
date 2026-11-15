@@ -69,6 +69,9 @@ a:hover{text-decoration:underline}
 
 /* ---------- Shell ---------- */
 .wrap{position:relative;max-width:1180px;margin:0 auto}
+@media (min-width:1280px){
+  .wrap{max-width:1500px}
+}
 .top{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:1rem;min-width:0}
 .logo-wrap{
@@ -174,17 +177,38 @@ h1{
 .intro svg{flex-shrink:0;margin-top:2px;color:var(--cyan)}
 .intro strong{color:var(--cyan-soft);font-weight:700}
 
-/* ---------- Layout: main + sidebar stack ---------- */
-.layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:1.25rem;align-items:start}
-.main{min-width:0;max-width:720px;width:100%}
+/* ---------- Layout: main + sidebar ---------- */
+.layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 380px;
+  gap:1.25rem;
+  align-items:start;
+}
+.main{min-width:0;max-width:820px;width:100%}
 
-/* Sidebar column — stacks the Follow up panel and Crew credits panel */
+/* Sidebar column — side-by-side on wide screens, stacked on narrow */
 .side-col{
-  position:sticky;top:1rem;
-  display:flex;flex-direction:column;gap:1rem;
+  position:sticky;
+  top:1rem;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1rem;
   max-height:calc(100vh - 2rem);
 }
-.side-col > .panel{flex-shrink:0}
+.side-col > .panel{min-width:0}
+
+/* Wide screens: widen the sidebar; Follow up gets more, Crew stays compact */
+@media (min-width:1280px){
+  .layout{grid-template-columns:minmax(0,1fr) 640px}
+  .side-col{
+    grid-template-columns:1fr 300px;
+    align-items:start;
+  }
+}
+/* Between 961 and 1279 the sidebar stays a single 380px column (stacked) */
+@media (max-width:1279px){
+  .layout{grid-template-columns:minmax(0,1fr) 380px}
+}
 
 /* Sidebar panels share scroll behaviour */
 .side{
@@ -305,7 +329,7 @@ h1{
 }
 .side-foot + .side-foot{margin-top:.5rem;padding-top:.5rem;border-top:1px dashed rgba(148,163,184,.12)}
 
-/* ---------- Crew Credits (now a standalone sidebar box) ---------- */
+/* ---------- Crew Credits (compact standalone sidebar box) ---------- */
 .crew{
   padding:1rem;
   display:flex;flex-direction:column;
@@ -328,12 +352,12 @@ h1{
 .crew-sub{color:var(--dim);font-size:.78rem;margin:0 0 .8rem;line-height:1.45}
 
 .crew-panel{
-  max-height:520px;
+  max-height:280px;
   overflow-y:auto;
   padding-right:6px;
   display:flex;
   flex-direction:column;
-  gap:.5rem;
+  gap:.4rem;
   scrollbar-width:thin;
   border-radius:10px;
   outline:none;
@@ -350,7 +374,7 @@ h1{
   border:1px solid rgba(148,163,184,.14);
   border-left:3px solid var(--crew-color,var(--cyan));
   background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
-  border-radius:9px;
+  border-radius:8px;
   overflow:hidden;
   transition:border-color .2s;
 }
@@ -362,7 +386,7 @@ h1{
   align-items:center;
   justify-content:space-between;
   gap:.6rem;
-  padding:.5rem .75rem;
+  padding:.45rem .7rem;
   background:transparent;
   border:0;
   color:#fff;
@@ -378,23 +402,23 @@ h1{
   align-items:center;
   gap:.55rem;
   font-family:var(--display);
-  font-size:.64rem;
+  font-size:.62rem;
   font-weight:800;
   letter-spacing:.12em;
   text-transform:uppercase;
   color:var(--crew-color,var(--cyan-soft));
 }
 .crew-role .dot{
-  width:7px;height:7px;border-radius:50%;
+  width:6px;height:6px;border-radius:50%;
   background:var(--crew-color,var(--cyan));
   box-shadow:0 0 8px var(--crew-color,var(--cyan));
   flex-shrink:0;
 }
 .crew-count{
   font-family:var(--mono);
-  font-size:.6rem;
+  font-size:.58rem;
   font-weight:700;
-  padding:1px 7px;
+  padding:1px 6px;
   border-radius:20px;
   background:rgba(255,255,255,.06);
   color:var(--dim);
@@ -402,31 +426,31 @@ h1{
 }
 
 .crew-chevron{
-  width:13px;height:13px;
+  width:12px;height:12px;
   color:var(--dim);
   transition:transform .2s ease;
   flex-shrink:0;
 }
 .crew-group[data-open="true"] .crew-chevron{transform:rotate(180deg)}
 
-.crew-body{display:none;padding:0 .75rem .6rem}
+.crew-body{display:none;padding:0 .7rem .55rem}
 .crew-group[data-open="true"] .crew-body{display:block}
 
 .crew-names{
   list-style:none;
   display:flex;
   flex-wrap:wrap;
-  gap:.3rem;
+  gap:.25rem;
   margin:.1rem 0 0;
 }
 .crew-names li{
-  font-size:.74rem;
+  font-size:.7rem;
   font-weight:500;
   color:#E2E8F0;
   background:rgba(255,255,255,.04);
   border:1px solid rgba(148,163,184,.18);
   border-radius:20px;
-  padding:.15rem .55rem;
+  padding:.1rem .5rem;
   transition:all .15s;
   white-space:nowrap;
 }
@@ -436,7 +460,7 @@ h1{
   color:var(--cyan-soft);
 }
 .crew-names .empty{
-  font-size:.74rem;
+  font-size:.7rem;
   color:var(--dim);
   font-style:italic;
   background:none;
@@ -647,6 +671,8 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
     z-index:50;
     background:var(--panel-solid);
     box-shadow:-20px 0 60px -20px rgba(0,0,0,.9);
+    display:flex;
+    flex-direction:column;
   }
   .side-col.open{transform:none}
   .side-col > .panel{
@@ -655,7 +681,7 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
     background:var(--panel);
     border-radius:14px;
   }
-  .crew-panel{max-height:280px}
+  .crew-panel{max-height:220px}
 }
 @media (max-width:520px){
   body{padding:.9rem}
@@ -786,7 +812,7 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
       </section>
     </div>
 
-    <!-- Sidebar column: Follow up + Crew credits, stacked -->
+    <!-- Sidebar column: Follow up + Crew credits (compact, collapsed by default) -->
     <div class="side-col" id="sideCol">
 
       <!-- Follow up panel -->
@@ -811,18 +837,15 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
         <div id="sideList"></div>
         <div class="side-foot" id="sideFoot">Loading…</div>
         <div class="side-foot">Names and production titles are visible to everyone. Phone numbers are never shown.</div>
-          </aside>     
- </div>
-        <aside class="side panel" id="side" aria-label="Request status">
-        <span class="hairline"></span>
-        <div class="side-head">
-      <!-- Crew credits panel (standalone box, not part of the booking form) -->
+      </aside>
+
+      <!-- Crew credits: compact, collapsed by default -->
       <aside class="crew panel" aria-label="Crew credits">
         <span class="hairline"></span>
         <div class="crew-head-row">
           <h2>Crew credits</h2>
         </div>
-        <p class="crew-sub">Names by role. Scroll to browse, click a role to expand or collapse.</p>
+        <p class="crew-sub">Click a role to expand names.</p>
         <div
           id="crewPanel"
           class="crew-panel"
@@ -831,10 +854,9 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
           tabindex="0"
         >
           <!-- populated by JS -->
-        </div>  </div>
+        </div>
       </aside>
-             
-</div>
+
     </div>
   </div>
 
@@ -846,16 +868,11 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
 const SURL='https://zomkvqbknmbkvmaliqkg.supabase.co';
 const SKEY='sb_publishable_rFAc7fyGRDHr78wxTnJoCg_RGTak7mW';
 
-// Canonical list of rooms. Which of these are bookable is decided at runtime
-// by the studio_status table (manager-controlled).
 const ALL_ROOMS=['Studio A','Studio B','Studio C','PCR A','PCR B'];
 const ROOM_COLOR={'Studio A':'#4FC3F7','Studio B':'#FFD600','Studio C':'#00C853','PCR A':'#FF9800','PCR B':'#CE93D8'};
 const FIRST_START=6,LAST_END=23,MAX_DAYS=90,COOLDOWN_MS=15000,MAX_PENDING_NOTE=5;
 
 /* ---------- Crew credits ---------- */
-// Grouped by role. Names are shown as pills.
-// To load from Supabase later, replace this constant with an async fetch
-// and call renderCrew() once the data arrives.
 const CREW = {
   'Light': {
     color: '#FBBF24',
@@ -867,15 +884,15 @@ const CREW = {
   },
   'Camera': {
     color: '#22D3EE',
-    names: ['Helen Gezahegn', 'Frezer Bedane', 'Tesfaye Arage', 'Tesfa Tegen', 'EShaneber ']
+    names: ['Helen Gezahegn', 'Frezer Bedane', 'Tesfaye Arage', 'Tesfa Tegen', 'EShaneber']
   },
   'Floor': {
     color: '#A78BFA',
-    names: ['Kalkidan Tilahun','Musse Selomon', 'Daniel']
+    names: ['Kalkidan Tilahun', 'Musse Selomon', 'Daniel']
   },
   'Supervisor': {
     color: '#FB7185',
-    names: ['Arefaine Mebrahtu', 'Belay Abera','Tamrat Tola', 'Addise Hymelo' ]
+    names: ['Arefaine Mebrahtu', 'Belay Abera', 'Tamrat Tola', 'Addise Hymelo']
   },
   'Vision Mixer': {
     color: '#38BDF8',
@@ -883,7 +900,6 @@ const CREW = {
   }
 };
 
-// Populated at boot from studio_status. Only these rooms are shown on the form.
 let activeRooms=[];
 
 function safeFetch(url,opts={}){
@@ -919,8 +935,6 @@ async function loadActiveRooms(){
         .map(r=>r.studio)
     );
 
-    // Fallback: if the table is empty or unreachable, show all known rooms so
-    // the form still works. A manager can restrict via studio_status later.
     activeRooms = activeSet.size > 0
       ? ALL_ROOMS.filter(r=>activeSet.has(r))
       : ALL_ROOMS.slice();
@@ -962,7 +976,7 @@ function markRooms(){
   $('stepRoomNum').classList.toggle('done',!!room);
 }
 
-/* ---------- Availability (approved bookings only) ---------- */
+/* ---------- Availability ---------- */
 async function loadAvailability(){
   const my=++seq,date=$('date').value;
   takenHours=new Set();availKnown=false;
@@ -1027,7 +1041,6 @@ function renderSlots(){
   updateSummary();
 }
 async function refreshSlots(){
-  // If the manager deactivated the currently selected room, clear it out.
   if(room && !activeRooms.includes(room)){
     room=null;
     startHour=null;
@@ -1167,8 +1180,6 @@ async function loadSide(){
       .order('date',{ascending:true})
       .order('start_time',{ascending:true});
     if(error) throw error;
-    // Filter out pending requests for studios that are now inactive so users
-    // don't see orphaned requests. Cancelled history stays visible.
     sideRows=(data||[]).filter(isUpcoming).filter(b=>{
       if(b.status==='pending' && !activeRooms.includes(b.studio)) return false;
       return true;
@@ -1246,7 +1257,7 @@ function initSide(){
   document.addEventListener('visibilitychange',()=>{if(!document.hidden) loadSide();});
 }
 
-/* ---------- Crew credits renderer (standalone box) ---------- */
+/* ---------- Crew credits renderer (collapsed by default) ---------- */
 function renderCrew(){
   const panel = $('crewPanel');
   if(!panel) return;
@@ -1255,8 +1266,7 @@ function renderCrew(){
   const entries = Object.entries(CREW);
 
   if(!entries.length){
-    const empty = el('div','note warn','No crew members listed yet.');
-    frag.appendChild(empty);
+    frag.appendChild(el('div','note warn','No crew members listed yet.'));
     panel.replaceChildren(frag);
     return;
   }
@@ -1264,12 +1274,12 @@ function renderCrew(){
   entries.forEach(([role, data], idx) => {
     const group = el('div','crew-group');
     group.style.setProperty('--crew-color', data.color || 'var(--cyan)');
-    group.dataset.open = 'true';   // all open by default
+    // Collapsed by default → names hidden until clicked
+    group.dataset.open = 'false';
 
-    // Header toggle
     const head = el('button','crew-toggle');
     head.type = 'button';
-    head.setAttribute('aria-expanded','true');
+    head.setAttribute('aria-expanded','false');
     head.setAttribute('aria-controls', `crew-body-${idx}`);
 
     const roleSpan = el('span','crew-role');
@@ -1299,22 +1309,18 @@ function renderCrew(){
     head.appendChild(rightSide);
     group.appendChild(head);
 
-    // Body list
     const body = el('div','crew-body');
     body.id = `crew-body-${idx}`;
 
     const ul = el('ul','crew-names');
     if(data.names.length){
-      data.names.forEach(name => {
-        ul.appendChild(el('li','',name));
-      });
+      data.names.forEach(name => ul.appendChild(el('li','',name)));
     } else {
       ul.appendChild(el('li','empty','No names listed'));
     }
     body.appendChild(ul);
     group.appendChild(body);
 
-    // Toggle
     head.addEventListener('click', () => {
       const isOpen = group.dataset.open === 'true';
       group.dataset.open = String(!isOpen);
@@ -1329,7 +1335,7 @@ function renderCrew(){
 
 /* ---------- Start ---------- */
 async function init(){
-  await loadActiveRooms();        // must run before buildRooms()
+  await loadActiveRooms();
   buildRooms();
   const d=$('date'),today=localDate();
   d.min=today;d.max=localDate(addDays(new Date(),MAX_DAYS));d.value=today;
@@ -1348,7 +1354,6 @@ async function init(){
 }
 init().catch(err=>{
   console.error('[FMC] Boot failed:',err);
-  // Degrade gracefully — render the form so the page isn't blank
   activeRooms=ALL_ROOMS.slice();
   buildRooms();
   renderSlots();
