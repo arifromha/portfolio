@@ -17,7 +17,129 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.min.js"></script>
 <style>
-/* ---------- Tokens ---------- */
+/* ---------- Tokens ---------- */ 
+/* ---------- Crew Credits ---------- */
+.crew-panel{
+  max-height:340px;
+  overflow-y:auto;
+  padding-right:6px;
+  display:flex;
+  flex-direction:column;
+  gap:.55rem;
+  scrollbar-width:thin;
+  border-radius:10px;
+  outline:none;
+}
+.crew-panel:focus-visible{box-shadow:0 0 0 2px rgba(34,211,238,.45)}
+.crew-panel::-webkit-scrollbar{width:6px}
+.crew-panel::-webkit-scrollbar-track{background:transparent}
+.crew-panel::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,rgba(34,211,238,.5),rgba(56,189,248,.25));
+  border-radius:3px;
+}
+
+.crew-group{
+  border:1px solid rgba(148,163,184,.14);
+  border-left:3px solid var(--crew-color,var(--cyan));
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+  border-radius:9px;
+  overflow:hidden;
+  transition:border-color .2s;
+}
+.crew-group:hover{border-color:rgba(148,163,184,.28)}
+
+.crew-head{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.6rem;
+  padding:.55rem .8rem;
+  background:transparent;
+  border:0;
+  color:#fff;
+  cursor:pointer;
+  font:inherit;
+  text-align:left;
+  transition:background .18s;
+}
+.crew-head:hover{background:rgba(255,255,255,.04)}
+
+.crew-role{
+  display:inline-flex;
+  align-items:center;
+  gap:.55rem;
+  font-family:var(--display);
+  font-size:.66rem;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--crew-color,var(--cyan-soft));
+}
+.crew-role .dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--crew-color,var(--cyan));
+  box-shadow:0 0 8px var(--crew-color,var(--cyan));
+  flex-shrink:0;
+}
+.crew-count{
+  font-family:var(--mono);
+  font-size:.62rem;
+  font-weight:700;
+  padding:1px 7px;
+  border-radius:20px;
+  background:rgba(255,255,255,.06);
+  color:var(--dim);
+  border:1px solid rgba(148,163,184,.15);
+}
+
+.crew-chevron{
+  width:14px;height:14px;
+  color:var(--dim);
+  transition:transform .2s ease;
+  flex-shrink:0;
+}
+.crew-group[data-open="true"] .crew-chevron{transform:rotate(180deg)}
+
+.crew-body{
+  display:none;
+  padding:0 .8rem .7rem;
+}
+.crew-group[data-open="true"] .crew-body{display:block}
+
+.crew-names{
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  gap:.35rem;
+  margin:.1rem 0 0;
+}
+.crew-names li{
+  font-size:.78rem;
+  font-weight:500;
+  color:#E2E8F0;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(148,163,184,.18);
+  border-radius:20px;
+  padding:.2rem .6rem;
+  transition:all .15s;
+  white-space:nowrap;
+}
+.crew-names li:hover{
+  background:rgba(34,211,238,.08);
+  border-color:rgba(34,211,238,.35);
+  color:var(--cyan-soft);
+}
+.crew-names .empty{
+  font-size:.78rem;
+  color:var(--dim);
+  font-style:italic;
+  background:none;
+  border:0;
+  padding:0;
+}
+
+      
 :root{
   --bg:#04070E;
   --panel:rgba(8,14,26,0.72);
@@ -649,7 +771,22 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
   <div class="backdrop" id="backdrop" hidden></div>
   <footer>FMC Studio · Booking Request</footer>
 </div>
-
+          <div class="sec panel">
+            <span class="hairline"></span>
+            <h2><span class="step-num" id="stepCrewNum">4</span> Crew credits</h2>
+            <p class="note" style="margin-top:0;margin-bottom:.8rem">
+              Names by role. Scroll to browse, click a role to expand or collapse.
+            </p>
+            <div
+              id="crewPanel"
+              class="crew-panel"
+              role="region"
+              aria-label="Crew credits by role"
+              tabindex="0"
+            >
+              <!-- populated by JS -->
+            </div>
+          </div>
 <script>
 const SURL='https://zomkvqbknmbkvmaliqkg.supabase.co';
 const SKEY='sb_publishable_rFAc7fyGRDHr78wxTnJoCg_RGTak7mW';
@@ -1048,7 +1185,38 @@ init().catch(err=>{
   buildRooms();
   renderSlots();
   initSide();
-});
+});  
+
+      /* ---------- Crew credits ---------- */
+// Grouped by role. Names are shown as pills.
+// To load from Supabase later, replace this constant with an async fetch
+// and call renderCrew() once the data arrives.
+const CREW = {
+  'Light': {
+    color: '#FBBF24',
+    names: ['Abebe Kebede', 'Meron Tesfaye', 'Yonas Alemu', 'Selamawit Haile']
+  },
+  'Sound': {
+    color: '#34D399',
+    names: ['Dawit Mekonnen', 'Hanna Girma', 'Bereket Assefa']
+  },
+  'Camera': {
+    color: '#22D3EE',
+    names: ['Samuel Tadesse', 'Rahel Desta', 'Kalkidan Wolde', 'Eyob Bekele', 'Marta Negash']
+  },
+  'Floor': {
+    color: '#A78BFA',
+    names: ['Tigist Abebe', 'Nahom Solomon']
+  },
+  'Supervisor': {
+    color: '#FB7185',
+    names: ['Alemayehu Fikru', 'Sara Mengistu']
+  },
+  'Vision Mixer': {
+    color: '#38BDF8',
+    names: ['Yohannes Gebre', 'Liya Tesfaye', 'Daniel Bekele']
+  }
+};
 </script>
 </body>
 </html>
