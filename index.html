@@ -658,14 +658,18 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
   .x{display:inline-flex}
 
   /* Sidebar column becomes a slide-in drawer */
+ @media (max-width:960px){
   .side-col{
-    position:fixed;top:0;right:0;bottom:0;
-    width:min(82vw,200px);
+    position:fixed;
+    top:0;
+    right:0;
+    bottom:0;
+    width:min(85vw, 340px);        /* ← was 92vw / 400px — narrower */
     max-height:none;
-    padding:1rem;
-    gap:1rem;
+    padding:.85rem;                /* ← was 1rem — tighter padding */
+    gap:.75rem;                    /* ← was 1rem — tighter gap */
     overflow-y:auto;
-    border-radius:14px 0 0 14px;
+    border-radius:12px 0 0 12px;   /* ← was 14px — slightly tighter corner */
     transform:translateX(105%);
     transition:transform .3s cubic-bezier(.4,0,.2,1);
     z-index:50;
@@ -681,7 +685,8 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
     background:var(--panel);
     border-radius:10px;
   }
-  .crew-panel{max-height:220px}
+  .crew-panel{max-height:180px}    /* ← was 220px — more compact */
+}
 }
 @media (max-width:520px){
   body{padding:.9rem}
