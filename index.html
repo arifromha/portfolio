@@ -17,129 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.min.js"></script>
 <style>
-/* ---------- Tokens ---------- */ 
-/* ---------- Crew Credits ---------- */
-.crew-panel{
-  max-height:340px;
-  overflow-y:auto;
-  padding-right:6px;
-  display:flex;
-  flex-direction:column;
-  gap:.55rem;
-  scrollbar-width:thin;
-  border-radius:10px;
-  outline:none;
-}
-.crew-panel:focus-visible{box-shadow:0 0 0 2px rgba(34,211,238,.45)}
-.crew-panel::-webkit-scrollbar{width:6px}
-.crew-panel::-webkit-scrollbar-track{background:transparent}
-.crew-panel::-webkit-scrollbar-thumb{
-  background:linear-gradient(180deg,rgba(34,211,238,.5),rgba(56,189,248,.25));
-  border-radius:3px;
-}
-
-.crew-group{
-  border:1px solid rgba(148,163,184,.14);
-  border-left:3px solid var(--crew-color,var(--cyan));
-  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
-  border-radius:9px;
-  overflow:hidden;
-  transition:border-color .2s;
-}
-.crew-group:hover{border-color:rgba(148,163,184,.28)}
-
-.crew-head{
-  width:100%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:.6rem;
-  padding:.55rem .8rem;
-  background:transparent;
-  border:0;
-  color:#fff;
-  cursor:pointer;
-  font:inherit;
-  text-align:left;
-  transition:background .18s;
-}
-.crew-head:hover{background:rgba(255,255,255,.04)}
-
-.crew-role{
-  display:inline-flex;
-  align-items:center;
-  gap:.55rem;
-  font-family:var(--display);
-  font-size:.66rem;
-  font-weight:800;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--crew-color,var(--cyan-soft));
-}
-.crew-role .dot{
-  width:7px;height:7px;border-radius:50%;
-  background:var(--crew-color,var(--cyan));
-  box-shadow:0 0 8px var(--crew-color,var(--cyan));
-  flex-shrink:0;
-}
-.crew-count{
-  font-family:var(--mono);
-  font-size:.62rem;
-  font-weight:700;
-  padding:1px 7px;
-  border-radius:20px;
-  background:rgba(255,255,255,.06);
-  color:var(--dim);
-  border:1px solid rgba(148,163,184,.15);
-}
-
-.crew-chevron{
-  width:14px;height:14px;
-  color:var(--dim);
-  transition:transform .2s ease;
-  flex-shrink:0;
-}
-.crew-group[data-open="true"] .crew-chevron{transform:rotate(180deg)}
-
-.crew-body{
-  display:none;
-  padding:0 .8rem .7rem;
-}
-.crew-group[data-open="true"] .crew-body{display:block}
-
-.crew-names{
-  list-style:none;
-  display:flex;
-  flex-wrap:wrap;
-  gap:.35rem;
-  margin:.1rem 0 0;
-}
-.crew-names li{
-  font-size:.78rem;
-  font-weight:500;
-  color:#E2E8F0;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(148,163,184,.18);
-  border-radius:20px;
-  padding:.2rem .6rem;
-  transition:all .15s;
-  white-space:nowrap;
-}
-.crew-names li:hover{
-  background:rgba(34,211,238,.08);
-  border-color:rgba(34,211,238,.35);
-  color:var(--cyan-soft);
-}
-.crew-names .empty{
-  font-size:.78rem;
-  color:var(--dim);
-  font-style:italic;
-  background:none;
-  border:0;
-  padding:0;
-}
-
-      
+/* ---------- Tokens ---------- */
 :root{
   --bg:#04070E;
   --panel:rgba(8,14,26,0.72);
@@ -601,6 +479,124 @@ input.invalid,textarea.invalid,select.invalid{border-color:var(--rose);box-shado
 /* ---------- Footer ---------- */
 footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;font-family:var(--mono);letter-spacing:.1em}
 
+/* ---------- Crew Credits ---------- */
+.crew-panel{
+  max-height:340px;
+  overflow-y:auto;
+  padding-right:6px;
+  display:flex;
+  flex-direction:column;
+  gap:.55rem;
+  scrollbar-width:thin;
+  border-radius:10px;
+  outline:none;
+}
+.crew-panel:focus-visible{box-shadow:0 0 0 2px rgba(34,211,238,.45)}
+.crew-panel::-webkit-scrollbar{width:6px}
+.crew-panel::-webkit-scrollbar-track{background:transparent}
+.crew-panel::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,rgba(34,211,238,.5),rgba(56,189,248,.25));
+  border-radius:3px;
+}
+
+.crew-group{
+  border:1px solid rgba(148,163,184,.14);
+  border-left:3px solid var(--crew-color,var(--cyan));
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+  border-radius:9px;
+  overflow:hidden;
+  transition:border-color .2s;
+}
+.crew-group:hover{border-color:rgba(148,163,184,.28)}
+
+.crew-head{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.6rem;
+  padding:.55rem .8rem;
+  background:transparent;
+  border:0;
+  color:#fff;
+  cursor:pointer;
+  font:inherit;
+  text-align:left;
+  transition:background .18s;
+}
+.crew-head:hover{background:rgba(255,255,255,.04)}
+
+.crew-role{
+  display:inline-flex;
+  align-items:center;
+  gap:.55rem;
+  font-family:var(--display);
+  font-size:.66rem;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--crew-color,var(--cyan-soft));
+}
+.crew-role .dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--crew-color,var(--cyan));
+  box-shadow:0 0 8px var(--crew-color,var(--cyan));
+  flex-shrink:0;
+}
+.crew-count{
+  font-family:var(--mono);
+  font-size:.62rem;
+  font-weight:700;
+  padding:1px 7px;
+  border-radius:20px;
+  background:rgba(255,255,255,.06);
+  color:var(--dim);
+  border:1px solid rgba(148,163,184,.15);
+}
+
+.crew-chevron{
+  width:14px;height:14px;
+  color:var(--dim);
+  transition:transform .2s ease;
+  flex-shrink:0;
+}
+.crew-group[data-open="true"] .crew-chevron{transform:rotate(180deg)}
+
+.crew-body{display:none;padding:0 .8rem .7rem}
+.crew-group[data-open="true"] .crew-body{display:block}
+
+.crew-names{
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  gap:.35rem;
+  margin:.1rem 0 0;
+}
+.crew-names li{
+  font-size:.78rem;
+  font-weight:500;
+  color:#E2E8F0;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(148,163,184,.18);
+  border-radius:20px;
+  padding:.2rem .6rem;
+  transition:all .15s;
+  white-space:nowrap;
+}
+.crew-names li:hover{
+  background:rgba(34,211,238,.08);
+  border-color:rgba(34,211,238,.35);
+  color:var(--cyan-soft);
+}
+.crew-names .empty{
+  font-size:.78rem;
+  color:var(--dim);
+  font-style:italic;
+  background:none;
+  border:0;
+  padding:0;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width:960px){
   .layout{grid-template-columns:minmax(0,1fr)}
@@ -623,6 +619,7 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
   .logo-wrap::before{display:none}
   .slots{grid-template-columns:repeat(auto-fill,minmax(80px,1fr))}
   .chips{grid-template-columns:repeat(auto-fit,minmax(95px,1fr))}
+  .crew-panel{max-height:280px}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -714,6 +711,23 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
             </div>
           </div>
 
+          <div class="sec panel">
+            <span class="hairline"></span>
+            <h2><span class="step-num" id="stepCrewNum">4</span> Crew credits</h2>
+            <p class="note" style="margin-top:0;margin-bottom:.8rem">
+              Names by role. Scroll to browse, click a role to expand or collapse.
+            </p>
+            <div
+              id="crewPanel"
+              class="crew-panel"
+              role="region"
+              aria-label="Crew credits by role"
+              tabindex="0"
+            >
+              <!-- populated by JS -->
+            </div>
+          </div>
+
           <div class="msg" id="msg" role="alert" hidden>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
             <span id="msgText"></span>
@@ -771,22 +785,7 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
   <div class="backdrop" id="backdrop" hidden></div>
   <footer>FMC Studio · Booking Request</footer>
 </div>
-          <div class="sec panel">
-            <span class="hairline"></span>
-            <h2><span class="step-num" id="stepCrewNum">4</span> Crew credits</h2>
-            <p class="note" style="margin-top:0;margin-bottom:.8rem">
-              Names by role. Scroll to browse, click a role to expand or collapse.
-            </p>
-            <div
-              id="crewPanel"
-              class="crew-panel"
-              role="region"
-              aria-label="Crew credits by role"
-              tabindex="0"
-            >
-              <!-- populated by JS -->
-            </div>
-          </div>
+
 <script>
 const SURL='https://zomkvqbknmbkvmaliqkg.supabase.co';
 const SKEY='sb_publishable_rFAc7fyGRDHr78wxTnJoCg_RGTak7mW';
@@ -796,6 +795,37 @@ const SKEY='sb_publishable_rFAc7fyGRDHr78wxTnJoCg_RGTak7mW';
 const ALL_ROOMS=['Studio A','Studio B','Studio C','PCR A','PCR B'];
 const ROOM_COLOR={'Studio A':'#4FC3F7','Studio B':'#FFD600','Studio C':'#00C853','PCR A':'#FF9800','PCR B':'#CE93D8'};
 const FIRST_START=6,LAST_END=23,MAX_DAYS=90,COOLDOWN_MS=15000,MAX_PENDING_NOTE=5;
+
+/* ---------- Crew credits ---------- */
+// Grouped by role. Names are shown as pills.
+// To load from Supabase later, replace this constant with an async fetch
+// and call renderCrew() once the data arrives.
+const CREW = {
+  'Light': {
+    color: '#FBBF24',
+    names: ['Abebe Kebede', 'Meron Tesfaye', 'Yonas Alemu', 'Selamawit Haile']
+  },
+  'Sound': {
+    color: '#34D399',
+    names: ['Dawit Mekonnen', 'Hanna Girma', 'Bereket Assefa']
+  },
+  'Camera': {
+    color: '#22D3EE',
+    names: ['Samuel Tadesse', 'Rahel Desta', 'Kalkidan Wolde', 'Eyob Bekele', 'Marta Negash']
+  },
+  'Floor': {
+    color: '#A78BFA',
+    names: ['Tigist Abebe', 'Nahom Solomon']
+  },
+  'Supervisor': {
+    color: '#FB7185',
+    names: ['Alemayehu Fikru', 'Sara Mengistu']
+  },
+  'Vision Mixer': {
+    color: '#38BDF8',
+    names: ['Yohannes Gebre', 'Liya Tesfaye', 'Daniel Bekele']
+  }
+};
 
 // Populated at boot from studio_status. Only these rooms are shown on the form.
 let activeRooms=[];
@@ -1160,6 +1190,96 @@ function initSide(){
   document.addEventListener('visibilitychange',()=>{if(!document.hidden) loadSide();});
 }
 
+/* ---------- Crew credits renderer ---------- */
+function renderCrew(){
+  const panel = $('crewPanel');
+  if(!panel) return;
+
+  const frag = document.createDocumentFragment();
+  const entries = Object.entries(CREW);
+
+  if(!entries.length){
+    const empty = el('div','note warn','No crew members listed yet.');
+    frag.appendChild(empty);
+    panel.replaceChildren(frag);
+    return;
+  }
+
+  entries.forEach(([role, data], idx) => {
+    const group = el('div','crew-group');
+    group.style.setProperty('--crew-color', data.color || 'var(--cyan)');
+    group.dataset.open = 'true';   // all open by default
+
+    // Header (clickable to collapse)
+    const head = el('button','crew-head');
+    head.type = 'button';
+    head.setAttribute('aria-expanded','true');
+    head.setAttribute('aria-controls', `crew-body-${idx}`);
+
+    const roleSpan = el('span','crew-role');
+    roleSpan.appendChild(el('span','dot'));
+    roleSpan.appendChild(document.createTextNode(role));
+    head.appendChild(roleSpan);
+
+    const rightSide = el('span');
+    rightSide.style.display = 'inline-flex';
+    rightSide.style.alignItems = 'center';
+    rightSide.style.gap = '.55rem';
+
+    rightSide.appendChild(el('span','crew-count', String(data.names.length)));
+
+    const chevron = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    chevron.setAttribute('class','crew-chevron');
+    chevron.setAttribute('viewBox','0 0 24 24');
+    chevron.setAttribute('fill','none');
+    chevron.setAttribute('stroke','currentColor');
+    chevron.setAttribute('stroke-width','2.5');
+    chevron.setAttribute('stroke-linecap','round');
+    chevron.setAttribute('stroke-linejoin','round');
+    chevron.setAttribute('aria-hidden','true');
+    chevron.innerHTML = '<polyline points="6 9 12 15 18 9"/>';
+    rightSide.appendChild(chevron);
+
+    head.appendChild(rightSide);
+    group.appendChild(head);
+
+    // Body (list of names)
+    const body = el('div','crew-body');
+    body.id = `crew-body-${idx}`;
+
+    if(data.names.length){
+      const ul = el('ul','crew-names');
+      data.names.forEach(name => {
+        const li = el('li','',name);
+        ul.appendChild(li);
+      });
+      body.appendChild(ul);
+    } else {
+      const ul = el('ul','crew-names');
+      ul.appendChild(el('li','empty','No names listed'));
+      body.appendChild(ul);
+    }
+
+    group.appendChild(body);
+
+    // Toggle on header click
+    head.addEventListener('click', () => {
+      const isOpen = group.dataset.open === 'true';
+      group.dataset.open = String(!isOpen);
+      head.setAttribute('aria-expanded', String(!isOpen));
+    });
+
+    frag.appendChild(group);
+  });
+
+  panel.replaceChildren(frag);
+
+  // Mark step 4 as "done" once the user has opened or scrolled the panel
+  const markCrewDone = () => $('stepCrewNum').classList.add('done');
+  panel.addEventListener('click', markCrewDone, { once: true });
+  panel.addEventListener('scroll', markCrewDone, { once: true, passive: true });
+}
+
 /* ---------- Start ---------- */
 async function init(){
   await loadActiveRooms();        // must run before buildRooms()
@@ -1177,6 +1297,7 @@ async function init(){
   });
   renderSlots();
   initSide();
+  renderCrew();
 }
 init().catch(err=>{
   console.error('[FMC] Boot failed:',err);
@@ -1185,38 +1306,8 @@ init().catch(err=>{
   buildRooms();
   renderSlots();
   initSide();
-});  
-
-      /* ---------- Crew credits ---------- */
-// Grouped by role. Names are shown as pills.
-// To load from Supabase later, replace this constant with an async fetch
-// and call renderCrew() once the data arrives.
-const CREW = {
-  'Light': {
-    color: '#FBBF24',
-    names: ['Abebe Kebede', 'Meron Tesfaye', 'Yonas Alemu', 'Selamawit Haile']
-  },
-  'Sound': {
-    color: '#34D399',
-    names: ['Dawit Mekonnen', 'Hanna Girma', 'Bereket Assefa']
-  },
-  'Camera': {
-    color: '#22D3EE',
-    names: ['Samuel Tadesse', 'Rahel Desta', 'Kalkidan Wolde', 'Eyob Bekele', 'Marta Negash']
-  },
-  'Floor': {
-    color: '#A78BFA',
-    names: ['Tigist Abebe', 'Nahom Solomon']
-  },
-  'Supervisor': {
-    color: '#FB7185',
-    names: ['Alemayehu Fikru', 'Sara Mengistu']
-  },
-  'Vision Mixer': {
-    color: '#38BDF8',
-    names: ['Yohannes Gebre', 'Liya Tesfaye', 'Daniel Bekele']
-  }
-};
+  renderCrew();
+});
 </script>
 </body>
 </html>
