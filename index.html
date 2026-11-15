@@ -2,2092 +2,993 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FMC â€” Studio Booking System</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FMC Studio — Request a Booking</title>
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'self';
+               script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+               style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+               font-src https://fonts.gstatic.com;
+               img-src 'self' data:;
+               connect-src https://zomkvqbknmbkvmaliqkg.supabase.co;">
+<link rel="icon" href="data:image/jpeg;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.min.js"></script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&display=swap');
+/* ---------- Tokens ---------- */
 :root{
-  --c:#4FC3F7;--g:#FFD600;--gr:#00C853;--r:#F44336;--am:#FF9800;
-  --bg:#04080f;--card:rgba(4,14,32,0.96);--dim:rgba(255,255,255,0.45);
-  --border:rgba(79,195,247,0.18);--b2:rgba(255,255,255,0.07);
+  --bg:#04070E;
+  --panel:rgba(8,14,26,0.72);
+  --panel-solid:#060B16;
+  --border:rgba(56,189,248,0.16);
+  --border-strong:rgba(34,211,238,0.38);
+  --cyan:#22D3EE;
+  --cyan-soft:#67E8F9;
+  --sky:#38BDF8;
+  --emerald:#34D399;
+  --amber:#FBBF24;
+  --violet:#A78BFA;
+  --rose:#FB7185;
+  --text:#E2E8F0;
+  --muted:#94A3B8;
+  --dim:#64748B;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --display:'Orbitron','JetBrains Mono',monospace;
+  --sans:'Plus Jakarta Sans',system-ui,sans-serif;
+  --room:#4FC3F7;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Rajdhani',sans-serif;background:var(--bg);color:#fff;min-height:100vh}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(79,195,247,0.022) 1px,transparent 1px),linear-gradient(90deg,rgba(79,195,247,0.022) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0}
-@keyframes fu{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-@keyframes pulse{0%,100%{box-shadow:0 0 6px rgba(255,51,85,0.3)}50%{box-shadow:0 0 18px rgba(255,51,85,0.7)}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:var(--sans);background:var(--bg);color:var(--text);
+  min-height:100vh;padding:1.25rem;
+  -webkit-font-smoothing:antialiased;
+  position:relative;isolation:isolate;
+  line-height:1.5;
+}
+body::before{
+  content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 50% at 12% 0%,rgba(34,211,238,.13) 0%,transparent 55%),
+    radial-gradient(ellipse 50% 40% at 88% 5%,rgba(52,211,153,.09) 0%,transparent 55%),
+    radial-gradient(ellipse 70% 55% at 50% 105%,rgba(167,139,250,.09) 0%,transparent 55%),
+    linear-gradient(rgba(56,189,248,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(56,189,248,.035) 1px,transparent 1px);
+  background-size:100% 100%,100% 100%,100% 100%,48px 48px,48px 48px;
+}
+body::after{
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.01) 0,rgba(255,255,255,.01) 1px,transparent 1px,transparent 3px);
+  opacity:.5;mix-blend-mode:overlay;
+}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--cyan-soft);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ---------- Shell ---------- */
+.wrap{position:relative;max-width:1180px;margin:0 auto}
+.top{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:1rem;min-width:0}
+.logo-wrap{
+  position:relative;width:56px;height:56px;flex-shrink:0;border-radius:50%;
+  display:grid;place-items:center;
+}
+.logo-wrap::before{
+  content:'';position:absolute;inset:-3px;border-radius:50%;
+  background:conic-gradient(from 0deg,var(--cyan),var(--amber),var(--emerald),var(--violet),var(--cyan));
+  filter:blur(6px);opacity:.55;animation:spin 14s linear infinite;z-index:0;
+}
+.logo-wrap::after{
+  content:'';position:absolute;inset:-1px;border-radius:50%;
+  border:1.5px solid rgba(251,191,36,.55);z-index:2;
+}
+.logo{position:relative;z-index:1;width:54px;height:54px;border-radius:50%;object-fit:cover;box-shadow:0 0 20px rgba(34,211,238,.35)}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* â”€â”€ LOGIN â”€â”€ */
-#login-screen{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center}
-.lbox{background:var(--card);border:1px solid rgba(79,195,247,0.28);border-radius:20px;padding:2.5rem 2.25rem;width:100%;max-width:400px;box-shadow:0 0 60px rgba(79,195,247,0.08),0 30px 80px rgba(0,0,0,0.6);position:relative;z-index:1}
-.llogo{font-family:'Orbitron',monospace;font-size:1.15rem;font-weight:900;background:linear-gradient(90deg,var(--c),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;letter-spacing:2px;margin-bottom:3px}
-.lsub{text-align:center;font-size:0.72rem;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:1.75rem}
-.ltabs{display:flex;gap:4px;background:rgba(255,255,255,0.04);border-radius:10px;padding:3px;margin-bottom:1.4rem}
-.ltab{flex:1;padding:0.38rem;border:none;border-radius:7px;background:transparent;color:var(--dim);font-family:'Rajdhani',sans-serif;font-size:0.8rem;font-weight:600;cursor:pointer;letter-spacing:1px;text-transform:uppercase;transition:all 0.2s}
-.ltab.on{background:rgba(79,195,247,0.13);color:var(--c)}
-.lf{margin-bottom:0.9rem}
-.lf label{display:block;font-size:0.68rem;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
-.lf .fw{position:relative}
-.lf input,.lf select{width:100%;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#fff;padding:0.72rem 1rem 0.72rem 2.6rem;font-family:'Rajdhani',sans-serif;font-size:0.95rem;transition:all 0.22s}
-.lf input:focus,.lf select:focus{outline:none;border-color:var(--c);box-shadow:0 0 14px rgba(79,195,247,0.15)}
-.lf select{background-color:rgba(0,0,0,0.5);padding-left:2.6rem}
-.lf select option{background:#040c1c}
-.lf .fi{position:absolute;left:0.85rem;top:50%;transform:translateY(-50%);color:var(--dim);font-size:0.82rem;pointer-events:none}
-.lf .tpw{position:absolute;right:0.85rem;top:50%;transform:translateY(-50%);color:var(--dim);background:none;border:none;cursor:pointer;font-size:0.82rem}
-.lbtn{width:100%;padding:0.82rem;background:linear-gradient(135deg,rgba(79,195,247,0.18),rgba(255,214,0,0.1));border:1px solid rgba(79,195,247,0.38);border-radius:10px;color:#fff;font-family:'Orbitron',monospace;font-size:0.76rem;font-weight:700;letter-spacing:2px;cursor:pointer;transition:all 0.22s;margin-top:0.4rem;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:7px}
-.lbtn:hover{background:linear-gradient(135deg,rgba(79,195,247,0.28),rgba(255,214,0,0.18))}
-.lbtn:disabled{opacity:0.55;cursor:not-allowed}
-.lerr{border-radius:8px;padding:0.55rem 0.85rem;font-size:0.8rem;margin-bottom:0.8rem;display:none;text-align:center}
-
-/* â”€â”€ NAV â”€â”€ */
-#nav{position:sticky;top:0;z-index:200;background:rgba(4,8,15,0.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);display:none;align-items:center;justify-content:space-between;padding:0 1.5rem;height:58px}
-.brand{font-family:'Orbitron',monospace;font-size:0.92rem;font-weight:900;background:linear-gradient(90deg,var(--c),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px}
-.tabs{display:flex;gap:2px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:3px}
-.tab{font-family:'Rajdhani',sans-serif;font-size:0.76rem;font-weight:600;letter-spacing:1px;padding:0.36rem 0.85rem;border:none;border-radius:7px;background:transparent;color:var(--dim);cursor:pointer;transition:all 0.2s;text-transform:uppercase;white-space:nowrap}
-.tab:hover{color:#fff;background:rgba(255,255,255,0.05)}
-.tab.on{background:linear-gradient(135deg,rgba(79,195,247,0.15),rgba(2,119,189,0.15));color:var(--c)}
-.tab i{margin-right:4px}
-#clock{font-family:'Share Tech Mono',monospace;font-size:0.9rem;color:var(--c);letter-spacing:2px}
-.uchip{display:flex;align-items:center;gap:7px;background:rgba(79,195,247,0.07);border:1px solid rgba(79,195,247,0.2);border-radius:20px;padding:4px 12px 4px 8px;cursor:pointer;transition:all 0.18s}
-.uchip:hover{background:rgba(79,195,247,0.13)}
-.uavt{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:0.62rem;font-weight:700;background:linear-gradient(135deg,var(--c),var(--g))}
-.umenu{position:absolute;top:calc(100%+8px);right:0;background:rgba(4,12,28,0.98);border:1px solid var(--border);border-radius:10px;padding:0.5rem;min-width:180px;box-shadow:0 10px 40px rgba(0,0,0,0.5);display:none;z-index:300}
-.umenu.open{display:block}
-.umitem{padding:0.5rem 0.75rem;border-radius:7px;font-size:0.82rem;cursor:pointer;transition:background 0.18s;display:flex;align-items:center;gap:8px}
-.umitem:hover{background:rgba(255,255,255,0.06)}
-.umitem.danger{color:var(--r)}
-.umitem.danger:hover{background:rgba(244,67,54,0.1)}
-.umsep{height:1px;background:var(--border);margin:0.3rem 0}
-#uarea{position:relative}
-.role-badge{font-size:0.62rem;padding:2px 7px;border-radius:12px;font-family:'Orbitron',monospace;letter-spacing:1px;text-transform:uppercase}
-.rb-manager{background:rgba(255,214,0,0.15);color:var(--g);border:1px solid rgba(255,214,0,0.3)}
-.rb-journalist{background:rgba(79,195,247,0.12);color:var(--c);border:1px solid rgba(79,195,247,0.28)}
-
-/* â”€â”€ PAGES â”€â”€ */
-.page{display:none;padding:1.5rem;position:relative;z-index:1;animation:fu 0.28s ease}
-.page.on{display:block}
-
-/* â”€â”€ SHARED â”€â”€ */
-.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.25rem;transition:border-color 0.3s}
-.stitle{font-family:'Orbitron',monospace;font-size:0.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--c);margin-bottom:1rem;padding-bottom:0.45rem;border-bottom:1px solid var(--border)}
-.btn{font-family:'Rajdhani',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:0.45rem 1rem;border:none;border-radius:8px;cursor:pointer;transition:all 0.18s;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
-.bc{background:rgba(79,195,247,0.12);border:1px solid rgba(79,195,247,0.35);color:var(--c)}.bc:hover{background:rgba(79,195,247,0.22)}
-.bg{background:rgba(255,214,0,0.12);border:1px solid rgba(255,214,0,0.35);color:var(--g)}.bg:hover{background:rgba(255,214,0,0.22)}
-.bgr{background:rgba(0,200,83,0.12);border:1px solid rgba(0,200,83,0.35);color:var(--gr)}.bgr:hover{background:rgba(0,200,83,0.22)}
-.br{background:rgba(244,67,54,0.12);border:1px solid rgba(244,67,54,0.35);color:var(--r)}.br:hover{background:rgba(244,67,54,0.22)}
-.bam{background:rgba(255,152,0,0.12);border:1px solid rgba(255,152,0,0.35);color:var(--am)}
-.sm{padding:0.28rem 0.65rem;font-size:0.72rem}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.1rem}
-@media(max-width:700px){.g2,.g3{grid-template-columns:1fr}}
-.fg{margin-bottom:0.85rem}
-.fg label{display:block;font-size:0.7rem;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
-.fg input,.fg select,.fg textarea{width:100%;background:rgba(0,0,0,0.4);border:1px solid var(--b2);border-radius:8px;color:#fff;padding:0.55rem 0.85rem;font-family:'Rajdhani',sans-serif;font-size:0.92rem;transition:all 0.22s}
-.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--c);box-shadow:0 0 10px rgba(79,195,247,0.15)}
-.fg select option{background:#040c1c}
-.fg textarea{resize:vertical;min-height:70px}
-.mover{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.78);backdrop-filter:blur(8px);align-items:center;justify-content:center}
-.mover.open{display:flex}
-.modal{background:rgba(4,12,26,0.99);border:1px solid var(--border);border-radius:16px;padding:1.75rem;min-width:340px;max-width:520px;width:92%;box-shadow:0 24px 70px rgba(0,0,0,0.6);animation:fu 0.22s ease;max-height:90vh;overflow-y:auto}
-.mtitle{font-family:'Orbitron',monospace;font-size:0.8rem;color:var(--c);margin-bottom:1rem;letter-spacing:2px}
-.mfoot{display:flex;justify-content:flex-end;gap:0.65rem;margin-top:1.25rem}
-#toast-wrap{position:fixed;bottom:1.4rem;right:1.4rem;z-index:9000;display:flex;flex-direction:column;gap:0.45rem;pointer-events:none}
-.toast-item{background:rgba(4,12,28,0.98);border-radius:10px;padding:0.72rem 1rem;font-size:0.83rem;min-width:210px;box-shadow:0 8px 30px rgba(0,0,0,0.4);animation:fu 0.3s ease;display:flex;align-items:center;gap:8px}
-.toast-item.success{border:1px solid rgba(0,200,83,0.4);color:var(--gr)}
-.toast-item.error{border:1px solid rgba(244,67,54,0.4);color:var(--r)}
-.toast-item.info{border:1px solid rgba(79,195,247,0.3);color:var(--c)}
-.toast-item.warning{border:1px solid rgba(255,152,0,0.4);color:var(--am)}
-
-/* â”€â”€ MOBILE â”€â”€ */
-@media(max-width:640px){
-  #nav{padding:0 0.85rem;height:52px}
-  .brand{font-size:0.72rem;letter-spacing:1px}
-  .tabs{gap:1px;padding:2px}
-  .tab{font-size:0.65rem;padding:0.3rem 0.55rem;letter-spacing:0.5px}
-  .tab i{margin-right:2px}
-  #clock{display:none}
-  .page{padding:0.85rem}
-  .studio-grid{grid-template-columns:1fr 1fr}
-  .g2,.g3{grid-template-columns:1fr}
-  .lbox{padding:1.75rem 1.25rem;border-radius:14px}
-  .llogo{font-size:0.95rem}
-  .modal{padding:1.25rem;min-width:unset;border-radius:12px}
-  .time-slots{grid-template-columns:repeat(auto-fill,minmax(76px,1fr))}
-  .rc-header{flex-direction:column;gap:0.65rem}
-  .rc-actions{display:flex;gap:0.5rem;width:100%}
-  .rc-actions .btn{flex:1;justify-content:center}
-  .dt{font-size:0.75rem}
-  .dt th,.dt td{padding:0.45rem 0.55rem}
-  /* hide less important columns on mobile */
-  .dt .mob-hide{display:none}
-  #room-picker{grid-template-columns:1fr 1fr 1fr}
-  .review-card{padding:0.9rem}
-  /* floating request button on mobile */
-  #mob-fab{display:flex}
+.brand-title-row{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+h1{
+  font-family:var(--display);font-size:1.15rem;font-weight:900;
+  letter-spacing:.14em;color:#fff;
+  text-shadow:0 0 18px rgba(34,211,238,.5);
+  white-space:nowrap;
 }
-@media(min-width:641px){#mob-fab{display:none}}
+.tag{
+  display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;
+  font-family:var(--mono);font-size:9px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--cyan-soft);
+  background:rgba(34,211,238,.10);border:1px solid rgba(34,211,238,.32);
+}
+.tag::before{
+  content:'';width:5px;height:5px;border-radius:50%;
+  background:var(--cyan);box-shadow:0 0 6px var(--cyan);
+  animation:pulseDot 2s ease-in-out infinite;
+}
+@keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.4}}
+.brand p{color:var(--muted);font-size:.85rem;margin-top:2px;letter-spacing:.02em}
 
-/* â”€â”€ FLOATING ACTION BUTTON (mobile) â”€â”€ */
-#mob-fab{position:fixed;bottom:1.5rem;right:1.5rem;z-index:400;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--c),var(--p,#0277BD));border:none;color:#fff;font-size:1.35rem;cursor:pointer;box-shadow:0 4px 20px rgba(79,195,247,0.4);align-items:center;justify-content:center;transition:all 0.22s}
-#mob-fab:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(79,195,247,0.55)}
-.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:0.66rem;font-weight:700;letter-spacing:1px;text-transform:uppercase}
-.b-pending{background:rgba(255,152,0,0.15);color:var(--am);border:1px solid rgba(255,152,0,0.35)}
-.b-approved{background:rgba(0,200,83,0.13);color:var(--gr);border:1px solid rgba(0,200,83,0.32)}
-.b-rejected{background:rgba(244,67,54,0.13);color:var(--r);border:1px solid rgba(244,67,54,0.32)}
-.b-cancelled{background:rgba(255,255,255,0.05);color:var(--dim);border:1px solid var(--b2)}
-.b-completed{background:rgba(79,195,247,0.08);color:var(--dim);border:1px solid var(--b2)}
-.hide-past{display:none!important}
+/* ---------- Buttons ---------- */
+.btn{
+  width:100%;background:linear-gradient(180deg,#4ADE80,#22C55E);color:#03140A;border:0;
+  border-radius:12px;padding:1rem;font-family:var(--display);font-size:.85rem;font-weight:800;
+  letter-spacing:.16em;text-transform:uppercase;cursor:pointer;
+  box-shadow:0 8px 24px -8px rgba(52,211,153,.6),0 0 0 1px rgba(255,255,255,.06) inset;
+  transition:transform .15s ease,box-shadow .2s ease,filter .2s;
+  display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+}
+.btn:hover:not(:disabled){transform:translateY(-1px);filter:brightness(1.05);box-shadow:0 12px 28px -8px rgba(52,211,153,.75)}
+.btn:active:not(:disabled){transform:translateY(0)}
+.btn:disabled{opacity:.6;cursor:wait}
+.btn-spinner{
+  width:14px;height:14px;border-radius:50%;
+  border:2px solid currentColor;border-top-color:transparent;
+  animation:spin .7s linear infinite;display:none;
+}
+.btn.is-loading .btn-spinner{display:inline-block}
+.btn.is-loading .btn-label{opacity:.7}
 
-/* â”€â”€ STUDIO CARDS â”€â”€ */
-.studio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:1.5rem}
-.studio-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.25rem;transition:all 0.22s;cursor:pointer;position:relative;overflow:hidden}
-.studio-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,0.3)}
-.studio-card.available{border-color:rgba(0,200,83,0.3)}
-.studio-card.booked{border-color:rgba(244,67,54,0.35)}
-.studio-card.pcr{border-color:rgba(255,214,0,0.25)}
-.sc-label{font-family:'Orbitron',monospace;font-size:1rem;font-weight:700;margin-bottom:4px}
-.sc-type{font-size:0.75rem;color:var(--dim);margin-bottom:10px}
-.sc-status{display:flex;align-items:center;gap:7px;font-size:0.78rem}
-.sd{width:9px;height:9px;border-radius:50%;flex-shrink:0}
-.sd-avail{background:var(--gr);box-shadow:0 0 7px var(--gr)}
-.sd-booked{background:var(--r);box-shadow:0 0 7px var(--r);animation:pulse 1.5s infinite}
-.sc-current{font-size:0.72rem;color:var(--dim);margin-top:8px;padding-top:8px;border-top:1px solid var(--b2)}
-.sc-book-btn{position:absolute;bottom:1rem;right:1rem}
+.sidebtn{
+  display:none;align-items:center;gap:.5rem;
+  background:rgba(34,211,238,.10);color:var(--cyan-soft);
+  border:1px solid rgba(34,211,238,.32);
+  border-radius:10px;padding:.55rem .85rem;
+  font-family:var(--mono);font-size:11px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;cursor:pointer;
+  transition:all .2s;
+}
+.sidebtn:hover{background:rgba(34,211,238,.18);color:#fff}
+.sidebtn b{
+  background:var(--amber);color:#1A1204;border-radius:10px;
+  padding:0 7px;font-family:var(--mono);font-size:.72rem;
+  min-width:20px;text-align:center;
+}
 
-/* â”€â”€ CALENDAR â”€â”€ */
-.cal-nav{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
-.cal-month-lbl{font-family:'Orbitron',monospace;font-size:0.82rem;color:var(--c);flex:1;text-align:center}
-.cal-hdr{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:2px}
-.cal-hdr-day{font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--dim);text-align:center;padding:0.35rem;text-transform:uppercase;letter-spacing:1px}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
-.cal-cell{min-height:72px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:5px;cursor:pointer;transition:all 0.18s;position:relative}
-.cal-cell:hover{background:rgba(79,195,247,0.05);border-color:rgba(79,195,247,0.2)}
-.cal-cell.today{border-color:rgba(79,195,247,0.45);background:rgba(79,195,247,0.04)}
-.cal-cell.other-month{opacity:0.3}
-.cal-date-num{font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--dim);margin-bottom:3px}
-.cal-date-num.today-num{color:var(--c);font-weight:700}
-.cal-ev{font-size:0.6rem;border-radius:3px;padding:1px 4px;margin-bottom:2px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-weight:600;cursor:pointer}
-.ev-A{background:rgba(79,195,247,0.2);color:var(--c)}
-.ev-B{background:rgba(255,214,0,0.18);color:var(--g)}
-.ev-C{background:rgba(0,200,83,0.16);color:var(--gr)}
-.ev-PA{background:rgba(255,152,0,0.18);color:var(--am)}
-.ev-PB{background:rgba(124,58,237,0.18);color:#a78bfa}
-.ev-pending{opacity:0.6;border:1px dashed currentColor}
+/* ---------- Panels ---------- */
+.panel{
+  position:relative;background:var(--panel);border:1px solid var(--border);
+  border-radius:14px;backdrop-filter:blur(16px) saturate(140%);
+  -webkit-backdrop-filter:blur(16px) saturate(140%);
+  box-shadow:0 0 0 1px rgba(34,211,238,.04) inset,0 1px 0 rgba(255,255,255,.04) inset,0 20px 50px -20px rgba(0,0,0,.8),0 0 60px -30px rgba(34,211,238,.35);
+}
+.panel::before,.panel::after{
+  content:'';position:absolute;width:12px;height:12px;
+  border:1.5px solid var(--cyan);opacity:.65;pointer-events:none;
+}
+.panel::before{top:-1px;left:-1px;border-right:0;border-bottom:0;border-top-left-radius:4px}
+.panel::after{bottom:-1px;right:-1px;border-left:0;border-top:0;border-bottom-right-radius:4px}
+.panel > .hairline{
+  position:absolute;top:-1px;left:16px;right:16px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--cyan),var(--violet),transparent);
+  opacity:.5;
+}
 
-/* â”€â”€ BOOKING TABLE â”€â”€ */
-.dt{width:100%;border-collapse:collapse;font-size:0.85rem}
-.dt th{font-family:'Share Tech Mono',monospace;font-size:0.64rem;letter-spacing:2px;text-transform:uppercase;color:var(--c);padding:0.65rem 0.9rem;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
-.dt td{padding:0.62rem 0.9rem;border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:middle}
-.dt tr:hover td{background:rgba(79,195,247,0.025)}
-.dt tr:last-child td{border-bottom:none}
-::-webkit-scrollbar{width:4px;height:4px}
-::-webkit-scrollbar-thumb{background:rgba(79,195,247,0.2);border-radius:4px}
+/* ---------- Intro callout ---------- */
+.intro{
+  display:flex;gap:12px;align-items:flex-start;
+  background:linear-gradient(135deg,rgba(34,211,238,.07),rgba(34,211,238,.02));
+  border:1px solid rgba(34,211,238,.22);border-radius:12px;
+  padding:.85rem 1rem;margin-bottom:1rem;line-height:1.5;font-size:.92rem;
+  color:rgba(226,232,240,.85);
+}
+.intro svg{flex-shrink:0;margin-top:2px;color:var(--cyan)}
+.intro strong{color:var(--cyan-soft);font-weight:700}
 
-/* â”€â”€ TIME SLOT PICKER â”€â”€ */
-.time-slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px;max-height:220px;overflow-y:auto;padding:2px}
-.ts{padding:0.4rem 0.5rem;border-radius:7px;font-family:'Share Tech Mono',monospace;font-size:0.72rem;text-align:center;cursor:pointer;transition:all 0.18s;border:1px solid var(--b2);background:rgba(255,255,255,0.03);color:var(--dim)}
-.ts:hover:not(.ts-taken){background:rgba(79,195,247,0.1);border-color:var(--c);color:var(--c)}
-.ts.ts-selected{background:rgba(79,195,247,0.18);border-color:var(--c);color:var(--c);font-weight:700}
-.ts.ts-taken{background:rgba(244,67,54,0.08);border-color:rgba(244,67,54,0.25);color:rgba(244,67,54,0.5);cursor:not-allowed;text-decoration:line-through}
-.ts.ts-pending{background:rgba(255,152,0,0.08);border-color:rgba(255,152,0,0.25);color:rgba(255,152,0,0.6);cursor:not-allowed}
+/* ---------- Form sections ---------- */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:1.25rem;align-items:start}
+.main{min-width:0;max-width:720px;width:100%}
 
-/* â”€â”€ CONFLICT WARNING â”€â”€ */
-.conflict-box{background:rgba(244,67,54,0.1);border:1px solid rgba(244,67,54,0.35);border-radius:9px;padding:0.75rem 1rem;font-size:0.8rem;color:var(--r);display:none;margin-bottom:0.75rem}
+.sec{padding:1.1rem 1.15rem;margin-bottom:1rem}
+.sec h2{
+  font-family:var(--display);font-size:.72rem;font-weight:800;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--cyan-soft);
+  margin-bottom:1rem;display:flex;align-items:center;gap:.7rem;
+}
+.step-num{
+  flex-shrink:0;width:26px;height:26px;border-radius:50%;
+  display:grid;place-items:center;
+  font-family:var(--mono);font-size:.72rem;font-weight:800;
+  color:#03140A;background:linear-gradient(135deg,var(--cyan),var(--sky));
+  box-shadow:0 0 12px rgba(34,211,238,.45),0 0 0 1px rgba(34,211,238,.2) inset;
+}
+.step-num.done{background:linear-gradient(135deg,#4ADE80,#22C55E);box-shadow:0 0 12px rgba(52,211,153,.5)}
 
-/* â”€â”€ STAT CARDS â”€â”€ */
-.sc-stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.35rem}
-.sc-stat .sl{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:3px}
-.sc-stat .sv{font-family:'Orbitron',monospace;font-size:1.6rem;font-weight:700}
-.sc-stat .ss{font-size:0.74rem;color:var(--dim);margin-top:3px}
+/* ---------- Labels & inputs ---------- */
+label{
+  display:block;font-size:.72rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);
+  margin:.95rem 0 .35rem;
+}
+label small{text-transform:none;letter-spacing:0;font-weight:500;color:var(--dim);font-size:.9em}
+.sec h2 + label,
+.sec h2 + .row2,
+.sec h2 + .chips,
+.sec h2 + .slots,
+.row2 > div > label{margin-top:0}
 
-/* â”€â”€ MANAGER REVIEW CARD â”€â”€ */
-.review-card{background:var(--card);border:1px solid rgba(255,152,0,0.25);border-radius:12px;padding:1.1rem 1.35rem;margin-bottom:0.75rem;transition:all 0.22s;animation:fu 0.25s ease}
-.review-card:hover{border-color:rgba(255,152,0,0.45)}
-.rc-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:0.75rem}
-.rc-studio{font-family:'Orbitron',monospace;font-size:0.88rem;font-weight:700}
-.rc-prod{font-size:0.88rem;margin-bottom:2px}
-.rc-meta{font-size:0.76rem;color:var(--dim);display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:0.5rem}
-.rc-meta span{display:flex;align-items:center;gap:5px}
-.rc-actions{display:flex;gap:0.5rem}
-.rc-notes{font-size:0.78rem;color:rgba(79,195,247,0.7);background:rgba(79,195,247,0.05);border-radius:7px;padding:0.45rem 0.65rem;margin-top:0.5rem;border-left:2px solid rgba(79,195,247,0.3)}
-.day-pill{display:inline-flex;align-items:center;gap:5px;padding:0.3rem 0.7rem;border-radius:20px;border:1px solid var(--b2);background:rgba(255,255,255,0.03);color:var(--dim);cursor:pointer;font-size:0.78rem;font-weight:600;transition:all 0.18s;user-select:none}
-.day-pill:has(input:checked){background:rgba(79,195,247,0.15);border-color:rgba(79,195,247,0.45);color:var(--c)}
-.day-pill input{display:none}
-.b-recurring-badge{display:inline-block;padding:2px 7px;border-radius:12px;font-size:0.62rem;font-weight:700;background:rgba(79,195,247,0.12);color:var(--c);border:1px solid rgba(79,195,247,0.28);margin-left:5px}
+input[type=text],input[type=tel],input[type=date],input[type=search],select,textarea{
+  width:100%;background:rgba(255,255,255,.04);
+  border:1px solid rgba(148,163,184,.22);
+  border-radius:9px;color:#fff;padding:.75rem .85rem;
+  font-family:var(--sans);font-size:.98rem;font-weight:500;
+  transition:border-color .2s,box-shadow .2s,background .2s;
+}
+input:hover,select:hover,textarea:hover{border-color:rgba(148,163,184,.35)}
+input:focus,select:focus,textarea:focus{
+  outline:none;border-color:var(--cyan);background:rgba(34,211,238,.04);
+  box-shadow:0 0 0 3px rgba(34,211,238,.18);
+}
+input::placeholder,textarea::placeholder{color:var(--dim);font-weight:400}
+select{appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;padding-right:34px;
+}
+select option{background:#0a1628;color:#fff}
+textarea{resize:vertical;min-height:80px;line-height:1.45}
+input[type=date]{color-scheme:dark;cursor:pointer}
+input[type=date]::-webkit-calendar-picker-indicator{filter:invert(.7);cursor:pointer}
+input.invalid,textarea.invalid,select.invalid{border-color:var(--rose);box-shadow:0 0 0 3px rgba(251,113,133,.15)}
 
-/* â”€â”€ REPORTS â”€â”€ */
-.rep-bar-row{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.65rem}
-.rep-bar-label{font-size:0.8rem;width:90px;flex-shrink:0;font-weight:600}
-.rep-bar-track{flex:1;height:10px;background:rgba(255,255,255,0.06);border-radius:99px;overflow:hidden}
-.rep-bar-fill{height:100%;border-radius:99px;transition:width 0.6s ease}
-.rep-bar-val{font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:var(--dim);width:34px;text-align:right;flex-shrink:0}
-.donut-wrap{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
-.donut-legend{display:flex;flex-direction:column;gap:7px}
-.donut-legend-item{display:flex;align-items:center;gap:7px;font-size:0.8rem}
-.donut-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-top:.95rem}
+
+/* ---------- Room chips ---------- */
+.chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:.6rem}
+.chip{
+  position:relative;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1.5px solid rgba(148,163,184,.18);
+  border-left:4px solid var(--rc);
+  color:#fff;border-radius:10px;padding:.75rem .55rem .7rem;
+  font-family:var(--display);font-size:.72rem;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;cursor:pointer;text-align:center;
+  transition:all .18s ease;
+}
+.chip:hover{background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.04));border-color:rgba(148,163,184,.32);transform:translateY(-1px)}
+.chip.on{
+  background:linear-gradient(180deg,color-mix(in srgb,var(--rc) 25%,transparent),color-mix(in srgb,var(--rc) 8%,transparent));
+  border-color:var(--rc);border-left-color:var(--rc);
+  box-shadow:0 0 18px color-mix(in srgb,var(--rc) 40%,transparent),0 0 0 1px color-mix(in srgb,var(--rc) 30%,transparent) inset;
+}
+.chip.on::after{
+  content:'';position:absolute;top:6px;right:6px;width:14px;height:14px;
+  border-radius:50%;background:var(--rc);
+  box-shadow:0 0 8px var(--rc);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:center;
+}
+
+/* ---------- Time slots ---------- */
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:.45rem}
+.slot{
+  background:linear-gradient(180deg,rgba(52,211,153,.10),rgba(52,211,153,.03));
+  border:1px solid rgba(52,211,153,.32);color:#fff;border-radius:8px;
+  padding:.55rem .3rem;font-family:var(--mono);font-size:.85rem;font-weight:600;
+  cursor:pointer;line-height:1.2;text-align:center;
+  transition:all .15s ease;
+}
+.slot small{display:block;font-size:.68rem;opacity:.75;font-weight:400;margin-top:2px}
+.slot:hover:not(:disabled){
+  background:linear-gradient(180deg,rgba(52,211,153,.22),rgba(52,211,153,.08));
+  border-color:rgba(52,211,153,.55);transform:translateY(-1px);
+}
+.slot.sel{
+  background:linear-gradient(180deg,#4ADE80,#22C55E);color:#03140A;
+  border-color:#4ADE80;font-weight:800;
+  box-shadow:0 0 16px rgba(52,211,153,.6),0 0 0 1px rgba(255,255,255,.15) inset;
+}
+.slot:disabled{cursor:not-allowed;background:rgba(255,255,255,.03);border-color:rgba(148,163,184,.12);color:rgba(148,163,184,.45)}
+.slot.taken:disabled{background:rgba(251,113,133,.08);border-color:rgba(251,113,133,.25);color:rgba(251,113,133,.6)}
+
+/* ---------- Legend & notes ---------- */
+.legend{display:flex;gap:1.2rem;flex-wrap:wrap;font-size:.76rem;color:var(--dim);margin-top:.9rem;font-family:var(--mono);letter-spacing:.04em}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;border:1px solid rgba(255,255,255,.1)}
+.note{font-size:.84rem;color:var(--muted);margin-top:.7rem;line-height:1.45}
+.note.warn{
+  color:var(--amber);background:rgba(251,191,36,.06);
+  border:1px solid rgba(251,191,36,.25);border-radius:8px;
+  padding:.55rem .75rem;
+}
+
+/* ---------- Summary & messages ---------- */
+.summary{
+  font-family:var(--mono);font-size:.85rem;font-weight:600;
+  letter-spacing:.04em;color:var(--cyan-soft);text-align:center;
+  padding:.8rem;margin:.4rem 0 .8rem;min-height:2.4rem;
+  background:rgba(34,211,238,.05);
+  border:1px dashed rgba(34,211,238,.25);
+  border-radius:9px;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+}
+.summary:empty{display:none}
+.summary::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--cyan);box-shadow:0 0 8px var(--cyan);
+  flex-shrink:0;
+}
+.summary:empty::before{display:none}
+
+.msg{
+  display:flex;gap:.7rem;align-items:flex-start;
+  border-radius:9px;padding:.8rem .95rem;margin-bottom:.9rem;
+  font-weight:600;line-height:1.4;font-size:.92rem;
+  background:rgba(251,113,133,.10);border:1px solid rgba(251,113,133,.45);
+  color:#FECDD3;
+  animation:msgIn .25s ease;
+}
+.msg svg{flex-shrink:0;color:var(--rose);margin-top:1px}
+.msg[hidden]{display:none}
+@keyframes msgIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* ---------- Success view ---------- */
+.done{padding:2rem 1.4rem;text-align:center;border-color:rgba(52,211,153,.35)}
+.done-icon{
+  width:72px;height:72px;margin:0 auto 1rem;
+  border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle,rgba(52,211,153,.18),rgba(52,211,153,.04));
+  border:1.5px solid rgba(52,211,153,.5);
+  box-shadow:0 0 30px rgba(52,211,153,.35),0 0 0 6px rgba(52,211,153,.06);
+  animation:doneIn .5s cubic-bezier(.2,1.3,.4,1);
+}
+.done-icon svg{width:34px;height:34px;color:#4ADE80;filter:drop-shadow(0 0 8px rgba(52,211,153,.8))}
+@keyframes doneIn{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.done h2{
+  font-family:var(--display);font-size:1rem;font-weight:900;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--emerald);
+  margin-bottom:.5rem;
+}
+.done p{color:var(--muted);font-size:.92rem;line-height:1.5}
+.done dl{
+  display:grid;grid-template-columns:auto 1fr;gap:.55rem 1rem;text-align:left;
+  background:rgba(255,255,255,.03);border:1px solid rgba(148,163,184,.15);
+  border-radius:10px;padding:1rem 1.15rem;margin:1.2rem 0;font-size:.92rem;
+}
+.done dt{
+  color:var(--dim);font-family:var(--mono);font-size:.72rem;
+  text-transform:uppercase;letter-spacing:.1em;align-self:center;font-weight:600;
+}
+.done dd{font-weight:700;overflow-wrap:anywhere;color:#F1F5F9}
+.done .btn{margin-top:.5rem}
+.done .btn.ghost{background:transparent;color:var(--cyan-soft);border:1px solid rgba(34,211,238,.4);box-shadow:none}
+.done .btn.ghost:hover{background:rgba(34,211,238,.08);transform:none}
+
+/* ---------- Sidebar ---------- */
+.side{
+  position:sticky;top:1rem;max-height:calc(100vh - 2rem);overflow-y:auto;
+  padding:1rem;
+  scrollbar-width:thin;
+}
+.side::-webkit-scrollbar{width:6px}
+.side::-webkit-scrollbar-track{background:transparent}
+.side::-webkit-scrollbar-thumb{background:rgba(56,189,248,.3);border-radius:3px}
+.side-head{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.side-head h2{
+  font-family:var(--display);font-size:.78rem;font-weight:800;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--cyan-soft);
+  display:flex;align-items:center;gap:.55rem;
+}
+.side-head h2::before{
+  content:'';width:7px;height:7px;border-radius:50%;
+  background:var(--sky);box-shadow:0 0 8px var(--sky);
+  animation:pulseDot 2.2s ease-in-out infinite;
+}
+.x{
+  display:none;background:transparent;border:1px solid rgba(148,163,184,.25);
+  color:var(--muted);border-radius:8px;width:32px;height:32px;
+  cursor:pointer;transition:all .15s;
+  align-items:center;justify-content:center;
+}
+.x:hover{color:#fff;border-color:rgba(148,163,184,.5);background:rgba(255,255,255,.05)}
+.x svg{width:14px;height:14px}
+.side-sub{color:var(--dim);font-size:.82rem;margin:.5rem 0 .9rem;line-height:1.45}
+
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin-bottom:.8rem;padding:4px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(148,163,184,.12)}
+.tab{
+  background:transparent;border:0;color:var(--muted);border-radius:7px;
+  padding:.5rem .3rem;font-family:var(--sans);font-weight:600;font-size:.82rem;
+  cursor:pointer;transition:all .2s;
+  display:inline-flex;align-items:center;justify-content:center;gap:.4rem;
+}
+.tab b{font-family:var(--mono);font-size:.72rem;font-weight:700;opacity:.7}
+.tab.on{color:#fff;background:linear-gradient(180deg,rgba(34,211,238,.18),rgba(34,211,238,.06));box-shadow:0 0 0 1px rgba(34,211,238,.3) inset}
+.tab.on b{opacity:1;color:var(--cyan-soft)}
+.tab.on.cx{background:linear-gradient(180deg,rgba(251,113,133,.18),rgba(251,113,133,.06));box-shadow:0 0 0 1px rgba(251,113,133,.3) inset}
+.tab.on.cx b{color:#FECDD3}
+
+.side input[type=search]{
+  padding:.6rem .8rem .6rem 2.2rem;font-size:.9rem;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:left 12px center;
+}
+
+.mine{
+  display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--muted);
+  margin:.7rem 0 .9rem;text-transform:none;letter-spacing:0;font-weight:600;
+  cursor:pointer;user-select:none;
+}
+.mine input{
+  width:auto;appearance:none;width:16px;height:16px;
+  border:1.5px solid rgba(148,163,184,.4);border-radius:4px;
+  background:rgba(255,255,255,.04);cursor:pointer;
+  transition:all .15s;position:relative;flex-shrink:0;margin:0;
+}
+.mine input:checked{
+  background:var(--cyan);border-color:var(--cyan);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23040A12' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:center;
+}
+
+.dh{
+  font-family:var(--mono);font-size:.68rem;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--cyan-soft);margin:1rem 0 .5rem;
+  padding-bottom:.35rem;
+  border-bottom:1px solid rgba(34,211,238,.15);
+  display:flex;align-items:center;gap:.5rem;
+}
+.dh::before{content:'▸';opacity:.6}
+
+.rq{
+  border:1px solid rgba(148,163,184,.14);
+  border-left:3px solid var(--rc,#4FC3F7);
+  background:rgba(255,255,255,.025);
+  border-radius:9px;padding:.65rem .8rem;margin-bottom:.5rem;
+  transition:all .18s ease;
+}
+.rq:hover{background:rgba(255,255,255,.05);border-color:rgba(148,163,184,.25)}
+.rq.mine-row{
+  border-left-width:3px;
+  border-color:rgba(34,211,238,.35);
+  background:linear-gradient(135deg,rgba(34,211,238,.05),rgba(34,211,238,.01));
+  box-shadow:0 0 16px rgba(34,211,238,.15);
+}
+.rq .r1{display:flex;justify-content:space-between;align-items:center;gap:.5rem;margin-bottom:.15rem}
+.rq .rn{font-family:var(--display);font-size:.66rem;font-weight:800;color:var(--rc);letter-spacing:.08em;text-transform:uppercase}
+.rq .rp{font-weight:700;font-size:.92rem;overflow-wrap:anywhere;line-height:1.25;color:#F1F5F9}
+.rq .rb{color:var(--dim);font-size:.8rem;overflow-wrap:anywhere;margin-top:.15rem}
+.rq .rt{font-family:var(--mono);font-size:.78rem;color:var(--muted);margin-top:.3rem;letter-spacing:.02em}
+
+.bd{
+  display:inline-flex;align-items:center;gap:4px;
+  font-family:var(--mono);font-size:.6rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:2px 7px;border-radius:20px;white-space:nowrap;
+  border:1px solid;
+}
+.bd.p{background:rgba(251,191,36,.12);color:var(--amber);border-color:rgba(251,191,36,.4)}
+.bd.c{background:rgba(251,113,133,.12);color:#FECDD3;border-color:rgba(251,113,133,.4)}
+.bd.me{background:rgba(34,211,238,.14);color:var(--cyan-soft);border-color:rgba(34,211,238,.45)}
+.rq.cancelled .rp{text-decoration:line-through;opacity:.7}
+
+.side-empty{
+  text-align:center;color:var(--dim);padding:1.6rem .5rem;
+  font-size:.88rem;line-height:1.5;
+}
+.side-empty svg{display:block;margin:0 auto .6rem;opacity:.4}
+.side-foot{
+  font-size:.72rem;color:var(--dim);margin-top:.9rem;line-height:1.4;
+  font-family:var(--mono);letter-spacing:.02em;
+}
+.side-foot + .side-foot{margin-top:.5rem;padding-top:.5rem;border-top:1px dashed rgba(148,163,184,.12)}
+
+/* ---------- Backdrop ---------- */
+.backdrop{position:fixed;inset:0;background:rgba(2,4,10,.7);backdrop-filter:blur(4px);z-index:40}
+.backdrop[hidden]{display:none}
+
+/* ---------- Footer ---------- */
+footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;font-family:var(--mono);letter-spacing:.1em}
+
+/* ---------- Responsive ---------- */
+@media (max-width:960px){
+  .layout{grid-template-columns:minmax(0,1fr)}
+  .sidebtn{display:inline-flex}
+  .x{display:inline-flex}
+  .side{
+    position:fixed;top:0;right:0;bottom:0;width:min(92vw,400px);max-height:none;
+    border-radius:14px 0 0 14px;transform:translateX(105%);
+    transition:transform .3s cubic-bezier(.4,0,.2,1);z-index:50;
+    background:var(--panel-solid);
+    box-shadow:-20px 0 60px -20px rgba(0,0,0,.9);
+  }
+  .side.open{transform:none}
+}
+@media (max-width:520px){
+  body{padding:.9rem}
+  .row2{grid-template-columns:1fr}
+  .brand h1{font-size:1rem}
+  .logo-wrap,.logo{width:44px;height:44px}
+  .logo-wrap::before{display:none}
+  .slots{grid-template-columns:repeat(auto-fill,minmax(80px,1fr))}
+  .chips{grid-template-columns:repeat(auto-fit,minmax(95px,1fr))}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+}
 </style>
 </head>
 <body>
-
-<div id="toast-wrap"></div>
-
-<!-- â•â• LOGIN â•â• -->
-<div id="login-screen">
-  <div class="lbox">
-    <div class="llogo">FANA MEDIA</div>
-    <div class="lsub">Studio Booking System</div>
-    <div class="ltabs">
-      <button class="ltab on" id="tab-si" onclick="authTab('signin')">Sign In</button>
-      <button class="ltab" id="tab-su" onclick="authTab('signup')">Register</button>
-    </div>
-    <div class="lerr" id="lerr"></div>
-    <div class="lf" id="f-name" style="display:none">
-      <label>Full Name</label>
-      <div class="fw"><i class="fas fa-user fi"></i><input type="text" id="i-name" placeholder="e.g. Adinew Dessie"></div>
-    </div>
-    <div class="lf" id="f-role" style="display:none">
-      <label>I am a</label>
-      <div class="fw">
-        <i class="fas fa-id-badge fi"></i>
-        <select id="i-role">
-          <option value="journalist">Journalist / Reporter</option>
-          <option value="producer">Producer</option>
-          <option value="director">Director</option>
-        </select>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo-wrap">
+        <img class="logo" alt="FMC TV logo" src="data:image/jpeg;base64,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">
+      </div>
+      <div>
+        <div class="brand-title-row">
+          <h1>FMC STUDIO</h1>
+          <span class="tag">Booking Request</span>
+        </div>
+        <p>Reserve a studio · Manager review within 24h</p>
       </div>
     </div>
-    <div class="lf">
-      <label>Email</label>
-      <div class="fw"><i class="fas fa-envelope fi"></i><input type="email" id="i-email" placeholder="you@fana.com"></div>
-    </div>
-    <div class="lf">
-      <label>Password</label>
-      <div class="fw">
-        <i class="fas fa-lock fi"></i>
-        <input type="password" id="i-pass" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" onkeydown="if(event.key==='Enter')doAuth()">
-        <button class="tpw" onclick="tglPw()"><i class="fas fa-eye" id="pw-eye"></i></button>
-      </div>
-    </div>
-    <button class="lbtn" id="auth-btn" onclick="doAuth()">
-      <i class="fas fa-sign-in-alt"></i><span id="auth-txt">Sign In</span>
+    <button class="sidebtn" id="sideOpen" type="button" aria-label="Open request status panel">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      Requests <b id="sideCount">0</b>
     </button>
-    <div id="login-note" style="display:none;margin-top:0.85rem;background:rgba(79,195,247,0.07);border:1px solid rgba(79,195,247,0.2);border-radius:8px;padding:0.55rem 0.85rem;font-size:0.75rem;color:var(--dim);text-align:center;line-height:1.5">
-      <i class="fas fa-shield-alt" style="color:var(--c);margin-right:5px"></i>
-      Manager access is granted by the system administrator only â€” not available at signup
-    </div>
-  </div>
-</div>
+  </header>
 
-<!-- Mobile floating request button -->
-<button id="mob-fab" onclick="openBookingModal()" title="Request Booking">
-  <i class="fas fa-plus"></i>
-</button>
-
-<!-- â•â• NAV â•â• -->
-<nav id="nav">
-  <div class="brand">ðŸ“¡ FMC Studios</div>
-  <div class="tabs">
-    <button class="tab on" onclick="go('overview',this)"><i class="fas fa-th-large"></i>Overview</button>
-    <button class="tab" onclick="go('calendar',this)"><i class="fas fa-calendar-alt"></i>Calendar</button>
-    <button class="tab" onclick="go('my-bookings',this)"><i class="fas fa-list"></i>My Bookings</button>
-    <button class="tab manager-only" onclick="go('approvals',this)" style="display:none"><i class="fas fa-check-double"></i>Approvals <span id="approval-badge" style="background:var(--r);color:#fff;border-radius:10px;padding:1px 6px;font-size:0.65rem;margin-left:3px;display:none">0</span></button>
-    <button class="tab manager-only" onclick="go('all-bookings',this)" style="display:none"><i class="fas fa-table"></i>All Bookings</button>
-    <button class="tab manager-only" onclick="go('reports',this)" style="display:none"><i class="fas fa-chart-bar"></i>Reports</button>
-  </div>
-  <div style="display:flex;align-items:center;gap:0.9rem">
-    <div id="clock">00:00:00</div>
-    <div id="uarea">
-      <div class="uchip" onclick="tglMenu()">
-        <div class="uavt" id="nav-avt">?</div>
-        <div>
-          <div style="font-size:0.76rem;font-weight:600" id="nav-uname">User</div>
-          <div style="font-size:0.6rem;color:var(--dim)" id="nav-urole">â€”</div>
+  <div class="layout">
+    <div class="main">
+      <div id="formView">
+        <div class="intro">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <span>No account needed. Pick a room and time, leave your details, and a manager will review your request and call to confirm. <strong>Your request is not a booking until a manager approves it.</strong></span>
         </div>
-        <i class="fas fa-chevron-down" style="font-size:0.58rem;color:var(--dim);margin-left:3px"></i>
-      </div>
-      <div class="umenu" id="umenu">
-        <div class="umitem" style="pointer-events:none"><i class="fas fa-user-circle" style="color:var(--c)"></i><span id="m-uname">User</span></div>
-        <div class="umitem" style="pointer-events:none;color:var(--dim);font-size:0.76rem"><i class="fas fa-id-badge"></i><span id="m-urole">Role</span></div>
-        <div class="umsep"></div>
-        <div class="umitem danger" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i>Sign Out</div>
-      </div>
-    </div>
-  </div>
-</nav>
 
-<!-- â•â• OVERVIEW â•â• -->
-<div id="page-overview" class="page on">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.75rem">
-    <div>
-      <div style="font-family:'Orbitron',monospace;font-size:1rem;font-weight:700">Studio Availability</div>
-      <div style="font-size:0.78rem;color:var(--dim);margin-top:2px" id="overview-date"></div>
-    </div>
-    <button class="btn bc" onclick="openBookingModal()"><i class="fas fa-plus"></i>Request Booking</button>
-  </div>
-
-  <!-- Studio cards -->
-  <div class="studio-grid" id="studio-cards"></div>
-
-  <!-- Stats -->
-  <div class="g3" style="margin-bottom:1.5rem">
-    <div class="sc-stat"><div class="sl">Available Now</div><div class="sv" style="color:var(--gr)" id="stat-avail">â€”</div><div class="ss">studios & PCR rooms</div></div>
-    <div class="sc-stat"><div class="sl">In Use Now</div><div class="sv" style="color:var(--r)" id="stat-busy">â€”</div><div class="ss">currently booked</div></div>
-    <div class="sc-stat"><div class="sl">My Pending</div><div class="sv" style="color:var(--am)" id="stat-pending">â€”</div><div class="ss">awaiting approval</div></div>
-  </div>
-
-  <!-- Today's schedule -->
-  <div class="card">
-    <div class="stitle"><i class="fas fa-clock" style="margin-right:6px"></i>Today's Schedule</div>
-    <div id="today-schedule">
-      <div style="color:var(--dim);font-size:0.82rem;text-align:center;padding:1.5rem">Loading today's bookingsâ€¦</div>
-    </div>
-  </div>
-</div>
-
-<!-- â•â• CALENDAR â•â• -->
-<div id="page-calendar" class="page">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.75rem">
-    <div style="font-family:'Orbitron',monospace;font-size:1rem;font-weight:700">Booking Calendar</div>
-    <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
-      <select id="cal-studio-filter" style="background:rgba(0,0,0,0.4);border:1px solid var(--b2);border-radius:8px;color:#fff;padding:0.4rem 0.75rem;font-family:'Rajdhani',sans-serif;font-size:0.85rem" onchange="renderCal()">
-        <option value="all">All Rooms</option>
-        <option value="Studio A">Studio A</option>
-        <option value="Studio B">Studio B</option>
-        <option value="Studio C">Studio C</option>
-        <option value="PCR A">PCR A</option>
-        <option value="PCR B">PCR B</option>
-      </select>
-      <button class="btn bc" onclick="openBookingModal()"><i class="fas fa-plus"></i>Request Booking</button>
-    </div>
-  </div>
-  <div class="card">
-    <div class="cal-nav">
-      <button class="btn bc sm" onclick="calPrev()"><i class="fas fa-chevron-left"></i></button>
-      <div class="cal-month-lbl" id="cal-month-lbl"></div>
-      <button class="btn bc sm" onclick="calNext()"><i class="fas fa-chevron-right"></i></button>
-    </div>
-    <!-- Legend -->
-    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:0.85rem;font-size:0.74rem">
-      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:rgba(79,195,247,0.3);margin-right:5px"></span>Studio A</span>
-      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:rgba(255,214,0,0.3);margin-right:5px"></span>Studio B</span>
-      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:rgba(0,200,83,0.25);margin-right:5px"></span>Studio C</span>
-      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:rgba(255,152,0,0.3);margin-right:5px"></span>PCR A</span>
-      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:rgba(124,58,237,0.3);margin-right:5px"></span>PCR B</span>
-      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;border:1px dashed rgba(255,255,255,0.3);margin-right:5px"></span>Pending</span>
-    </div>
-    <div class="cal-hdr" id="cal-hdr"></div>
-    <div class="cal-grid" id="cal-grid"></div>
-  </div>
-</div>
-
-<!-- â•â• MY BOOKINGS â•â• -->
-<div id="page-my-bookings" class="page">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.75rem">
-    <div style="font-family:'Orbitron',monospace;font-size:1rem;font-weight:700">My Bookings</div>
-    <button class="btn bc" onclick="openBookingModal()"><i class="fas fa-plus"></i>New Request</button>
-  </div>
-  <div class="card" style="overflow-x:auto">
-    <table class="dt">
-      <thead>
-        <tr>
-          <th>Studio / Room</th>
-          <th>Production</th>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Status</th>
-          <th>Manager Note</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody id="my-bookings-tbody">
-        <tr><td colspan="7" style="text-align:center;color:var(--dim);padding:2rem">No bookings yet</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- â•â• APPROVALS (Manager only) â•â• -->
-<div id="page-approvals" class="page">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.75rem">
-    <div>
-      <div style="font-family:'Orbitron',monospace;font-size:1rem;font-weight:700">Pending Approvals</div>
-      <div style="font-size:0.78rem;color:var(--dim);margin-top:2px" id="approval-count-lbl">Loadingâ€¦</div>
-    </div>
-    <div style="display:flex;gap:0.5rem">
-      <button class="btn bgr sm" onclick="approveAll()"><i class="fas fa-check-double"></i>Approve All</button>
-    </div>
-  </div>
-  <div id="approvals-list">
-    <div style="color:var(--dim);font-size:0.82rem;text-align:center;padding:3rem">Loading pending requestsâ€¦</div>
-  </div>
-</div>
-
-<!-- â•â• ALL BOOKINGS (Manager only) â•â• -->
-<div id="page-all-bookings" class="page">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.75rem">
-    <div style="font-family:'Orbitron',monospace;font-size:1rem;font-weight:700">All Bookings</div>
-    <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
-      <select id="all-filter-studio" style="background:rgba(0,0,0,0.4);border:1px solid var(--b2);border-radius:8px;color:#fff;padding:0.4rem 0.75rem;font-family:'Rajdhani',sans-serif;font-size:0.82rem" onchange="renderAllBookings()">
-        <option value="all">All Rooms</option>
-        <option value="Studio A">Studio A</option>
-        <option value="Studio B">Studio B</option>
-        <option value="Studio C">Studio C</option>
-        <option value="PCR A">PCR A</option>
-        <option value="PCR B">PCR B</option>
-      </select>
-      <select id="all-filter-status" style="background:rgba(0,0,0,0.4);border:1px solid var(--b2);border-radius:8px;color:#fff;padding:0.4rem 0.75rem;font-family:'Rajdhani',sans-serif;font-size:0.82rem" onchange="renderAllBookings()">
-        <option value="active" selected>Active (hide completed)</option>
-        <option value="all">All Status</option>
-        <option value="pending">Pending</option>
-        <option value="approved">Approved</option>
-        <option value="rejected">Rejected</option>
-        <option value="completed">Completed</option>
-      </select>
-      <button class="btn bc sm" onclick="exportCSV()"><i class="fas fa-download"></i>Export</button>
-    </div>
-  </div>
-  <div class="card" style="overflow-x:auto">
-    <table class="dt">
-      <thead>
-        <tr><th>Studio</th><th>Production</th><th>Requested By</th><th>Date</th><th>Time</th><th>Status</th><th>Note</th><th></th></tr>
-      </thead>
-      <tbody id="all-bookings-tbody"></tbody>
-    </table>
-  </div>
-</div>
-
-<!-- â•â• REPORTS (Manager only) â•â• -->
-<div id="page-reports" class="page">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.75rem">
-    <div>
-      <div style="font-family:'Orbitron',monospace;font-size:1rem;font-weight:700">Reports & Analytics</div>
-      <div style="font-size:0.78rem;color:var(--dim);margin-top:2px" id="report-range-lbl">All-time data</div>
-    </div>
-    <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
-      <select id="report-range" style="background:rgba(0,0,0,0.4);border:1px solid var(--b2);border-radius:8px;color:#fff;padding:0.4rem 0.75rem;font-family:'Rajdhani',sans-serif;font-size:0.82rem" onchange="renderReports()">
-        <option value="7">Last 7 days</option>
-        <option value="30" selected>Last 30 days</option>
-        <option value="90">Last 90 days</option>
-        <option value="all">All time</option>
-      </select>
-      <button class="btn bc sm" onclick="exportReportCSV()"><i class="fas fa-download"></i>Export Report</button>
-    </div>
-  </div>
-
-  <!-- Top stats -->
-  <div class="g4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;margin-bottom:1.5rem" id="report-stats"></div>
-
-  <div class="g2" style="margin-bottom:1.5rem">
-    <!-- Studio usage -->
-    <div class="card">
-      <div class="stitle"><i class="fas fa-tv" style="margin-right:6px"></i>Studio Usage</div>
-      <div id="report-studio-usage"></div>
-    </div>
-    <!-- Approval breakdown -->
-    <div class="card">
-      <div class="stitle"><i class="fas fa-chart-pie" style="margin-right:6px"></i>Approval Breakdown</div>
-      <div id="report-approval-breakdown"></div>
-    </div>
-  </div>
-
-  <div class="g2" style="margin-bottom:1.5rem">
-    <!-- Busiest days -->
-    <div class="card">
-      <div class="stitle"><i class="fas fa-calendar-week" style="margin-right:6px"></i>Busiest Days of the Week</div>
-      <div id="report-busy-days"></div>
-    </div>
-    <!-- Busiest hours -->
-    <div class="card">
-      <div class="stitle"><i class="fas fa-clock" style="margin-right:6px"></i>Busiest Time Slots</div>
-      <div id="report-busy-hours"></div>
-    </div>
-  </div>
-
-  <!-- Journalist activity -->
-  <div class="card">
-    <div class="stitle"><i class="fas fa-users" style="margin-right:6px"></i>Activity by Requester</div>
-    <table class="dt">
-      <thead>
-        <tr><th>Requester</th><th>Total Requests</th><th>Approved</th><th>Rejected</th><th>Pending</th><th>Approval Rate</th><th>Most Used Room</th></tr>
-      </thead>
-      <tbody id="report-journalist-tbody"></tbody>
-    </table>
-  </div>
-</div>
-
-<!-- â•â• BOOKING REQUEST MODAL â•â• -->
-<div class="mover" id="m-booking">
-  <div class="modal">
-    <div class="mtitle"><i class="fas fa-tv" style="margin-right:8px"></i>REQUEST STUDIO BOOKING</div>
-
-    <div class="fg">
-      <label>Select Studio / Room</label>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px" id="room-picker">
-        <button class="room-btn" onclick="selectRoom(this,'Studio A')" data-room="Studio A" style="padding:0.6rem;border-radius:9px;border:1px solid var(--b2);background:rgba(255,255,255,0.03);color:var(--dim);cursor:pointer;font-family:'Orbitron',monospace;font-size:0.68rem;letter-spacing:1px;transition:all 0.18s">Studio A</button>
-        <button class="room-btn" onclick="selectRoom(this,'Studio B')" data-room="Studio B" style="padding:0.6rem;border-radius:9px;border:1px solid var(--b2);background:rgba(255,255,255,0.03);color:var(--dim);cursor:pointer;font-family:'Orbitron',monospace;font-size:0.68rem;letter-spacing:1px;transition:all 0.18s">Studio B</button>
-        <button class="room-btn" onclick="selectRoom(this,'Studio C')" data-room="Studio C" style="padding:0.6rem;border-radius:9px;border:1px solid var(--b2);background:rgba(255,255,255,0.03);color:var(--dim);cursor:pointer;font-family:'Orbitron',monospace;font-size:0.68rem;letter-spacing:1px;transition:all 0.18s">Studio C</button>
-        <button class="room-btn" onclick="selectRoom(this,'PCR A')" data-room="PCR A" style="padding:0.6rem;border-radius:9px;border:1px solid var(--b2);background:rgba(255,255,255,0.03);color:var(--dim);cursor:pointer;font-family:'Orbitron',monospace;font-size:0.68rem;letter-spacing:1px;transition:all 0.18s">PCR A</button>
-        <button class="room-btn" onclick="selectRoom(this,'PCR B')" data-room="PCR B" style="padding:0.6rem;border-radius:9px;border:1px solid var(--b2);background:rgba(255,255,255,0.03);color:var(--dim);cursor:pointer;font-family:'Orbitron',monospace;font-size:0.68rem;letter-spacing:1px;transition:all 0.18s">PCR B</button>
-      </div>
-    </div>
-
-    <div class="fg">
-      <label>Production / Show Name</label>
-      <input type="text" id="b-prod" placeholder="e.g. Morning News, Documentary Interview, Live Sport">
-    </div>
-
-    <div class="g2">
-      <div class="fg">
-        <label>Date</label>
-        <input type="date" id="b-date" onchange="loadTimeSlots()">
-      </div>
-      <div class="fg">
-        <label>Duration</label>
-        <select id="b-duration" onchange="loadTimeSlots()">
-          <option value="1">1 hour</option>
-          <option value="2">2 hours</option>
-          <option value="3">3 hours</option>
-          <option value="4">4 hours</option>
-          <option value="6">6 hours</option>
-          <option value="8">Full day (8 hours)</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="fg">
-      <label>Available Time Slots <span id="slot-room-label" style="color:var(--c);font-size:0.65rem"></span></label>
-      <div id="time-slots-wrap">
-        <div style="color:var(--dim);font-size:0.8rem;padding:0.5rem">Select a studio and date first</div>
-      </div>
-    </div>
-
-    <div class="conflict-box" id="conflict-box">
-      <i class="fas fa-exclamation-triangle" style="margin-right:7px"></i>
-      <span id="conflict-msg"></span>
-    </div>
-
-    <div class="fg">
-      <label>Notes for Manager (optional)</label>
-      <textarea id="b-notes" placeholder="Special requirements, setup needs, urgency reasonâ€¦"></textarea>
-    </div>
-
-    <!-- RECURRING SECTION -->
-    <div style="border-top:1px solid var(--b2);padding-top:0.85rem;margin-top:0.35rem">
-      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem">
-        <input type="checkbox" id="b-recurring" onchange="toggleRecurring()" style="width:16px;height:16px;accent-color:var(--c);cursor:pointer">
-        <label for="b-recurring" style="font-size:0.8rem;font-weight:600;cursor:pointer;color:var(--c);letter-spacing:0.5px">
-          <i class="fas fa-redo" style="margin-right:5px"></i>Make this a recurring booking
-        </label>
-      </div>
-      <div id="recurring-fields" style="display:none">
-        <div class="g2">
-          <div class="fg">
-            <label>Repeat Pattern</label>
-            <select id="b-pattern">
-              <option value="daily">Daily</option>
-              <option value="weekdays" selected>Weekdays (Monâ€“Fri)</option>
-              <option value="weekly">Weekly (same day)</option>
-              <option value="custom">Custom days</option>
-            </select>
+        <form id="form" novalidate autocomplete="off">
+          <div class="sec panel">
+            <span class="hairline"></span>
+            <h2><span class="step-num" id="stepRoomNum">1</span> Choose a room</h2>
+            <div class="chips" id="rooms"></div>
           </div>
-          <div class="fg">
-            <label>End Date</label>
-            <input type="date" id="b-end-date">
+
+          <div class="sec panel">
+            <span class="hairline"></span>
+            <h2><span class="step-num" id="stepTimeNum">2</span> Date &amp; time</h2>
+            <div class="row2">
+              <div><label for="date">Date</label><input type="date" id="date"></div>
+              <div>
+                <label for="dur">Duration</label>
+                <select id="dur">
+                  <option value="1">1 hour</option>
+                  <option value="2">2 hours</option>
+                  <option value="3">3 hours</option>
+                  <option value="4">4 hours</option>
+                  <option value="6">6 hours</option>
+                  <option value="8">8 hours (full day)</option>
+                </select>
+              </div>
+            </div>
+            <label>Start time <small id="slotRoom"></small></label>
+            <div class="slots" id="slots"></div>
+            <div class="legend">
+              <span><i style="background:rgba(52,211,153,.5)"></i>Available</span>
+              <span><i style="background:rgba(251,113,133,.5)"></i>Booked</span>
+              <span><i style="background:rgba(148,163,184,.2)"></i>Unavailable</span>
+            </div>
+            <div class="note" id="slotNote">Select a room first.</div>
           </div>
-        </div>
-        <div id="custom-days-wrap" style="display:none;margin-bottom:0.85rem">
-          <label style="display:block;font-size:0.7rem;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:6px">Select Days</label>
-          <div style="display:flex;gap:6px;flex-wrap:wrap">
-            <label class="day-pill"><input type="checkbox" value="1"> Mon</label>
-            <label class="day-pill"><input type="checkbox" value="2"> Tue</label>
-            <label class="day-pill"><input type="checkbox" value="3"> Wed</label>
-            <label class="day-pill"><input type="checkbox" value="4"> Thu</label>
-            <label class="day-pill"><input type="checkbox" value="5"> Fri</label>
-            <label class="day-pill"><input type="checkbox" value="6"> Sat</label>
-            <label class="day-pill"><input type="checkbox" value="0"> Sun</label>
+
+          <div class="sec panel">
+            <span class="hairline"></span>
+            <h2><span class="step-num" id="stepDetailsNum">3</span> Your details</h2>
+            <label for="prod">Production / program name</label>
+            <input id="prod" type="text" maxlength="120" placeholder="e.g. Morning Show interview">
+            <div class="row2">
+              <div><label for="name">Your full name</label><input id="name" type="text" maxlength="80" autocomplete="name"></div>
+              <div><label for="phone">Phone number</label><input id="phone" type="tel" inputmode="tel" maxlength="20" placeholder="0911 23 45 67" autocomplete="tel"></div>
+            </div>
+            <label for="notes">Notes <small>— optional, equipment or guests</small></label>
+            <textarea id="notes" maxlength="500" placeholder="Anything a manager should know about your booking…"></textarea>
+            <div class="hp" aria-hidden="true">
+              <label>Leave this empty<input id="website" tabindex="-1" autocomplete="off"></label>
+            </div>
           </div>
+
+          <div class="msg" id="msg" role="alert" hidden>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span id="msgText"></span>
+          </div>
+
+          <div class="summary" id="summary" aria-live="polite"></div>
+
+          <button class="btn" id="submit" type="submit">
+            <span class="btn-spinner" aria-hidden="true"></span>
+            <span class="btn-label">Send request</span>
+          </button>
+        </form>
+      </div>
+
+      <section class="done panel" id="doneView" hidden>
+        <span class="hairline"></span>
+        <div class="done-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
         </div>
-        <div id="recurring-preview" style="background:rgba(79,195,247,0.06);border:1px solid rgba(79,195,247,0.18);border-radius:8px;padding:0.6rem 0.85rem;font-size:0.78rem;color:var(--dim)">
-          <i class="fas fa-calendar-alt" style="color:var(--c);margin-right:6px"></i>
-          <span id="recurring-preview-txt">Set a pattern and end date to preview</span>
-        </div>
+        <h2>Request received</h2>
+        <p>A manager will review it and call you on the number below.</p>
+        <dl id="doneList"></dl>
+        <p class="note">This is not a confirmed booking yet. If you don't hear back, please contact the studio directly.</p>
+        <button class="btn" id="viewStatus" type="button">See my request status</button>
+        <button class="btn ghost" id="again" type="button">Make another request</button>
+      </section>
+    </div>
+
+    <aside class="side panel" id="side" aria-label="Request status">
+      <span class="hairline"></span>
+      <div class="side-head">
+        <h2>Follow up</h2>
+        <button class="x" id="sideClose" type="button" aria-label="Close panel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
       </div>
-    </div>
+      <p class="side-sub">Upcoming requests waiting for a manager's decision, and cancelled bookings.</p>
 
-    <div class="mfoot">
-      <button class="btn br sm" onclick="closeM('m-booking')">Cancel</button>
-      <button class="btn bc" onclick="submitBooking()"><i class="fas fa-paper-plane"></i>Submit Request</button>
-    </div>
-  </div>
-</div>
-
-<!-- â•â• REJECT MODAL â•â• -->
-<div class="mover" id="m-reject">
-  <div class="modal">
-    <div class="mtitle" style="color:var(--r)"><i class="fas fa-times-circle" style="margin-right:8px"></i>REJECT BOOKING</div>
-    <input type="hidden" id="reject-id">
-    <div class="fg">
-      <label>Reason for Rejection</label>
-      <textarea id="reject-reason" placeholder="Explain why this booking cannot be approvedâ€¦" style="min-height:90px"></textarea>
-    </div>
-    <div class="mfoot">
-      <button class="btn bc sm" onclick="closeM('m-reject')">Cancel</button>
-      <button class="btn br" onclick="confirmReject()"><i class="fas fa-times"></i>Reject Booking</button>
-    </div>
-  </div>
-</div>
-
-<!-- â•â• DAY VIEW MODAL â•â• -->
-<div class="mover" id="m-day">
-  <div class="modal" style="max-width:560px">
-    <div class="mtitle" id="day-modal-title">Bookings</div>
-    <div id="day-modal-content"></div>
-    <div class="mfoot">
-      <button class="btn bc sm" onclick="closeM('m-day')">Close</button>
-      <button class="btn bgr sm" onclick="closeM('m-day');openBookingModal()"><i class="fas fa-plus"></i>Book This Day</button>
-    </div>
-  </div>
-</div>
-
-<!-- â•â• MANAGER CANCEL MODAL â•â• -->
-<div class="mover" id="m-cancel">
-  <div class="modal">
-    <div class="mtitle" style="color:var(--r)"><i class="fas fa-ban" style="margin-right:8px"></i>CANCEL BOOKING</div>
-    <input type="hidden" id="cancel-id">
-    <div id="cancel-booking-detail" style="background:rgba(255,255,255,0.03);border:1px solid var(--b2);border-radius:9px;padding:0.85rem 1rem;margin-bottom:1rem;font-size:0.85rem"></div>
-    <div class="fg">
-      <label>Reason for Cancellation</label>
-      <textarea id="cancel-reason" placeholder="e.g. Emergency news coverage, equipment maintenance, VIP bookingâ€¦" style="min-height:90px"></textarea>
-    </div>
-    <div style="background:rgba(255,152,0,0.08);border:1px solid rgba(255,152,0,0.25);border-radius:8px;padding:0.6rem 0.85rem;font-size:0.78rem;color:var(--am);margin-bottom:0.75rem">
-      <i class="fas fa-exclamation-triangle" style="margin-right:6px"></i>
-      The journalist will see this reason in their My Bookings page.
-    </div>
-    <div class="mfoot">
-      <button class="btn bc sm" onclick="closeM('m-cancel')">Go Back</button>
-      <button class="btn br" onclick="confirmCancel()"><i class="fas fa-ban"></i>Cancel Booking</button>
-    </div>
-  </div>
-</div>
-
-<!-- â•â• EDIT BOOKING MODAL â•â• -->
-<div class="mover" id="m-edit">
-  <div class="modal">
-    <div class="mtitle"><i class="fas fa-edit" style="margin-right:8px"></i>EDIT BOOKING REQUEST</div>
-    <input type="hidden" id="edit-id">
-    <div style="background:rgba(79,195,247,0.06);border:1px solid rgba(79,195,247,0.18);border-radius:8px;padding:0.6rem 0.85rem;font-size:0.78rem;color:var(--dim);margin-bottom:1rem">
-      <i class="fas fa-info-circle" style="color:var(--c);margin-right:6px"></i>
-      Editing will resubmit this request for manager approval.
-    </div>
-    <div class="fg">
-      <label>Production / Show Name</label>
-      <input type="text" id="edit-prod" placeholder="Production name">
-    </div>
-    <div class="g2">
-      <div class="fg">
-        <label>Date</label>
-        <input type="date" id="edit-date" onchange="loadEditSlots()">
+      <div class="tabs" role="tablist">
+        <button class="tab on" type="button" data-tab="pending" role="tab">Pending <b id="cPending">0</b></button>
+        <button class="tab cx" type="button" data-tab="cancelled" role="tab">Cancelled <b id="cCancelled">0</b></button>
       </div>
-      <div class="fg">
-        <label>Duration</label>
-        <select id="edit-duration" onchange="loadEditSlots()">
-          <option value="1">1 hour</option>
-          <option value="2">2 hours</option>
-          <option value="3">3 hours</option>
-          <option value="4">4 hours</option>
-          <option value="6">6 hours</option>
-          <option value="8">Full day (8 hours)</option>
-        </select>
-      </div>
-    </div>
-    <div class="fg">
-      <label>Time Slot <span id="edit-slot-label" style="color:var(--c);font-size:0.65rem"></span></label>
-      <div id="edit-slots-wrap">
-        <div style="color:var(--dim);font-size:0.8rem;padding:0.5rem">Loading available slotsâ€¦</div>
-      </div>
-    </div>
-    <div class="fg">
-      <label>Notes for Manager</label>
-      <textarea id="edit-notes" placeholder="Explain what changed and whyâ€¦"></textarea>
-    </div>
-    <div class="mfoot">
-      <button class="btn br sm" onclick="closeM('m-edit')">Cancel</button>
-      <button class="btn bc" onclick="submitEdit()"><i class="fas fa-paper-plane"></i>Resubmit for Approval</button>
-    </div>
+
+      <input id="q" type="search" placeholder="Search name or production" maxlength="60" autocomplete="off" aria-label="Search requests">
+      <label class="mine"><input type="checkbox" id="mineOnly"> Only requests sent from this device</label>
+
+      <div id="sideList"></div>
+      <div class="side-foot" id="sideFoot">Loading…</div>
+      <div class="side-foot">Names and production titles are visible to everyone. Phone numbers are never shown.</div>
+    </aside>
   </div>
+
+  <div class="backdrop" id="backdrop" hidden></div>
+  <footer>FMC Studio · Booking Request</footer>
 </div>
 
 <script>
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   SUPABASE
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const SURL='https://zomkvqbknmbkvmaliqkg.supabase.co';
 const SKEY='sb_publishable_rFAc7fyGRDHr78wxTnJoCg_RGTak7mW';
-const sb=supabase.createClient(SURL,SKEY,{
-  auth:{
-    autoRefreshToken:true,      // silently refresh before expiry
-    persistSession:true,        // keep session across page reloads
-    detectSessionInUrl:true     // handle OAuth redirects
-  }
-});
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   STATE
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-let currentUser=null, userRole='journalist', userName='User';
-let bookings=[]; // all bookings
-let authMode='signin';
-let selectedRoom=null, selectedSlots=[];
-let calDate=new Date();
 const ROOMS=['Studio A','Studio B','Studio C','PCR A','PCR B'];
-const ROOM_CLASS={
-  'Studio A':'A','Studio B':'B','Studio C':'C','PCR A':'PA','PCR B':'PB'
-};
-const ROOM_COLOR={
-  'Studio A':'var(--c)','Studio B':'var(--g)','Studio C':'var(--gr)',
-  'PCR A':'var(--am)','PCR B':'#a78bfa'
-};
-// Studio active/inactive status â€” manager-controlled
-// true = active (can be booked), false = inactive (deactivated)
-const studioStatus={
-  'Studio A':true,'Studio B':true,'Studio C':true,'PCR A':true,'PCR B':true
-};
-// Generate time slots 06:00 â€“ 23:00 in 1-hour steps
-const ALL_SLOTS=[];
-for(let h=6;h<=22;h++) ALL_SLOTS.push(`${String(h).padStart(2,'0')}:00`);
+const ROOM_COLOR={'Studio A':'#4FC3F7','Studio B':'#FFD600','Studio C':'#00C853','PCR A':'#FF9800','PCR B':'#CE93D8'};
+const FIRST_START=6,LAST_END=23,MAX_DAYS=90,COOLDOWN_MS=15000,MAX_PENDING_NOTE=5;
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   AUTH
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-function authTab(m){
-  authMode=m;
-  document.getElementById('tab-si').classList.toggle('on',m==='signin');
-  document.getElementById('tab-su').classList.toggle('on',m==='signup');
-  document.getElementById('f-name').style.display=m==='signup'?'block':'none';
-  document.getElementById('f-role').style.display=m==='signup'?'block':'none';
-  document.getElementById('login-note').style.display=m==='signup'?'block':'none';
-  document.getElementById('auth-txt').textContent=m==='signin'?'Sign In':'Register';
-  document.getElementById('lerr').style.display='none';
+function safeFetch(url,opts={}){
+  const h={};
+  new Headers(opts.headers||{}).forEach((v,k)=>{h[k]=v;});
+  return fetch(String(url),{...opts,headers:h});
 }
-function tglPw(){const i=document.getElementById('i-pass'),e=document.getElementById('pw-eye');i.type=i.type==='password'?'text':'password';e.className=i.type==='password'?'fas fa-eye':'fas fa-eye-slash';}
-
-async function doAuth(){
-  const email=document.getElementById('i-email').value.trim();
-  const pass=document.getElementById('i-pass').value;
-  const btn=document.getElementById('auth-btn');
-  if(!email||!pass){showErr('Please enter email and password.');return;}
-  btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Please waitâ€¦';
-  document.getElementById('lerr').style.display='none';
-  try{
-    if(authMode==='signin'){
-      const{data,error}=await sb.auth.signInWithPassword({email,password:pass});
-      if(error)throw error;
-      currentUser=data.user;
-      await loadProfile();
-      showApp();
-    } else {
-      const name=document.getElementById('i-name').value.trim();
-      const role=document.getElementById('i-role').value;
-      if(!name){showErr('Please enter your full name.');btn.disabled=false;btn.innerHTML='<i class="fas fa-user-plus"></i><span id="auth-txt">Register</span>';return;}
-      const{data,error}=await sb.auth.signUp({email,password:pass,options:{data:{full_name:name,role}}});
-      if(error)throw error;
-      if(data.session){currentUser=data.user;await loadProfile();showApp();}
-      else showErr('âœ… Account created! Check your email inbox (and spam folder) for a confirmation link. Click it to activate your account, then come back here to sign in.',true);
-    }
-  }catch(e){
-    const msg=e?.message||e?.error_description||e?.msg||(typeof e==='string'?e:null);
-    showErr(msg&&msg!=='[object Object]'?msg:'Registration failed â€” please check your Supabase project settings or try again.');
-  }
-  btn.disabled=false;
-  btn.innerHTML=`<i class="fas fa-sign-in-alt"></i><span id="auth-txt">${authMode==='signin'?'Sign In':'Register'}</span>`;
-}
-
-function showErr(msg,ok=false){
-  const el=document.getElementById('lerr');
-  el.textContent=msg;el.style.display='block';
-  el.style.color=ok?'var(--gr)':'var(--r)';
-  el.style.background=ok?'rgba(0,200,83,0.08)':'rgba(244,67,54,0.1)';
-  el.style.border=ok?'1px solid rgba(0,200,83,0.3)':'1px solid rgba(244,67,54,0.3)';
-}
-
-async function loadProfile(){
-  const meta=currentUser?.user_metadata||{};
-  userName=meta.full_name||currentUser?.email?.split('@')[0]||'User';
-  userRole='journalist';
-  try{
-    const{data,error}=await sb.from('profiles').select('*').eq('id',currentUser.id).single();
-    if(error&&error.code!=='PGRST116'){
-      console.warn('loadProfile error:',error.message);
-    }
-    if(data){
-      userName=data.full_name||userName;
-      userRole=data.role||'journalist';
-    }
-  }catch(e){
-    console.warn('loadProfile failed:',e);
-  }
-}
-
-function showApp(){
-  document.getElementById('login-screen').style.display='none';
-  document.getElementById('nav').style.display='flex';
-  // Show manager tabs only for managers
-  const isManager=userRole==='manager';
-  document.querySelectorAll('.manager-only').forEach(el=>el.style.display=isManager?'':'none');
-  // Update nav user info
-  const ini=userName.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
-  document.getElementById('nav-avt').textContent=ini;
-  document.getElementById('nav-uname').textContent=userName.split(' ')[0];
-  document.getElementById('nav-urole').textContent=userRole.charAt(0).toUpperCase()+userRole.slice(1);
-  document.getElementById('m-uname').textContent=userName;
-  document.getElementById('m-urole').textContent=userRole.charAt(0).toUpperCase()+userRole.slice(1);
-  document.querySelectorAll('.page').forEach(p=>p.style.display='none');
-  const dp=document.getElementById('page-overview');dp.style.display='block';dp.classList.add('on');
-  // Load data and render
-  loadBookings();
-  startRealtime();
-}
-
-async function doLogout(){
-  closeMenu();
-  stopRealtime();
-  await sb.auth.signOut();
-  currentUser=null;bookings=[];
-  document.getElementById('nav').style.display='none';
-  document.querySelectorAll('.page').forEach(p=>p.style.display='none');
-  document.getElementById('login-screen').style.display='flex';
-}
-
-function tglMenu(){document.getElementById('umenu').classList.toggle('open');}
-function closeMenu(){document.getElementById('umenu').classList.remove('open');}
-document.addEventListener('click',e=>{const a=document.getElementById('uarea');if(a&&!a.contains(e.target))closeMenu();});
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   CLOCK
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-setInterval(()=>{document.getElementById('clock').textContent=new Date().toTimeString().slice(0,8);},1000);
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   NAVIGATION
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-function go(page,btn){
-  document.querySelectorAll('.page').forEach(p=>{p.classList.remove('on');p.style.display='none';});
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
-  const pg=document.getElementById('page-'+page);
-  if(!pg)return;
-  pg.classList.add('on');pg.style.display='block';
-  if(btn)btn.classList.add('on');
-  closeMenu();
-  if(page==='overview')renderOverview();
-  if(page==='calendar')renderCal();
-  if(page==='my-bookings')renderMyBookings();
-  if(page==='approvals')renderApprovals();
-  if(page==='all-bookings')renderAllBookings();
-  if(page==='reports')renderReports();
-}
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   DATA â€” LOAD FROM SUPABASE
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-async function loadBookings(){
-  const{data,error}=await sb.from('studio_bookings').select('*').order('date',{ascending:true}).order('start_time',{ascending:true});
-  if(error){
-    console.error('loadBookings error:',error);
-    // If JWT expired, onAuthStateChange will handle the redirect â€” no need to show a confusing error
-    if(error.message?.includes('JWT')||error.code==='PGRST301'||error.message?.includes('expired')){
-      return; // auth listener will redirect to login automatically
-    }
-    toast('Could not load bookings: '+error.message,'error');
-  } else {
-    bookings=data||[];
-    await expireOldBookings();
-  }
-  // Load studio active/inactive statuses
-  try{
-    const{data:statuses,error:se}=await sb.from('studio_status').select('*');
-    if(se) console.warn('studio_status load:',se.message);
-    if(statuses&&statuses.length){
-      statuses.forEach(s=>{if(studioStatus.hasOwnProperty(s.studio))studioStatus[s.studio]=s.active;});
-    }
-  }catch(e){console.warn('studio_status fetch failed:',e);}
-  renderOverview();
-  renderCal();
-  updateApprovalBadge();
-}
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   AUTO-EXPIRY
-   Marks approved bookings as 'completed'
-   once their end time has passed, so they
-   stop cluttering active views automatically.
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-async function expireOldBookings(){
-  const now=new Date();
-  const toExpire=bookings.filter(b=>{
-    if(b.status!=='approved') return false;
-    const endDateTime=new Date(`${b.date}T${b.end_time}:00`);
-    return endDateTime < now;
-  });
-  if(!toExpire.length) return;
-  for(const b of toExpire){
-    const{error}=await sb.from('studio_bookings').update({status:'completed'}).eq('id',b.id);
-    if(!error){
-      const idx=bookings.findIndex(x=>x.id===b.id);
-      if(idx>=0) bookings[idx].status='completed';
-    }
-  }
-}
-
-function isPastBooking(b){
-  const endDateTime=new Date(`${b.date}T${b.end_time}:00`);
-  return endDateTime < new Date();
-}
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   STUDIO STATUS TOGGLE (Manager only)
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-async function toggleStudioStatus(room){
-  const newStatus=!studioStatus[room];
-  studioStatus[room]=newStatus;
-  // Save to Supabase studio_status table
-  try{
-    await sb.from('studio_status').upsert({studio:room,active:newStatus,updated_at:new Date().toISOString(),updated_by:userName},{onConflict:'studio'});
-  }catch(e){console.warn('studio_status save failed:',e);}
-  toast(`${room} ${newStatus?'âœ… activated':'ðŸ”´ deactivated'}`,newStatus?'success':'warning');
-  renderOverview();
-}
-
-async function saveBooking(booking){
-  const{data,error}=await sb.from('studio_bookings').insert(booking).select().single();
-  if(error){
-    console.error('saveBooking error:',error);
-    toast('Booking failed to save: '+error.message,'error');
-    return null;
-  }
-  return data;
-}
-
-async function updateBooking(id,updates){
-  const{error}=await sb.from('studio_bookings').update(updates).eq('id',id);
-  if(error){
-    console.error('updateBooking error:',error);
-    // If RLS blocked it, give the user a clear message
-    if(error.code==='42501'||error.message?.includes('policy')){
-      toast('Permission denied â€” only managers can perform this action','error');
-    } else {
-      toast('Failed to update booking: '+error.message,'error');
-    }
-    return false;
-  }
-  const idx=bookings.findIndex(b=>b.id===id);
-  if(idx>=0)Object.assign(bookings[idx],updates);
-  return true;
-}
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   MODALS
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-function openM(id){document.getElementById(id).classList.add('open');}
-function closeM(id){document.getElementById(id).classList.remove('open');}
-document.querySelectorAll('.mover').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
-
-function openBookingModal(){
-  selectedRoom=null;selectedSlots=[];
-  document.getElementById('b-prod').value='';
-  const todayStr=new Date().toISOString().split('T')[0];
-  const dateInput=document.getElementById('b-date');
-  dateInput.value=todayStr;
-  dateInput.min=todayStr;
-  // Set default end date 1 month from today
-  const endDate=new Date();endDate.setMonth(endDate.getMonth()+1);
-  document.getElementById('b-end-date').value=endDate.toISOString().split('T')[0];
-  document.getElementById('b-end-date').min=todayStr;
-  document.getElementById('b-notes').value='';
-  document.getElementById('b-duration').value='2';
-  document.getElementById('b-recurring').checked=false;
-  document.getElementById('recurring-fields').style.display='none';
-  document.getElementById('conflict-box').style.display='none';
-  document.getElementById('time-slots-wrap').innerHTML='<div style="color:var(--dim);font-size:0.8rem;padding:0.5rem">Select a studio and date first</div>';
-  document.getElementById('slot-room-label').textContent='';
-  document.querySelectorAll('.room-btn').forEach(b=>{
-    const room=b.getAttribute('data-room');
-    const inactive=studioStatus[room]===false;
-    b.style.background='rgba(255,255,255,0.03)';
-    b.style.borderColor=inactive?'rgba(255,255,255,0.04)':'var(--b2)';
-    b.style.color=inactive?'rgba(255,255,255,0.2)':'var(--dim)';
-    b.style.cursor=inactive?'not-allowed':'pointer';
-    b.title=inactive?`${room} is inactive`:'';
-  });
-  openM('m-booking');
-}
-
-function selectRoom(btn,room){
-  if(studioStatus[room]===false){
-    toast(`${room} is currently inactive â€” the manager has disabled bookings for this room`,'error');
-    return;
-  }
-  selectedRoom=room;selectedSlots=[];
-  document.querySelectorAll('.room-btn').forEach(b=>{
-    const isThis=b===btn;
-    b.style.background=isThis?'rgba(79,195,247,0.15)':'rgba(255,255,255,0.03)';
-    b.style.borderColor=isThis?'var(--c)':'var(--b2)';
-    b.style.color=isThis?'var(--c)':'var(--dim)';
-    b.style.fontWeight=isThis?'700':'400';
-  });
-  loadTimeSlots();
-}
-
-function loadTimeSlots(){
-  if(!selectedRoom){return;}
-  const dateInput=document.getElementById('b-date');
-  const date=dateInput.value;
-  const dur=parseInt(document.getElementById('b-duration').value)||1;
-  if(!date){return;}
-  // Safety net: if somehow a past date got selected, snap it back to today
-  const todayStr=new Date().toISOString().split('T')[0];
-  if(date<todayStr){
-    dateInput.value=todayStr;
-    toast('You cannot book a date in the past','error');
-    loadTimeSlots();
-    return;
-  }
-  document.getElementById('slot-room-label').textContent=`â€” ${selectedRoom}`;
-  const isToday=date===todayStr;
-  const currentHour=new Date().getHours();
-  // Find taken slots for this room+date
-  const takenApproved=bookings.filter(b=>b.studio===selectedRoom&&b.date===date&&b.status==='approved');
-  const takenPending=bookings.filter(b=>b.studio===selectedRoom&&b.date===date&&b.status==='pending');
-  const takenHours=new Set();
-  const pendingHours=new Set();
-  takenApproved.forEach(b=>{
-    const sh=parseInt(b.start_time),eh=parseInt(b.end_time);
-    for(let h=sh;h<eh;h++)takenHours.add(h);
-  });
-  takenPending.forEach(b=>{
-    const sh=parseInt(b.start_time),eh=parseInt(b.end_time);
-    for(let h=sh;h<eh;h++)pendingHours.add(h);
-  });
-  selectedSlots=[];
-  const wrap=document.getElementById('time-slots-wrap');
-  wrap.innerHTML=`<div class="time-slots">${ALL_SLOTS.map(slot=>{
-    const h=parseInt(slot);
-    const endH=h+dur;
-    // Block any slot that starts at or before the current hour, only when booking for today
-    const isPast=isToday&&h<=currentHour;
-    // Check if all hours in range are free
-    let slotTaken=false,slotPending=false;
-    for(let i=h;i<endH;i++){if(takenHours.has(i))slotTaken=true;if(pendingHours.has(i))slotPending=true;}
-    const disabled=slotTaken||slotPending||isPast;
-    const cls=isPast?'ts ts-taken':slotTaken?'ts ts-taken':slotPending?'ts ts-pending':'ts';
-    const endStr=endH<=23?`${String(endH).padStart(2,'0')}:00`:'00:00';
-    const title=isPast?'This time has already passed':slotTaken?'Already booked':slotPending?'Pending approval':'Available';
-    const style=isPast?'style="opacity:0.4"':'';
-    return `<div class="${cls}" ${style} onclick="toggleSlot(this,'${slot}',${disabled})" title="${title}">${slot}<br><span style="font-size:0.58rem;opacity:0.7">${endStr}</span></div>`;
-  }).join('')}</div>`;
-}
-
-function toggleSlot(el,slot,taken){
-  if(taken)return;
-  if(el.classList.contains('ts-selected')){
-    el.classList.remove('ts-selected');
-    selectedSlots=selectedSlots.filter(s=>s!==slot);
-  } else {
-    // Only allow 1 continuous slot selection (the start time)
-    document.querySelectorAll('.ts-selected').forEach(e=>e.classList.remove('ts-selected'));
-    selectedSlots=[slot];
-    el.classList.add('ts-selected');
-  }
-  document.getElementById('conflict-box').style.display='none';
-}
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   RECURRING BOOKING LOGIC
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-function toggleRecurring(){
-  const on=document.getElementById('b-recurring').checked;
-  document.getElementById('recurring-fields').style.display=on?'block':'none';
-  if(on) updateRecurringPreview();
-}
-
-function toggleCustomDays(){
-  const pattern=document.getElementById('b-pattern').value;
-  document.getElementById('custom-days-wrap').style.display=pattern==='custom'?'flex':'none';
-  updateRecurringPreview();
-}
-
-document.addEventListener('change',e=>{
-  if(e.target.id==='b-pattern') toggleCustomDays();
-  if(e.target.id==='b-end-date'||e.target.id==='b-pattern'||e.target.closest('#custom-days-wrap')) updateRecurringPreview();
+const sb=supabase.createClient(SURL,SKEY,{
+  auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false},
+  global:{fetch:safeFetch}
 });
 
-function getRecurringDates(startDate, pattern, endDate, customDays=[]){
-  const dates=[];
-  const start=new Date(startDate+'T12:00:00');
-  const end=new Date(endDate+'T12:00:00');
-  if(end<=start) return dates;
-  const cur=new Date(start);
-  cur.setDate(cur.getDate()+1); // start from day AFTER first booking date
-  const weekdays=[1,2,3,4,5];
-  while(cur<=end){
-    const dow=cur.getDay();
-    let include=false;
-    if(pattern==='daily') include=true;
-    else if(pattern==='weekdays') include=weekdays.includes(dow);
-    else if(pattern==='weekly') include=dow===start.getDay();
-    else if(pattern==='custom') include=customDays.includes(dow);
-    if(include) dates.push(cur.toISOString().split('T')[0]);
-    cur.setDate(cur.getDate()+1);
-  }
-  return dates;
+const $=id=>document.getElementById(id);
+const pad=n=>String(n).padStart(2,'0');
+const hh=h=>pad(h)+':00';
+function localDate(d=new Date()){return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;}
+function addDays(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x;}
+function el(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
+function clean(s){return String(s||'').replace(/\s+/g,' ').trim();}
+function niceDate(d){return new Date(d+'T00:00:00').toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long',year:'numeric'});}
+
+let room=null,startHour=null,takenHours=new Set(),availKnown=false,seq=0,busy=false;
+
+/* ---------- Rooms ---------- */
+function buildRooms(){
+  ROOMS.forEach(r=>{
+    const b=el('button','chip',r);
+    b.type='button';
+    b.setAttribute('aria-pressed','false');
+    b.style.setProperty('--rc',ROOM_COLOR[r]);
+    b.addEventListener('click',()=>{room=r;startHour=null;markRooms();refreshSlots();});
+    $('rooms').appendChild(b);
+  });
+}
+function markRooms(){
+  [...$('rooms').children].forEach(b=>{
+    const on=b.textContent===room;
+    b.classList.toggle('on',on);
+    b.setAttribute('aria-pressed',String(on));
+  });
+  $('stepRoomNum').classList.toggle('done',!!room);
 }
 
-function getCustomDays(){
-  return Array.from(document.querySelectorAll('#custom-days-wrap input:checked')).map(i=>parseInt(i.value));
-}
-
-function updateRecurringPreview(){
-  const startDate=document.getElementById('b-date').value;
-  const endDate=document.getElementById('b-end-date').value;
-  const pattern=document.getElementById('b-pattern').value;
-  const preview=document.getElementById('recurring-preview-txt');
-  if(!startDate||!endDate){preview.textContent='Set a start and end date to preview';return;}
-  const customDays=getCustomDays();
-  if(pattern==='custom'&&!customDays.length){preview.textContent='Select at least one day';return;}
-  const dates=getRecurringDates(startDate,pattern,endDate,customDays);
-  const patternLabels={daily:'every day',weekdays:'Monâ€“Fri',weekly:`every ${new Date(startDate+'T12:00:00').toLocaleDateString('en-US',{weekday:'long'})}`,custom:'selected days'};
-  if(!dates.length){preview.textContent='No dates match this pattern â€” check your end date';return;}
-  preview.innerHTML=`<i class="fas fa-calendar-alt" style="color:var(--c);margin-right:6px"></i>
-    Will generate <strong style="color:var(--c)">${dates.length} bookings</strong> ${patternLabels[pattern]}, 
-    ending <strong style="color:var(--c)">${new Date(endDate+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</strong>
-    <span style="color:var(--dim);font-size:0.72rem;display:block;margin-top:3px">First few: ${dates.slice(0,3).join(', ')}${dates.length>3?'â€¦':''}</span>`;
-}
-
-async function submitBooking(){
-  if(!selectedRoom){toast('Please select a studio or room','error');return;}
-  if(studioStatus[selectedRoom]===false){toast(`${selectedRoom} is currently inactive and cannot be booked`,'error');return;}
-  const prod=document.getElementById('b-prod').value.trim();
-  if(!prod){toast('Please enter a production name','error');return;}
-  const date=document.getElementById('b-date').value;
-  if(!date){toast('Please select a date','error');return;}
-  if(!selectedSlots.length){toast('Please select a start time','error');return;}
-  const startHour=parseInt(selectedSlots[0]);
-  const dur=parseInt(document.getElementById('b-duration').value)||1;
-  const endHour=startHour+dur;
-  const startTime=`${String(startHour).padStart(2,'0')}:00`;
-  const endTime=`${String(endHour).padStart(2,'0')}:00`;
-  // Past check
-  const startDateTime=new Date(`${date}T${startTime}:00`);
-  if(startDateTime<=new Date()){
-    toast('You cannot book a date or time that has already passed','error');
-    loadTimeSlots();return;
-  }
-  // Conflict check for first date
-  const conflict=bookings.find(b=>b.studio===selectedRoom&&b.date===date&&b.status==='approved'&&parseInt(b.start_time)<endHour&&parseInt(b.end_time)>startHour);
-  if(conflict){
-    document.getElementById('conflict-box').style.display='block';
-    document.getElementById('conflict-msg').textContent=`Conflict: "${conflict.production}" has this slot (${conflict.start_time}â€“${conflict.end_time})`;
-    return;
-  }
-  const isRecurring=document.getElementById('b-recurring').checked;
-  const notes=document.getElementById('b-notes').value.trim();
-  const recurringId=isRecurring?`rec_${Date.now()}`:''; // shared ID for all instances
-  // Build base booking
-  const baseBooking={
-    studio:selectedRoom,production:prod,date,
-    start_time:startTime,end_time:endTime,
-    requested_by:userName,requested_by_id:currentUser?.id,
-    requester_email:currentUser?.email||'',
-    status:'pending',notes,
-    is_recurring:isRecurring,
-    recurring_id:isRecurring?recurringId:null,
-    recurring_pattern:isRecurring?document.getElementById('b-pattern').value:null,
-    recurring_end_date:isRecurring?document.getElementById('b-end-date').value:null,
-    created_at:new Date().toISOString()
-  };
-  const saved=await saveBooking(baseBooking);
-  if(!saved) return;
-  // If recurring, generate and save all future instances too
-  if(isRecurring){
-    const pattern=document.getElementById('b-pattern').value;
-    const endDate=document.getElementById('b-end-date').value;
-    const customDays=getCustomDays();
-    if(pattern==='custom'&&!customDays.length){toast('Select at least one day for recurring booking','error');return;}
-    const futureDates=getRecurringDates(date,pattern,endDate,customDays);
-    if(!futureDates.length){toast('No future dates match this pattern','error');return;}
-    // Check max to prevent abuse
-    if(futureDates.length>365){toast('Recurring booking cannot exceed 365 occurrences','error');return;}
-    // Save all future instances
-    const instances=futureDates.map(d=>({...baseBooking,date:d,id:undefined,created_at:new Date().toISOString()}));
-    // Insert in batches of 20
-    for(let i=0;i<instances.length;i+=20){
-      const batch=instances.slice(i,i+20);
-      const{error:be}=await sb.from('studio_bookings').insert(batch);
-      if(be){console.error('Batch insert error:',be);toast('Some recurring dates failed to save: '+be.message,'error');break;}
-    }
-    closeM('m-booking');
-    toast(`Recurring booking submitted â€” ${futureDates.length+1} dates pending approval`,'info');
-  } else {
-    closeM('m-booking');
-    toast(`Booking submitted for ${selectedRoom} â€” awaiting manager approval`,'info');
-  }
-  await loadBookings();
-  renderMyBookings();
-  updateApprovalBadge();
-}
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   OVERVIEW
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-function renderOverview(){
-  document.getElementById('overview-date').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  const today=new Date().toISOString().split('T')[0];
-  const nowH=new Date().getHours();
-  // Studio cards
-  document.getElementById('studio-cards').innerHTML=ROOMS.map(room=>{
-    const isPCR=room.startsWith('PCR');
-    const isActive=studioStatus[room]!==false;
-    const activeNow=isActive&&bookings.find(b=>b.studio===room&&b.date===today&&b.status==='approved'&&parseInt(b.start_time)<=nowH&&parseInt(b.end_time)>nowH);
-    const nextUp=isActive&&bookings.filter(b=>b.studio===room&&b.date===today&&b.status==='approved'&&parseInt(b.start_time)>nowH).sort((a,b)=>a.start_time.localeCompare(b.start_time))[0];
-    const isBooked=!!activeNow;
-    const cardStyle=!isActive?'opacity:0.55;filter:grayscale(0.6)':'';
-    return `<div class="studio-card ${isBooked?'booked':''} ${isPCR?'pcr':''} ${!isActive?'inactive':''}" style="${cardStyle}" onclick="${isActive?'openBookingModal()':''}">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start">
-        <div class="sc-label" style="color:${isActive?ROOM_COLOR[room]:'var(--dim)'}">${room}</div>
-        ${userRole==='manager'?`
-        <button onclick="event.stopPropagation();toggleStudioStatus('${room}')"
-          style="font-family:'Rajdhani',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.5px;padding:3px 9px;border-radius:20px;border:1px solid ${isActive?'rgba(244,67,54,0.4)':'rgba(0,200,83,0.4)'};background:${isActive?'rgba(244,67,54,0.1)':'rgba(0,200,83,0.1)'};color:${isActive?'var(--r)':'var(--gr)'};cursor:pointer;transition:all 0.18s">
-          ${isActive?'Deactivate':'Activate'}
-        </button>`:''}
-      </div>
-      <div class="sc-type">${isPCR?'Production Control Room':'Television Studio'}</div>
-      ${!isActive?`
-        <div class="sc-status">
-          <div class="sd" style="background:rgba(255,255,255,0.25)"></div>
-          <span style="color:var(--dim)">Inactive â€” unavailable for booking</span>
-        </div>`:
-      `<div class="sc-status">
-        <div class="sd ${isBooked?'sd-booked':'sd-avail'}"></div>
-        <span style="color:${isBooked?'var(--r)':'var(--gr)'}">${isBooked?'In Use':'Available'}</span>
-      </div>`}
-      ${isActive&&activeNow?`<div class="sc-current"><i class="fas fa-clapperboard" style="margin-right:5px;color:var(--r)"></i>${activeNow.production}<br><i class="fas fa-clock" style="margin-right:5px;color:var(--dim)"></i>${activeNow.start_time}â€“${activeNow.end_time}</div>`:''}
-      ${isActive&&!isBooked&&nextUp?`<div class="sc-current"><i class="fas fa-arrow-right" style="margin-right:5px;color:var(--am)"></i>Next: ${nextUp.production} at ${nextUp.start_time}</div>`:''}
-      ${isActive&&!isBooked&&!nextUp?`<div class="sc-current" style="color:rgba(0,200,83,0.6)"><i class="fas fa-check" style="margin-right:5px"></i>Free all day</div>`:''}
-    </div>`;
-  }).join('');
-  // Stats
-  const activeRooms=ROOMS.filter(r=>bookings.find(b=>b.studio===r&&b.date===today&&b.status==='approved'&&parseInt(b.start_time)<=nowH&&parseInt(b.end_time)>nowH));
-  document.getElementById('stat-avail').textContent=ROOMS.length-activeRooms.length;
-  document.getElementById('stat-busy').textContent=activeRooms.length;
-  const myPending=bookings.filter(b=>b.requested_by_id===currentUser?.id&&b.status==='pending');
-  document.getElementById('stat-pending').textContent=myPending.length;
-  // Today's schedule
-  const todayBookings=bookings.filter(b=>b.date===today&&b.status==='approved').sort((a,b)=>a.start_time.localeCompare(b.start_time));
-  const sched=document.getElementById('today-schedule');
-  if(!todayBookings.length){
-    sched.innerHTML='<div style="color:var(--dim);font-size:0.82rem;text-align:center;padding:1.5rem">No approved bookings for today</div>';
-  } else {
-    sched.innerHTML=`<table class="dt"><thead><tr><th>Room</th><th>Production</th><th>Time</th><th class="mob-hide">Booked By</th><th>Status</th>${userRole==='manager'?'<th></th>':''}</tr></thead><tbody>${
-      todayBookings.map(b=>`<tr>
-        <td><span style="font-family:'Orbitron',monospace;font-size:0.78rem;color:${ROOM_COLOR[b.studio]}">${b.studio}</span></td>
-        <td style="font-weight:600">${b.production}</td>
-        <td style="font-family:'Share Tech Mono',monospace;font-size:0.8rem">${b.start_time}â€“${b.end_time}</td>
-        <td class="mob-hide" style="color:var(--dim)">${b.requested_by}</td>
-        <td><span class="badge b-${b.status}">${b.status}</span></td>
-        ${userRole==='manager'?`<td>${b.status==='pending'?`<div style="display:flex;gap:4px"><button class="btn bgr sm" onclick="approveBooking('${b.id}')"><i class="fas fa-check"></i>Approve</button><button class="btn br sm" onclick="openRejectModal('${b.id}')"><i class="fas fa-times"></i>Reject</button></div>`:'â€”'}</td>`:''}
-      </tr>`).join('')
-    }</tbody></table>`;
-  }
-}
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   CALENDAR
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
-
-function renderCal(){
-  const y=calDate.getFullYear(),m=calDate.getMonth();
-  document.getElementById('cal-month-lbl').textContent=`${MONTHS[m]} ${y}`;
-  const hdr=document.getElementById('cal-hdr');
-  hdr.innerHTML=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d=>`<div class="cal-hdr-day">${d}</div>`).join('');
-  const first=new Date(y,m,1);
-  let startDay=first.getDay()-1;if(startDay<0)startDay=6;
-  const daysInMonth=new Date(y,m+1,0).getDate();
-  const today=new Date();
-  const filter=document.getElementById('cal-studio-filter')?.value||'all';
-  const grid=document.getElementById('cal-grid');grid.innerHTML='';
-  // Pad start
-  const prevDays=new Date(y,m,0).getDate();
-  for(let i=0;i<startDay;i++){
-    const c=document.createElement('div');c.className='cal-cell other-month';
-    c.innerHTML=`<div class="cal-date-num">${prevDays-startDay+i+1}</div>`;grid.appendChild(c);
-  }
-  for(let d=1;d<=daysInMonth;d++){
-    const c=document.createElement('div');
-    const isToday=d===today.getDate()&&m===today.getMonth()&&y===today.getFullYear();
-    c.className='cal-cell'+(isToday?' today':'');
-    const dateStr=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const dayBookings=bookings.filter(b=>b.date===dateStr&&(filter==='all'||b.studio===filter)&&b.status!=='rejected'&&b.status!=='cancelled').sort((a,b2)=>a.start_time.localeCompare(b2.start_time));
-    c.innerHTML=`<div class="cal-date-num ${isToday?'today-num':''}">${d}</div>`+
-      dayBookings.slice(0,3).map(b=>`<div class="cal-ev ev-${ROOM_CLASS[b.studio]} ${b.status==='pending'?'ev-pending':''}" title="${b.studio}: ${b.production} ${b.start_time}â€“${b.end_time} [${b.status}]">${b.studio.replace('Studio ','').replace('PCR ','PCR')} Â· ${b.start_time}</div>`).join('')+
-      (dayBookings.length>3?`<div style="font-size:0.58rem;color:var(--dim);margin-top:1px">+${dayBookings.length-3} more</div>`:'');
-    c.onclick=()=>showDayModal(dateStr,dayBookings);
-    grid.appendChild(c);
-  }
-  const used=startDay+daysInMonth;const rem=(7-used%7)%7;
-  for(let i=1;i<=rem;i++){const c=document.createElement('div');c.className='cal-cell other-month';c.innerHTML=`<div class="cal-date-num">${i}</div>`;grid.appendChild(c);}
-}
-
-function calPrev(){calDate=new Date(calDate.getFullYear(),calDate.getMonth()-1,1);renderCal();}
-function calNext(){calDate=new Date(calDate.getFullYear(),calDate.getMonth()+1,1);renderCal();}
-
-function showDayModal(dateStr,dayBookings){
-  const d=new Date(dateStr+'T12:00:00');
-  document.getElementById('day-modal-title').textContent=d.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  document.getElementById('day-modal-content').innerHTML=dayBookings.length?
-    dayBookings.map(b=>`<div style="display:flex;align-items:center;gap:1rem;padding:0.75rem 0;border-bottom:1px solid var(--b2)">
-      <div style="width:4px;height:44px;border-radius:4px;background:${ROOM_COLOR[b.studio]};flex-shrink:0"></div>
-      <div style="flex:1">
-        <div style="font-weight:700;font-size:0.92rem">${b.production}</div>
-        <div style="font-size:0.76rem;color:var(--dim);margin-top:2px">${b.studio} Â· ${b.start_time}â€“${b.end_time} Â· ${b.requested_by}</div>
-      </div>
-      <span class="badge b-${b.status}">${b.status}</span>
-    </div>`).join(''):
-    '<div style="color:var(--dim);font-size:0.82rem;text-align:center;padding:1.5rem">No bookings for this day</div>';
-  openM('m-day');
-}
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   APPROVAL CONFIRMATION POPUP
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-function showApprovalConfirm(b, type, reason=''){
-  if(!b) return;
-  // Remove any existing confirm popup
-  document.getElementById('approval-confirm-popup')?.remove();
-  const popup=document.createElement('div');
-  popup.id='approval-confirm-popup';
-  popup.style.cssText='position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:800;background:rgba(4,12,26,0.99);border-radius:16px;padding:2rem;text-align:center;min-width:300px;max-width:420px;width:90%;box-shadow:0 24px 70px rgba(0,0,0,0.7);animation:fu 0.25s ease';
-  const isApproved=type==='approved';
-  const isCancelled=type==='cancelled';
-  const icon=isApproved?'âœ…':isCancelled?'ðŸš«':'âŒ';
-  const color=isApproved?'var(--gr)':isCancelled?'var(--am)':'var(--r)';
-  const label=isApproved?'BOOKING APPROVED':isCancelled?'BOOKING CANCELLED':'BOOKING REJECTED';
-  popup.innerHTML=`
-    <div style="font-size:2.5rem;margin-bottom:0.75rem">${icon}</div>
-    <div style="font-family:'Orbitron',monospace;font-size:0.88rem;font-weight:700;color:${color};margin-bottom:0.5rem">${label}</div>
-    <div style="font-size:0.9rem;font-weight:600;margin-bottom:4px">${b.production}</div>
-    <div style="font-size:0.8rem;color:var(--dim);margin-bottom:0.5rem">${b.studio} Â· ${b.date} Â· ${b.start_time}â€“${b.end_time}</div>
-    <div style="font-size:0.78rem;color:var(--dim);margin-bottom:0.5rem">Requested by: <strong style="color:#fff">${b.requested_by}</strong></div>
-    ${reason?`<div style="background:rgba(255,152,0,0.1);border:1px solid rgba(255,152,0,0.25);border-radius:8px;padding:0.55rem 0.75rem;font-size:0.78rem;color:var(--am);margin-bottom:1rem">Reason: ${reason}</div>`:''}
-    <div style="font-size:0.75rem;color:var(--dim);margin-bottom:1.25rem"><i class="fas fa-envelope" style="margin-right:5px;color:var(--c)"></i>${b.requested_by} will be notified</div>
-    <button onclick="document.getElementById('approval-confirm-popup').remove()" style="background:rgba(79,195,247,0.12);border:1px solid rgba(79,195,247,0.35);color:var(--c);border-radius:8px;padding:0.55rem 1.5rem;cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:0.85rem;font-weight:600;letter-spacing:1px">OK</button>
-  `;
-  document.body.appendChild(popup);
-  // Auto-close after 5 seconds
-  setTimeout(()=>popup.remove(), 5000);
-}
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   MY BOOKINGS
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-function renderMyBookings(){
-  const all=bookings.filter(b=>b.requested_by_id===currentUser?.id).sort((a,b)=>b.created_at?.localeCompare(a.created_at||'')||0);
-  const active=all.filter(b=>b.status!=='completed'&&b.status!=='cancelled'&&b.status!=='rejected');
-  const past=all.filter(b=>b.status==='completed'||b.status==='cancelled'||b.status==='rejected');
-  const tbody=document.getElementById('my-bookings-tbody');
-  if(!all.length){
-    tbody.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:2rem">You have no bookings yet.<br><br><button class="btn bc" onclick="openBookingModal()"><i class="fas fa-plus"></i>Make your first request</button></td></tr>';
-    return;
-  }
-  const rowHtml=b=>`<tr>
-    <td style="font-family:'Orbitron',monospace;font-size:0.78rem;color:${ROOM_COLOR[b.studio]};font-weight:700">${b.studio}</td>
-    <td style="font-weight:600">${b.production}${b.is_recurring?`<span class="b-recurring-badge"><i class="fas fa-redo" style="margin-right:3px"></i>${b.recurring_pattern||'recurring'}</span>`:''}</td>
-    <td class="mob-hide" style="font-family:'Share Tech Mono',monospace;font-size:0.78rem">${b.date}</td>
-    <td style="font-family:'Share Tech Mono',monospace;font-size:0.78rem">${b.start_time}â€“${b.end_time}</td>
-    <td><span class="badge b-${b.status}">${b.status}</span></td>
-    <td class="mob-hide" style="font-size:0.76rem;color:${b.status==='rejected'?'var(--r)':'var(--dim)'}">${b.manager_note||'â€”'}</td>
-    <td>${b.status==='pending'
-      ?`<div style="display:flex;gap:4px;flex-wrap:wrap">
-          <button class="btn bc sm" onclick="openEditModal('${b.id}')"><i class="fas fa-edit"></i><span class="mob-hide"> Edit</span></button>
-          <button class="btn br sm" onclick="cancelBooking('${b.id}')"><i class="fas fa-times"></i><span class="mob-hide"> Cancel</span></button>
-          ${b.is_recurring&&b.recurring_id?`<button class="btn br sm" onclick="cancelAllRecurring('${b.recurring_id}')" title="Cancel all future occurrences"><i class="fas fa-redo"></i><span class="mob-hide"> All</span></button>`:''}
-        </div>`
-      :b.status==='rejected'
-      ?`<div style="font-size:0.72rem;color:var(--r);max-width:120px">${b.manager_note||''}</div>`
-      :b.status==='cancelled'
-      ?`<div style="font-size:0.72rem;color:var(--dim);max-width:140px"><i class="fas fa-ban" style="margin-right:4px"></i>${b.manager_note||'Cancelled by manager'}</div>`
-      :''}</td>
-  </tr>`;
-  let html=active.length?active.map(rowHtml).join(''):'<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:1.25rem">No upcoming bookings</td></tr>';
-  if(past.length){
-    html+=`<tr><td colspan="7" style="padding:0.6rem 0.9rem;background:rgba(255,255,255,0.02)">
-      <button onclick="document.getElementById('past-bookings-rows').classList.toggle('hide-past')" style="background:none;border:none;color:var(--dim);cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:0.78rem;display:flex;align-items:center;gap:6px">
-        <i class="fas fa-history"></i>${past.length} past booking${past.length!==1?'s':''} <i class="fas fa-chevron-down"></i>
-      </button>
-    </td></tr>`;
-    html+=`<tbody id="past-bookings-rows" class="hide-past" style="display:contents">${past.map(rowHtml).join('')}</tbody>`;
-  }
-  tbody.innerHTML=html;
-}
-/* Toggle visibility of past bookings rows */
-document.addEventListener('click',e=>{
-  const wrap=document.getElementById('past-bookings-rows');
-  if(wrap){wrap.style.display=wrap.classList.contains('hide-past')?'none':'contents';}
-});
-
-async function cancelBooking(id){
-  if(!confirm('Cancel this booking request?'))return;
-  await updateBooking(id,{status:'cancelled'});
-  await loadBookings();
-  renderMyBookings();
-  toast('Booking cancelled','info');
-}
-
-async function cancelAllRecurring(recurringId){
-  if(!recurringId)return;
-  const future=bookings.filter(b=>b.recurring_id===recurringId&&b.status==='pending'&&b.date>=new Date().toISOString().split('T')[0]);
-  if(!future.length){toast('No future pending occurrences found','info');return;}
-  if(!confirm(`Cancel all ${future.length} future pending occurrences of this recurring booking?`))return;
-  for(const b of future){
-    await updateBooking(b.id,{status:'cancelled'});
-  }
-  await loadBookings();
-  renderMyBookings();
-  toast(`${future.length} recurring bookings cancelled`,'warning');
-}
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   MANAGER CANCEL BOOKING
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-function openCancelModal(id){
-  const b=bookings.find(x=>x.id===id);
-  if(!b)return;
-  document.getElementById('cancel-id').value=id;
-  document.getElementById('cancel-reason').value='';
-  document.getElementById('cancel-booking-detail').innerHTML=`
-    <div style="display:flex;gap:1rem;align-items:center">
-      <div style="width:4px;height:48px;border-radius:4px;background:${ROOM_COLOR[b.studio]};flex-shrink:0"></div>
-      <div>
-        <div style="font-weight:700;font-size:0.92rem">${b.production}</div>
-        <div style="font-size:0.78rem;color:var(--dim);margin-top:3px">${b.studio} Â· ${b.date} Â· ${b.start_time}â€“${b.end_time}</div>
-        <div style="font-size:0.75rem;color:var(--dim);margin-top:2px">Booked by: ${b.requested_by}</div>
-      </div>
-    </div>`;
-  openM('m-cancel');
-}
-
-async function confirmCancel(){
-  const id=document.getElementById('cancel-id').value;
-  const reason=document.getElementById('cancel-reason').value.trim();
-  if(!reason){toast('Please provide a reason for cancellation','error');return;}
-  const b=bookings.find(x=>x.id===id);
-  await updateBooking(id,{status:'cancelled',manager_note:reason,manager_name:userName});
-  closeM('m-cancel');
-  await loadBookings();
-  renderAllBookings();
-  renderOverview();
-  renderCal();
-  // Show confirmation popup
-  showApprovalConfirm({...b,manager_note:reason},'cancelled',reason);
-  toast(`Booking cancelled â€” ${b?.requested_by} has been notified`,'warning');
-}
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   JOURNALIST EDIT BOOKING
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-let editSelectedSlot=null;
-
-function openEditModal(id){
-  const b=bookings.find(x=>x.id===id);
-  if(!b)return;
-  document.getElementById('edit-id').value=id;
-  document.getElementById('edit-prod').value=b.production;
-  const todayStr=new Date().toISOString().split('T')[0];
-  const editDate=document.getElementById('edit-date');
-  editDate.value=b.date>=todayStr?b.date:todayStr;
-  editDate.min=todayStr;
-  document.getElementById('edit-duration').value=
-    String(parseInt(b.end_time)-parseInt(b.start_time));
-  document.getElementById('edit-notes').value=b.notes||'';
-  document.getElementById('edit-slot-label').textContent=`â€” ${b.studio}`;
-  editSelectedSlot=b.start_time;
-  openM('m-edit');
-  loadEditSlots(id);
-}
-
-function loadEditSlots(bookingId){
-  const id=bookingId||document.getElementById('edit-id').value;
-  const b=bookings.find(x=>x.id===id);
-  if(!b)return;
-  const date=document.getElementById('edit-date').value;
-  const dur=parseInt(document.getElementById('edit-duration').value)||1;
-  const todayStr=new Date().toISOString().split('T')[0];
-  const isToday=date===todayStr;
-  const currentHour=new Date().getHours();
-  // Find taken slots excluding this booking itself
-  const takenApproved=bookings.filter(x=>x.id!==id&&x.studio===b.studio&&x.date===date&&x.status==='approved');
-  const takenPending=bookings.filter(x=>x.id!==id&&x.studio===b.studio&&x.date===date&&x.status==='pending');
-  const takenHours=new Set();const pendingHours=new Set();
-  takenApproved.forEach(x=>{const sh=parseInt(x.start_time),eh=parseInt(x.end_time);for(let h=sh;h<eh;h++)takenHours.add(h);});
-  takenPending.forEach(x=>{const sh=parseInt(x.start_time),eh=parseInt(x.end_time);for(let h=sh;h<eh;h++)pendingHours.add(h);});
-  const wrap=document.getElementById('edit-slots-wrap');
-  wrap.innerHTML=`<div class="time-slots">${ALL_SLOTS.map(slot=>{
-    const h=parseInt(slot),endH=h+dur;
-    const isPast=isToday&&h<=currentHour;
-    let slotTaken=false,slotPending=false;
-    for(let i=h;i<endH;i++){if(takenHours.has(i))slotTaken=true;if(pendingHours.has(i))slotPending=true;}
-    const disabled=slotTaken||slotPending||isPast;
-    const isCurrent=slot===b.start_time;
-    const cls=disabled?(isPast?'ts ts-taken':slotTaken?'ts ts-taken':'ts ts-pending'):(isCurrent?'ts ts-selected':'ts');
-    const endStr=endH<=23?`${String(endH).padStart(2,'0')}:00`:'00:00';
-    if(isCurrent&&!disabled)editSelectedSlot=slot;
-    return `<div class="${cls}" onclick="pickEditSlot(this,'${slot}',${disabled})" title="${isPast?'Past':'Available'}">${slot}<br><span style="font-size:0.58rem;opacity:0.7">${endStr}</span></div>`;
-  }).join('')}</div>`;
-}
-
-function pickEditSlot(el,slot,disabled){
-  if(disabled)return;
-  document.querySelectorAll('#edit-slots-wrap .ts-selected').forEach(e=>e.classList.remove('ts-selected'));
-  el.classList.add('ts-selected');
-  editSelectedSlot=slot;
-}
-
-async function submitEdit(){
-  const id=document.getElementById('edit-id').value;
-  const b=bookings.find(x=>x.id===id);
-  if(!b)return;
-  const prod=document.getElementById('edit-prod').value.trim();
-  if(!prod){toast('Enter a production name','error');return;}
-  const date=document.getElementById('edit-date').value;
-  if(!date){toast('Select a date','error');return;}
-  if(!editSelectedSlot){toast('Select a time slot','error');return;}
-  const startHour=parseInt(editSelectedSlot);
-  const dur=parseInt(document.getElementById('edit-duration').value)||1;
-  const endHour=startHour+dur;
-  const startTime=`${String(startHour).padStart(2,'0')}:00`;
-  const endTime=`${String(endHour).padStart(2,'0')}:00`;
-  // Past check
-  const startDT=new Date(`${date}T${startTime}:00`);
-  if(startDT<=new Date()){toast('Cannot book a time that has already passed','error');return;}
-  const updates={
-    production:prod,
-    date,
-    start_time:startTime,
-    end_time:endTime,
-    notes:document.getElementById('edit-notes').value.trim(),
-    status:'pending', // resubmit for approval
-    manager_note:null,
-    manager_name:null,
-    approved_at:null,
-    updated_at:new Date().toISOString()
-  };
-  await updateBooking(id,updates);
-  closeM('m-edit');
-  await loadBookings();
-  renderMyBookings();
-  updateApprovalBadge();
-  toast('Booking updated and resubmitted for approval','info');
-}
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   APPROVALS (Manager)
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-function renderApprovals(){
-  const pending=bookings.filter(b=>b.status==='pending').sort((a,b)=>a.created_at?.localeCompare(b.created_at||'')||0);
-  document.getElementById('approval-count-lbl').textContent=`${pending.length} request${pending.length!==1?'s':''} waiting for your decision`;
-  updateApprovalBadge();
-  const list=document.getElementById('approvals-list');
-  if(!pending.length){
-    list.innerHTML='<div style="color:var(--dim);font-size:0.88rem;text-align:center;padding:3rem;border:1px dashed var(--b2);border-radius:12px"><i class="fas fa-check-circle" style="font-size:2rem;color:var(--gr);display:block;margin-bottom:0.75rem"></i>All clear â€” no pending requests</div>';
-    return;
-  }
-  list.innerHTML=pending.map(b=>`
-    <div class="review-card" id="rc-${b.id}">
-      <div class="rc-header">
-        <div>
-          <div class="rc-studio" style="color:${ROOM_COLOR[b.studio]}">${b.studio}</div>
-          <div class="rc-prod">${b.production}${b.is_recurring?`<span class="b-recurring-badge"><i class="fas fa-redo" style="margin-right:3px"></i>${b.recurring_pattern||'recurring'}</span>`:''}</div>
-        </div>
-        <div class="rc-actions">
-          <button class="btn bgr sm" onclick="approveBooking('${b.id}')"><i class="fas fa-check"></i>Approve</button>
-          ${b.is_recurring&&b.recurring_id?`<button class="btn bgr sm" onclick="approveAllRecurring('${b.recurring_id}')" title="Approve all dates in this series"><i class="fas fa-redo"></i>All</button>`:''}
-          <button class="btn br sm" onclick="openRejectModal('${b.id}')"><i class="fas fa-times"></i>Reject</button>
-        </div>
-      </div>
-      <div class="rc-meta">
-        <span><i class="fas fa-user"></i>${b.requested_by}</span>
-        <span><i class="fas fa-calendar"></i>${b.date}</span>
-        <span><i class="fas fa-clock"></i>${b.start_time} â€“ ${b.end_time}</span>
-        ${b.is_recurring?`<span style="color:var(--c)"><i class="fas fa-redo"></i>Until ${b.recurring_end_date||'â€”'}</span>`:''}
-        <span style="color:var(--dim);font-size:0.72rem">${b.created_at?new Date(b.created_at).toLocaleString():''}</span>
-      </div>
-      ${b.notes?`<div class="rc-notes"><i class="fas fa-sticky-note" style="margin-right:6px"></i>${b.notes}</div>`:''}
-    </div>`).join('');
-}
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   EMAIL NOTIFICATIONS
-   Uses Supabase's built-in email via
-   a simple log table that triggers
-   a notification â€” no extra service needed
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-async function sendEmailNotification(booking, type){
+/* ---------- Availability (approved bookings only) ---------- */
+async function loadAvailability(){
+  const my=++seq,date=$('date').value;
+  takenHours=new Set();availKnown=false;
+  if(!room||!date) return;
   try{
-    await sb.from('studio_notifications').insert({
-      booking_id: booking.id,
-      type,
-      recipient_email: booking.requester_email || '',
-      recipient_name: booking.requested_by,
-      studio: booking.studio,
-      production: booking.production,
-      date: booking.date,
-      start_time: booking.start_time,
-      end_time: booking.end_time,
-      message: type==='approved'
-        ? `Your booking for ${booking.studio} on ${booking.date} (${booking.start_time}â€“${booking.end_time}) has been APPROVED.`
-        : `Your booking for ${booking.studio} on ${booking.date} (${booking.start_time}â€“${booking.end_time}) has been REJECTED. Reason: ${booking.manager_note||'No reason given'}`,
-      created_at: new Date().toISOString()
+    const{data,error}=await sb.from('studio_bookings')
+      .select('start_time,end_time')
+      .eq('status','approved').eq('studio',room).eq('date',date);
+    if(error) throw error;
+    if(my!==seq) return;
+    (data||[]).forEach(b=>{
+      const s=parseInt(b.start_time,10),e=parseInt(b.end_time,10);
+      for(let h=s;h<e;h++) takenHours.add(h);
     });
-  } catch(e){
-    // Table may not exist yet â€” silent fail
+    availKnown=true;
+  }catch(err){
+    console.error('Availability check failed:',err&&err.message?err.message:err);
   }
 }
 
-async function approveBooking(id){
-  const b=bookings.find(x=>x.id===id);
-  if(!b)return;
-  const conflict=bookings.find(x=>x.id!==id&&x.studio===b.studio&&x.date===b.date&&x.status==='approved'&&parseInt(x.start_time)<parseInt(b.end_time)&&parseInt(x.end_time)>parseInt(b.start_time));
-  if(conflict){
-    toast(`Conflict with "${conflict.production}" (${conflict.start_time}â€“${conflict.end_time}) â€” cannot approve`,'error');return;
+function slotState(h,dur,date){
+  const end=h+dur;
+  if(end>LAST_END) return 'late';
+  if(date===localDate()&&h<=new Date().getHours()) return 'past';
+  for(let i=h;i<end;i++) if(takenHours.has(i)) return 'taken';
+  return 'free';
+}
+
+function renderSlots(){
+  const box=$('slots'),note=$('slotNote');
+  const date=$('date').value,dur=parseInt($('dur').value,10)||1;
+  $('slotRoom').textContent=room?'— '+room:'';
+  const frag=document.createDocumentFragment();
+  if(!room||!date){
+    box.replaceChildren();
+    note.className='note';note.textContent=!room?'Select a room first.':'Choose a date.';
+    updateSummary();return;
   }
-  await updateBooking(id,{status:'approved',manager_name:userName,approved_at:new Date().toISOString()});
-  // Refresh local state
-  const updated=bookings.find(x=>x.id===id);
-  // Send email notification
-  await sendEmailNotification(updated||b,'approved');
-  await loadBookings();
-  renderApprovals();
-  renderOverview();
-  renderCal();
-  // Show clear confirmation
-  showApprovalConfirm(b,'approved');
-  toast(`âœ… Approved â€” ${b.studio} confirmed for "${b.production}"`, 'success');
-}
-
-async function approveAllRecurring(recurringId){
-  if(!recurringId)return;
-  const series=bookings.filter(b=>b.recurring_id===recurringId&&b.status==='pending');
-  if(!series.length){toast('No pending occurrences found in this series','info');return;}
-  if(!confirm(`Approve all ${series.length} pending bookings in this recurring series?`))return;
-  let approved=0,skipped=0;
-  for(const b of series){
-    const conflict=bookings.find(x=>x.id!==b.id&&x.studio===b.studio&&x.date===b.date&&x.status==='approved'&&parseInt(x.start_time)<parseInt(b.end_time)&&parseInt(x.end_time)>parseInt(b.start_time));
-    if(conflict){skipped++;continue;}
-    await updateBooking(b.id,{status:'approved',manager_name:userName,approved_at:new Date().toISOString()});
-    approved++;
-  }
-  await loadBookings();
-  renderApprovals();
-  renderOverview();
-  renderCal();
-  toast(`${approved} bookings approved${skipped?`, ${skipped} skipped due to conflicts`:''}`,approved>0?'success':'warning');
-}
-
-function openRejectModal(id){
-  document.getElementById('reject-id').value=id;
-  document.getElementById('reject-reason').value='';
-  closeM('m-reject');// close any previous
-  setTimeout(()=>openM('m-reject'),50);
-}
-
-async function confirmReject(){
-  const id=document.getElementById('reject-id').value;
-  const reason=document.getElementById('reject-reason').value.trim();
-  if(!reason){toast('Please provide a reason for rejection','error');return;}
-  const b=bookings.find(x=>x.id===id);
-  await updateBooking(id,{status:'rejected',manager_note:reason,manager_name:userName});
-  // Send email notification
-  if(b) await sendEmailNotification({...b,manager_note:reason},'rejected');
-  closeM('m-reject');
-  await loadBookings();
-  renderApprovals();
-  renderOverview();
-  showApprovalConfirm(b,'rejected',reason);
-  toast('Booking rejected â€” journalist has been notified','warning');
-}
-
-async function approveAll(){
-  const pending=bookings.filter(b=>b.status==='pending');
-  if(!pending.length){toast('No pending bookings','info');return;}
-  if(!confirm(`Approve all ${pending.length} pending requests?`))return;
-  for(const b of pending){
-    const conflict=bookings.find(x=>x.id!==b.id&&x.studio===b.studio&&x.date===b.date&&x.status==='approved'&&parseInt(x.start_time)<parseInt(b.end_time)&&parseInt(x.end_time)>parseInt(b.start_time));
-    if(!conflict) await updateBooking(b.id,{status:'approved',manager_name:userName,approved_at:new Date().toISOString()});
-  }
-  await loadBookings();
-  renderApprovals();
-  renderOverview();
-  toast('All conflict-free bookings approved','success');
-}
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   ALL BOOKINGS (Manager)
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-function renderAllBookings(){
-  const sf=document.getElementById('all-filter-studio')?.value||'all';
-  const stf=document.getElementById('all-filter-status')?.value||'active';
-  const filtered=bookings.filter(b=>{
-    if(sf!=='all'&&b.studio!==sf) return false;
-    if(stf==='all') return true;
-    if(stf==='active') return b.status!=='completed';
-    return b.status===stf;
-  }).sort((a,b)=>b.date?.localeCompare(a.date||'')||0);
-  const tbody=document.getElementById('all-bookings-tbody');
-  if(!filtered.length){tbody.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--dim);padding:2rem">No bookings match the filter</td></tr>';return;}
-  tbody.innerHTML=filtered.map(b=>`<tr>
-    <td style="font-family:'Orbitron',monospace;font-size:0.78rem;color:${ROOM_COLOR[b.studio]}">${b.studio}</td>
-    <td style="font-weight:600">${b.production}</td>
-    <td style="color:var(--dim)">${b.requested_by}</td>
-    <td style="font-family:'Share Tech Mono',monospace;font-size:0.78rem">${b.date}</td>
-    <td style="font-family:'Share Tech Mono',monospace;font-size:0.78rem">${b.start_time}â€“${b.end_time}</td>
-    <td><span class="badge b-${b.status}">${b.status}</span></td>
-    <td style="font-size:0.76rem;color:var(--dim);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${b.manager_note||'â€”'}</td>
-    <td style="display:flex;gap:4px;flex-wrap:wrap">
-      ${b.status==='pending'?`<button class="btn bgr sm" onclick="approveBooking('${b.id}')"><i class="fas fa-check"></i></button><button class="btn br sm" onclick="openRejectModal('${b.id}')"><i class="fas fa-times"></i></button>`:''}
-      ${b.status==='approved'?`<button class="btn br sm" onclick="openCancelModal('${b.id}')"><i class="fas fa-ban"></i>Cancel</button>`:''}
-    </td>
-  </tr>`).join('');
-}
-
-function updateApprovalBadge(){
-  const n=bookings.filter(b=>b.status==='pending').length;
-  const badge=document.getElementById('approval-badge');
-  if(badge){badge.style.display=n>0?'inline':'none';badge.textContent=n;}
-}
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   EXPORT
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-function exportCSV(){
-  const sf=document.getElementById('all-filter-studio')?.value||'all';
-  const stf=document.getElementById('all-filter-status')?.value||'active';
-  const filtered=bookings.filter(b=>{
-    if(sf!=='all'&&b.studio!==sf) return false;
-    if(stf==='all') return true;
-    if(stf==='active') return b.status!=='completed';
-    return b.status===stf;
-  });
-  const rows=[['Studio','Production','Requested By','Date','Start','End','Status','Manager Note'],
-    ...filtered.map(b=>[b.studio,b.production,b.requested_by,b.date,b.start_time,b.end_time,b.status,b.manager_note||''])
-  ];
-  const csv=rows.map(r=>r.map(v=>`"${v}"`).join(',')).join('\n');
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='fmc-studio-bookings.csv';a.click();
-  toast('Exported to CSV','success');
-}
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   REPORTS
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-const DOW_NAMES=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-const REP_COLORS=['#4FC3F7','#FFD600','#00C853','#FF9800','#a78bfa','#F44336'];
-
-function getReportRangeBookings(){
-  const range=document.getElementById('report-range')?.value||'30';
-  const lbl=document.getElementById('report-range-lbl');
-  if(range==='all'){
-    if(lbl)lbl.textContent='All-time data Â· '+bookings.length+' total requests';
-    return bookings;
-  }
-  const days=parseInt(range);
-  const cutoff=new Date();cutoff.setDate(cutoff.getDate()-days);
-  const filtered=bookings.filter(b=>new Date(b.created_at||b.date)>=cutoff);
-  if(lbl)lbl.textContent=`Last ${days} days Â· ${filtered.length} requests`;
-  return filtered;
-}
-
-function renderReports(){
-  const data=getReportRangeBookings();
-
-  // â”€â”€ Top stats â”€â”€
-  const total=data.length;
-  const approved=data.filter(b=>b.status==='approved'||b.status==='completed').length;
-  const rejected=data.filter(b=>b.status==='rejected').length;
-  const approvalRate=total?Math.round((approved/(approved+rejected||1))*100):0;
-  const uniqueRequesters=new Set(data.map(b=>b.requested_by)).size;
-
-  document.getElementById('report-stats').innerHTML=`
-    <div class="sc-stat"><div class="sl">Total Requests</div><div class="sv" style="color:var(--c)">${total}</div></div>
-    <div class="sc-stat"><div class="sl">Approval Rate</div><div class="sv" style="color:var(--gr)">${approvalRate}%</div></div>
-    <div class="sc-stat"><div class="sl">Rejected</div><div class="sv" style="color:var(--r)">${rejected}</div></div>
-    <div class="sc-stat"><div class="sl">Active Requesters</div><div class="sv" style="color:var(--g)">${uniqueRequesters}</div></div>
-  `;
-
-  // â”€â”€ Studio usage â”€â”€
-  const studioCounts={};
-  ROOMS.forEach(r=>studioCounts[r]=0);
-  data.forEach(b=>{if(studioCounts[b.studio]!==undefined)studioCounts[b.studio]++;});
-  const maxStudio=Math.max(1,...Object.values(studioCounts));
-  document.getElementById('report-studio-usage').innerHTML=ROOMS.map(room=>`
-    <div class="rep-bar-row">
-      <div class="rep-bar-label" style="color:${ROOM_COLOR[room]}">${room}</div>
-      <div class="rep-bar-track"><div class="rep-bar-fill" style="width:${(studioCounts[room]/maxStudio*100)}%;background:${ROOM_COLOR[room]}"></div></div>
-      <div class="rep-bar-val">${studioCounts[room]}</div>
-    </div>`).join('');
-
-  // â”€â”€ Approval breakdown (donut via conic-gradient) â”€â”€
-  const pending=data.filter(b=>b.status==='pending').length;
-  const cancelled=data.filter(b=>b.status==='cancelled').length;
-  const completed=data.filter(b=>b.status==='completed').length;
-  const approvedOnly=data.filter(b=>b.status==='approved').length;
-  const segs=[
-    {label:'Completed',n:completed,color:'#4FC3F7'},
-    {label:'Approved',n:approvedOnly,color:'#00C853'},
-    {label:'Pending',n:pending,color:'#FF9800'},
-    {label:'Rejected',n:rejected,color:'#F44336'},
-    {label:'Cancelled',n:cancelled,color:'rgba(255,255,255,0.25)'}
-  ].filter(s=>s.n>0);
-  const segTotal=segs.reduce((s,x)=>s+x.n,0)||1;
-  let acc=0;
-  const gradParts=segs.map(s=>{
-    const start=(acc/segTotal*360);acc+=s.n;const end=(acc/segTotal*360);
-    return `${s.color} ${start}deg ${end}deg`;
-  }).join(', ');
-  document.getElementById('report-approval-breakdown').innerHTML=segs.length?`
-    <div class="donut-wrap">
-      <div style="width:110px;height:110px;border-radius:50%;background:conic-gradient(${gradParts});flex-shrink:0;position:relative">
-        <div style="position:absolute;inset:18px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;flex-direction:column">
-          <div style="font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:700">${segTotal}</div>
-          <div style="font-size:0.6rem;color:var(--dim)">total</div>
-        </div>
-      </div>
-      <div class="donut-legend">
-        ${segs.map(s=>`<div class="donut-legend-item"><div class="donut-dot" style="background:${s.color}"></div>${s.label} â€” ${s.n}</div>`).join('')}
-      </div>
-    </div>` : '<div style="color:var(--dim);font-size:0.82rem;text-align:center;padding:1.5rem">No data in this range</div>';
-
-  // â”€â”€ Busiest days of week â”€â”€
-  const dowCounts=new Array(7).fill(0);
-  data.forEach(b=>{if(b.date){const d=new Date(b.date+'T12:00:00');dowCounts[d.getDay()]++;}});
-  const maxDow=Math.max(1,...dowCounts);
-  document.getElementById('report-busy-days').innerHTML=DOW_NAMES.map((name,i)=>`
-    <div class="rep-bar-row">
-      <div class="rep-bar-label">${name.slice(0,3)}</div>
-      <div class="rep-bar-track"><div class="rep-bar-fill" style="width:${(dowCounts[i]/maxDow*100)}%;background:var(--c)"></div></div>
-      <div class="rep-bar-val">${dowCounts[i]}</div>
-    </div>`).join('');
-
-  // â”€â”€ Busiest time slots â”€â”€
-  const hourCounts={};
-  for(let h=6;h<=22;h++)hourCounts[h]=0;
-  data.forEach(b=>{const h=parseInt(b.start_time);if(hourCounts[h]!==undefined)hourCounts[h]++;});
-  const topHours=Object.entries(hourCounts).sort((a,b)=>b[1]-a[1]).slice(0,6).filter(h=>h[1]>0);
-  const maxHour=Math.max(1,...Object.values(hourCounts));
-  document.getElementById('report-busy-hours').innerHTML=topHours.length?topHours.map(([h,n])=>`
-    <div class="rep-bar-row">
-      <div class="rep-bar-label">${String(h).padStart(2,'0')}:00</div>
-      <div class="rep-bar-track"><div class="rep-bar-fill" style="width:${(n/maxHour*100)}%;background:var(--g)"></div></div>
-      <div class="rep-bar-val">${n}</div>
-    </div>`).join('') : '<div style="color:var(--dim);font-size:0.82rem;text-align:center;padding:1.5rem">No data in this range</div>';
-
-  // â”€â”€ Journalist activity table â”€â”€
-  const byUser={};
-  data.forEach(b=>{
-    const key=b.requested_by||'Unknown';
-    if(!byUser[key])byUser[key]={total:0,approved:0,rejected:0,pending:0,rooms:{}};
-    byUser[key].total++;
-    if(b.status==='approved'||b.status==='completed')byUser[key].approved++;
-    if(b.status==='rejected')byUser[key].rejected++;
-    if(b.status==='pending')byUser[key].pending++;
-    byUser[key].rooms[b.studio]=(byUser[key].rooms[b.studio]||0)+1;
-  });
-  const userRows=Object.entries(byUser).sort((a,b)=>b[1].total-a[1].total);
-  document.getElementById('report-journalist-tbody').innerHTML=userRows.length?userRows.map(([name,d])=>{
-    const rate=d.approved+d.rejected?Math.round(d.approved/(d.approved+d.rejected)*100):0;
-    const topRoom=Object.entries(d.rooms).sort((a,b)=>b[1]-a[1])[0]?.[0]||'â€”';
-    return `<tr>
-      <td style="font-weight:600">${name}</td>
-      <td style="font-family:'Share Tech Mono',monospace">${d.total}</td>
-      <td style="color:var(--gr)">${d.approved}</td>
-      <td style="color:var(--r)">${d.rejected}</td>
-      <td style="color:var(--am)">${d.pending}</td>
-      <td><span class="badge ${rate>=70?'b-approved':rate>=40?'b-pending':'b-rejected'}">${rate}%</span></td>
-      <td style="color:${ROOM_COLOR[topRoom]||'var(--dim)'}">${topRoom}</td>
-    </tr>`;
-  }).join('') : '<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:1.5rem">No activity in this range</td></tr>';
-}
-
-function exportReportCSV(){
-  const data=getReportRangeBookings();
-  const byUser={};
-  data.forEach(b=>{
-    const key=b.requested_by||'Unknown';
-    if(!byUser[key])byUser[key]={total:0,approved:0,rejected:0,pending:0};
-    byUser[key].total++;
-    if(b.status==='approved'||b.status==='completed')byUser[key].approved++;
-    if(b.status==='rejected')byUser[key].rejected++;
-    if(b.status==='pending')byUser[key].pending++;
-  });
-  const rows=[['Requester','Total','Approved','Rejected','Pending'],
-    ...Object.entries(byUser).map(([name,d])=>[name,d.total,d.approved,d.rejected,d.pending])
-  ];
-  const csv=rows.map(r=>r.map(v=>`"${v}"`).join(',')).join('\n');
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='fmc-studio-report.csv';a.click();
-  toast('Report exported to CSV','success');
-}
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   TOAST
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-function toast(msg,type='info'){
-  const icons={success:'fa-check-circle',error:'fa-times-circle',info:'fa-info-circle',warning:'fa-exclamation-triangle'};
-  const el=document.createElement('div');el.className=`toast-item ${type}`;
-  el.innerHTML=`<i class="fas ${icons[type]||icons.info}"></i>${msg}`;
-  document.getElementById('toast-wrap').appendChild(el);
-  setTimeout(()=>el.remove(),4000);
-}
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   BOOT
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-// Listen for auth state changes â€” handles token refresh, expiry, and logout
-sb.auth.onAuthStateChange(async(event,session)=>{
-  if(event==='SIGNED_IN'||event==='TOKEN_REFRESHED'){
-    // Token was refreshed silently â€” update user and reload bookings
-    if(session){
-      currentUser=session.user;
-      await loadProfile();
-      // If app is already showing, just refresh bookings silently
-      if(document.getElementById('nav').style.display!=='none'){
-        loadBookings();
-      } else {
-        showApp();
-      }
+  if(startHour!==null&&slotState(startHour,dur,date)!=='free') startHour=null;
+  let free=0;
+  for(let h=FIRST_START;h<=22;h++){
+    const st=slotState(h,dur,date);
+    const b=el('button','slot'+(st==='taken'?' taken':'')+(startHour===h?' sel':''));
+    b.type='button';
+    b.appendChild(document.createTextNode(hh(h)));
+    b.appendChild(el('small','','– '+hh(h+dur<=24?h+dur:24)));
+    if(st!=='free'){
+      b.disabled=true;
+      b.title=st==='taken'?'Already booked':st==='past'?'This time has passed':'Would end after 23:00';
+    }else{
+      free++;
+      b.setAttribute('aria-pressed',String(startHour===h));
+      b.addEventListener('click',()=>{startHour=h;renderSlots();});
     }
-  } else if(event==='SIGNED_OUT'||event==='TOKEN_EXPIRED'){
-    // Session expired or user signed out â€” force back to login
-    currentUser=null;bookings=[];
-    document.getElementById('nav').style.display='none';
-    document.querySelectorAll('.page').forEach(p=>p.style.display='none');
-    document.getElementById('login-screen').style.display='flex';
-    if(event==='TOKEN_EXPIRED'){
-      // Show a friendly message instead of a confusing error
-      const err=document.getElementById('lerr');
-      err.textContent='Your session has expired. Please sign in again.';
-      err.style.display='block';
-      err.style.color='var(--am)';
-      err.style.background='rgba(255,152,0,0.1)';
-      err.style.border='1px solid rgba(255,152,0,0.3)';
-    }
+    frag.appendChild(b);
   }
-});
-
-(async()=>{
-  // Check for email confirmation token in URL (when user clicks confirmation link)
-  const hash=window.location.hash;
-  const params=new URLSearchParams(window.location.search);
-  const isConfirmation=hash.includes('access_token')||params.get('type')==='signup'||params.get('type')==='email_change';
-
-  if(isConfirmation){
-    // Supabase picks up the token automatically via detectSessionInUrl
-    // Just get the session â€” it will already be established
-    const{data:{session},error}=await sb.auth.getSession();
-    if(session){
-      currentUser=session.user;
-      await loadProfile();
-      // Clean the URL so token doesn't show in the address bar
-      window.history.replaceState({},document.title,window.location.pathname);
-      showApp();
-      toast('âœ… Email confirmed â€” welcome to FMC Studio Booking!','success');
-    } else {
-      document.getElementById('login-screen').style.display='flex';
-      showErr('Email confirmation failed â€” please try signing in or register again.','');
-    }
-    return;
-  }
-
-  // Normal boot â€” check for existing session
-  const{data:{session}}=await sb.auth.getSession();
-  if(session){currentUser=session.user;await loadProfile();showApp();}
-  else{document.getElementById('login-screen').style.display='flex';}
-})();
-
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   REAL-TIME SUBSCRIPTIONS
-   All users see booking changes instantly
-   without refreshing the page
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-let realtimeChannel=null;
-
-function startRealtime(){
-  // Clean up any existing subscription first
-  if(realtimeChannel){sb.removeChannel(realtimeChannel);}
-  realtimeChannel=sb.channel('studio_bookings_changes')
-    .on('postgres_changes',{
-      event:'INSERT',
-      schema:'public',
-      table:'studio_bookings'
-    },payload=>{
-      // New booking submitted â€” add to local state if not already there
-      if(!bookings.find(b=>b.id===payload.new.id)){
-        bookings.push(payload.new);
-        renderOverview();
-        renderCal();
-        updateApprovalBadge();
-        // Notify manager of new pending request
-        if(userRole==='manager'&&payload.new.status==='pending'){
-          toast(`New booking request: ${payload.new.requested_by} â€” ${payload.new.studio}`,'info');
-        }
-      }
-    })
-    .on('postgres_changes',{
-      event:'UPDATE',
-      schema:'public',
-      table:'studio_bookings'
-    },payload=>{
-      // Booking updated (approved/rejected/cancelled) â€” update local state
-      const idx=bookings.findIndex(b=>b.id===payload.new.id);
-      if(idx>=0){
-        bookings[idx]=payload.new;
-      } else {
-        bookings.push(payload.new);
-      }
-      renderOverview();
-      renderCal();
-      updateApprovalBadge();
-      // Notify the journalist if their own booking changed
-      if(payload.new.requested_by_id===currentUser?.id){
-        const status=payload.new.status;
-        const studio=payload.new.studio;
-        const prod=payload.new.production;
-        if(status==='approved') toast(`âœ… Your booking for ${studio} (${prod}) was approved`,'success');
-        if(status==='rejected') toast(`âŒ Your booking for ${studio} (${prod}) was rejected`,'error');
-        if(status==='cancelled') toast(`ðŸš« Your booking for ${studio} (${prod}) was cancelled by the manager`,'warning');
-        // Refresh My Bookings if it's open
-        const mb=document.getElementById('page-my-bookings');
-        if(mb&&mb.classList.contains('on')) renderMyBookings();
-      }
-      // Refresh Approvals if manager is viewing it
-      if(userRole==='manager'){
-        const ap=document.getElementById('page-approvals');
-        if(ap&&ap.classList.contains('on')) renderApprovals();
-        const ab=document.getElementById('page-all-bookings');
-        if(ab&&ab.classList.contains('on')) renderAllBookings();
-      }
-    })
-    .subscribe(status=>{
-      if(status==='SUBSCRIBED'){
-        console.log('Real-time connected â€” live updates active');
-      } else if(status==='CHANNEL_ERROR'){
-        console.warn('Real-time connection error â€” changes may require manual refresh');
-      }
-    });
+  box.replaceChildren(frag);
+  if(!availKnown){note.className='note warn';note.textContent='Could not check availability right now. You can still send a request and a manager will check it.';}
+  else if(!free){note.className='note warn';note.textContent='No free start times for this length on this day. Try a shorter length or another date.';}
+  else{note.className='note';note.textContent='Only approved bookings are shown as taken. A manager makes the final decision.';}
+  $('stepTimeNum').classList.toggle('done',!!(date&&startHour!==null));
+  updateSummary();
+}
+async function refreshSlots(){
+  markRooms();renderSlots();
+  await loadAvailability();
+  renderSlots();
 }
 
-function stopRealtime(){
-  if(realtimeChannel){sb.removeChannel(realtimeChannel);realtimeChannel=null;}
+function updateSummary(){
+  const date=$('date').value,dur=parseInt($('dur').value,10)||1;
+  $('summary').textContent=(room&&date&&startHour!==null)
+    ? `${room} · ${new Date(date+'T00:00:00').toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'})} · ${hh(startHour)}–${hh(startHour+dur)}`
+    : '';
+  const detailsDone=clean($('prod').value).length>=2&&clean($('name').value).length>=2&&normPhone($('phone').value)!==null;
+  $('stepDetailsNum').classList.toggle('done',detailsDone);
 }
+
+/* ---------- Validation ---------- */
+function normPhone(raw){
+  const p=String(raw||'').replace(/[\s\-().]/g,'');
+  if(/^(?:\+?251|0)?[79]\d{8}$/.test(p)) return '+251'+p.slice(-9);
+  if(/^\+?\d{8,15}$/.test(p)) return p;
+  return null;
+}
+function showMsg(t){
+  $('msgText').textContent=t;
+  const m=$('msg');m.hidden=false;
+  m.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function hideMsg(){$('msg').hidden=true;}
+function friendly(e){
+  const m=(e&&e.message)||'';
+  if(/too many pending/i.test(m)) return `You already have the maximum of ${MAX_PENDING_NOTE} pending requests on this phone number. Please wait for a manager to respond.`;
+  if(e&&(e.code==='42501'||/row-level security|permission denied/i.test(m))) return 'Your request could not be accepted. Please check your details and try again.';
+  if(/failed to fetch|network|timed out|timeout/i.test(m)) return 'Connection problem. Please check your internet and try again.';
+  return 'Something went wrong. Please try again, or contact the studio directly.';
+}
+function setBusy(on){
+  busy=on;
+  const b=$('submit');
+  b.disabled=on;
+  b.classList.toggle('is-loading',on);
+  b.querySelector('.btn-label').textContent=on?'Sending…':'Send request';
+}
+
+/* ---------- Submit ---------- */
+async function submit(){
+  if(busy) return;
+  hideMsg();
+  const date=$('date').value,dur=parseInt($('dur').value,10)||1;
+  const name=clean($('name').value),prod=clean($('prod').value),notes=$('notes').value.trim();
+  const phone=normPhone($('phone').value);
+
+  if($('website').value){ showDone({room:room||'—',date,start:'',end:'',prod,name,phone:phone||''}); return; }
+
+  if(!room) return showMsg('Please choose a room.');
+  if(!date) return showMsg('Please choose a date.');
+  if(date<localDate()) return showMsg('That date has already passed.');
+  if(date>localDate(addDays(new Date(),MAX_DAYS))) return showMsg(`Requests can be made up to ${MAX_DAYS} days ahead.`);
+  if(startHour===null) return showMsg('Please choose a start time.');
+  if(slotState(startHour,dur,date)==='past') return showMsg('That start time has already passed.');
+  if(prod.length<2) return showMsg('Please enter the production or program name.');
+  if(name.length<2) return showMsg('Please enter your full name.');
+  if(!phone) return showMsg('Please enter a valid phone number, for example 0911 23 45 67 or +251 911 234567.');
+  if(/[<>]/.test(name+prod+notes)) return showMsg('Please remove the characters < and > from your text.');
+  if(notes.length>500) return showMsg('Notes are too long (500 characters maximum).');
+
+  try{
+    const last=Number(localStorage.getItem('fmc_req_ts')||0);
+    if(Date.now()-last<COOLDOWN_MS) return showMsg('Please wait a few seconds before sending another request.');
+  }catch(e){}
+
+  setBusy(true);
+  try{
+    await loadAvailability();
+    if(slotState(startHour,dur,date)==='taken'){
+      renderSlots();
+      return showMsg('Sorry, that time was just taken. Please choose another time.');
+    }
+    const payload={
+      studio:room,production:prod,date,
+      start_time:hh(startHour),end_time:hh(startHour+dur),
+      requested_by:name,requester_phone:phone,requester_email:'',
+      status:'pending',notes,is_recurring:false,
+      created_at:new Date().toISOString()
+    };
+    const timeout=new Promise((_,rej)=>setTimeout(()=>rej(new Error('Request timed out')),20000));
+    const{error}=await Promise.race([sb.from('studio_bookings').insert(payload),timeout]);
+    if(error) throw error;
+    try{localStorage.setItem('fmc_req_ts',String(Date.now()));}catch(e){}
+    rememberMine({room,date,start:hh(startHour),name});
+    loadSide();
+    showDone({room,date,start:hh(startHour),end:hh(startHour+dur),prod,name,phone});
+  }catch(e){
+    console.error('Request failed:',e&&e.message?e.message:e);
+    showMsg(friendly(e));
+  }finally{
+    setBusy(false);
+  }
+}
+
+function showDone(d){
+  const dl=$('doneList');
+  const rows=[['Room',d.room],['Date',d.date?niceDate(d.date):'—'],['Time',d.start?`${d.start} – ${d.end}`:'—'],['Production',d.prod],['Name',d.name],['Phone',d.phone]];
+  const frag=document.createDocumentFragment();
+  rows.forEach(([k,v])=>{frag.appendChild(el('dt','',k));frag.appendChild(el('dd','',v));});
+  dl.replaceChildren(frag);
+  $('formView').hidden=true;$('doneView').hidden=false;
+  window.scrollTo(0,0);
+}
+
+/* ---------- Sidebar ---------- */
+let sideRows=[],sideTab='pending',sideOk=true,sideUpdated=null;
+const MINE_KEY='fmc_my_reqs';
+function reqKey(room,date,start,name){return [room,date,String(start).slice(0,5),clean(name).toLowerCase()].join('|');}
+function getMine(){try{return JSON.parse(localStorage.getItem(MINE_KEY)||'[]');}catch(e){return [];}}
+function rememberMine(d){
+  try{
+    const arr=getMine();arr.push(reqKey(d.room,d.date,d.start,d.name));
+    localStorage.setItem(MINE_KEY,JSON.stringify(arr.slice(-50)));
+  }catch(e){}
+}
+function isUpcoming(b){
+  const today=localDate();
+  if(b.date>today) return true;
+  if(b.date<today) return false;
+  return parseInt(b.end_time,10)>new Date().getHours();
+}
+async function loadSide(){
+  try{
+    const{data,error}=await sb.from('studio_bookings')
+      .select('id,studio,production,date,start_time,end_time,requested_by,status')
+      .in('status',['pending','cancelled'])
+      .gte('date',localDate())
+      .order('date',{ascending:true})
+      .order('start_time',{ascending:true});
+    if(error) throw error;
+    sideRows=(data||[]).filter(isUpcoming);
+    sideOk=true;sideUpdated=new Date();
+  }catch(e){
+    console.error('Sidebar load failed:',e&&e.message?e.message:e);
+    sideOk=false;
+  }
+  renderSide();
+}
+function renderSide(){
+  const pend=sideRows.filter(b=>b.status==='pending'),canc=sideRows.filter(b=>b.status==='cancelled');
+  $('cPending').textContent=pend.length;$('cCancelled').textContent=canc.length;
+  $('sideCount').textContent=pend.length;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.tab===sideTab));
+
+  const q=clean($('q').value).toLowerCase(),mineOnly=$('mineOnly').checked,mine=new Set(getMine());
+  let rows=(sideTab==='pending'?pend:canc).filter(b=>{
+    if(q&&!(String(b.production).toLowerCase().includes(q)||String(b.requested_by).toLowerCase().includes(q))) return false;
+    if(mineOnly&&!mine.has(reqKey(b.studio,b.date,b.start_time,b.requested_by))) return false;
+    return true;
+  });
+  const list=$('sideList'),frag=document.createDocumentFragment();
+  if(!rows.length){
+    const empty=el('div','side-empty');
+    const icon=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    icon.setAttribute('width','40');icon.setAttribute('height','40');
+    icon.setAttribute('viewBox','0 0 24 24');icon.setAttribute('fill','none');
+    icon.setAttribute('stroke','currentColor');icon.setAttribute('stroke-width','1.5');
+    icon.innerHTML='<circle cx="12" cy="12" r="10"/><path d="M8 12h8"/>';
+    empty.appendChild(icon);
+    empty.appendChild(document.createTextNode((q||mineOnly)?'Nothing matches your search.':(sideTab==='pending'?'No pending requests.':'No cancelled bookings.')));
+    frag.appendChild(empty);
+  }
+  let lastDate='';
+  rows.forEach(b=>{
+    if(b.date!==lastDate){
+      lastDate=b.date;
+      frag.appendChild(el('div','dh',new Date(b.date+'T00:00:00').toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short',year:'numeric'}).toUpperCase()));
+    }
+    const isMine=mine.has(reqKey(b.studio,b.date,b.start_time,b.requested_by));
+    const card=el('div','rq'+(b.status==='cancelled'?' cancelled':'')+(isMine?' mine-row':''));
+    card.style.setProperty('--rc',ROOM_COLOR[b.studio]||'#4FC3F7');
+    const r1=el('div','r1');
+    r1.appendChild(el('span','rn',b.studio));
+    const badges=el('span');
+    badges.appendChild(el('span','bd '+(b.status==='cancelled'?'c':'p'),b.status==='cancelled'?'Cancelled':'Pending'));
+    if(isMine) badges.appendChild(document.createTextNode(' ')),badges.appendChild(el('span','bd me','Yours'));
+    r1.appendChild(badges);
+    card.appendChild(r1);
+    card.appendChild(el('div','rp',b.production));
+    card.appendChild(el('div','rb','by '+b.requested_by));
+    card.appendChild(el('div','rt',`${String(b.start_time).slice(0,5)} – ${String(b.end_time).slice(0,5)}`));
+    frag.appendChild(card);
+  });
+  list.replaceChildren(frag);
+  $('sideFoot').textContent=sideOk
+    ? (sideUpdated?'Updated '+sideUpdated.toLocaleTimeString():'')
+    : 'Could not refresh — retrying…';
+}
+function openSide(){$('side').classList.add('open');$('backdrop').hidden=false;}
+function closeSide(){$('side').classList.remove('open');$('backdrop').hidden=true;}
+function initSide(){
+  document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{sideTab=t.dataset.tab;renderSide();}));
+  $('q').addEventListener('input',renderSide);
+  $('mineOnly').addEventListener('change',renderSide);
+  $('sideOpen').addEventListener('click',openSide);
+  $('sideClose').addEventListener('click',closeSide);
+  $('backdrop').addEventListener('click',closeSide);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape') closeSide();});
+  $('viewStatus').addEventListener('click',()=>{sideTab='pending';$('mineOnly').checked=true;renderSide();openSide();});
+  loadSide();
+  setInterval(loadSide,30000);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden) loadSide();});
+}
+
+/* ---------- Start ---------- */
+function init(){
+  buildRooms();
+  const d=$('date'),today=localDate();
+  d.min=today;d.max=localDate(addDays(new Date(),MAX_DAYS));d.value=today;
+  d.addEventListener('change',()=>{startHour=null;refreshSlots();});
+  $('dur').addEventListener('change',()=>{renderSlots();});
+  ['prod','name','phone'].forEach(id=>$(id).addEventListener('input',updateSummary));
+  $('form').addEventListener('submit',e=>{e.preventDefault();submit();});
+  $('again').addEventListener('click',()=>{
+    $('prod').value='';$('notes').value='';startHour=null;
+    $('doneView').hidden=true;$('formView').hidden=false;
+    updateSummary();refreshSlots();window.scrollTo(0,0);
+  });
+  renderSlots();
+  initSide();
+}
+init();
 </script>
 </body>
 </html>
