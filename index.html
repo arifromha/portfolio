@@ -798,6 +798,34 @@ footer{letter-spacing:.12em;color:#718096}
 @media(max-width:520px){.top{padding:12px}.broadcast-strip{font-size:.59rem}.stats-grid{gap:7px}.stat-card{padding:10px}.calendar-strip{gap:4px}.cal-day{padding:7px 1px}.cal-day .dow{font-size:.52rem}.cal-day .num{font-size:.88rem}.calendar-tools{align-items:flex-start}.calendar-nav{width:100%;justify-content:space-between}.lang-control{width:100%;justify-content:space-between}}
 @media(prefers-reduced-motion:reduce){.stat-card,.crew-group,.crew-body{animation:none!important}}
 
+
+
+/* Mobile crew visibility: keep the crew directory in the page flow instead of hiding it in the requests drawer. */
+@media (max-width:760px){
+  .sidebtn{display:none!important}
+  .side-col{
+    position:static!important;inset:auto!important;width:100%!important;max-height:none!important;
+    padding:0!important;margin-top:1rem;overflow:visible!important;border-radius:0!important;
+    transform:none!important;transition:none!important;z-index:auto!important;background:transparent!important;
+    box-shadow:none!important;display:flex!important;flex-direction:column!important;gap:1rem!important;
+  }
+  .side-col > .panel{position:static!important;max-height:none!important;width:100%;}
+  .side-col > .crew{order:-1;padding:1rem;border:1px solid rgba(245,158,11,.48)!important;
+    background:linear-gradient(145deg,rgba(245,158,11,.10),rgba(13,20,32,.96) 42%)!important;
+    box-shadow:0 0 0 1px rgba(245,158,11,.08),0 12px 28px rgba(0,0,0,.22);}
+  .crew-head-row h2{font-size:.9rem!important;letter-spacing:.12em!important;color:#fcd34d!important;}
+  .crew-sub{font-size:.84rem;margin-bottom:.7rem}
+  .crew-person-count{font-size:.76rem;color:#cbd5e1;margin-bottom:.65rem}
+  .crew-tools input{min-height:42px;font-size:.9rem}
+  .crew-action{min-height:38px;font-size:.74rem;padding:.55rem .7rem}
+  .crew-panel{max-height:52vh!important;overflow-y:auto;padding-right:2px}
+  .crew-toggle{min-height:48px;padding:.7rem .8rem}
+  .crew-role{font-size:.74rem;letter-spacing:.08em}
+  .crew-count{font-size:.68rem;padding:3px 8px}
+  .crew-names li{font-size:.78rem;padding:.25rem .6rem}
+  .side-head .x{display:none!important}
+}
+
 </style>
 </head>
 <body>
@@ -816,7 +844,7 @@ footer{letter-spacing:.12em;color:#718096}
       </div>
     </div>
     <label class="lang-control" for="languageSelect"><span data-i18n="language">Language</span>
-      <select id="languageSelect" aria-label="Select language"><option value="en">English</option><option value="am">አማርኛ</option></select>
+      <select id="languageSelect" aria-label="Select language"><option value="en">English</option><option value="am">አማርኛ</option><option value="om">Afaan Oromoo</option><option value="ti">ትግርኛ</option></select>
     </label>
     <button class="sidebtn" id="sideOpen" type="button" aria-label="Open request status panel">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
@@ -993,12 +1021,15 @@ const FIRST_START=6,LAST_END=23,MAX_DAYS=90,COOLDOWN_MS=15000,MAX_PENDING_NOTE=5
 const I18N={
  en:{language:'Language',studioSystem:'STUDIO OPERATIONS',broadcastPortal:'BROADCAST PRODUCTION PORTAL',activeStudios:'Active studios',readyForRequests:'Ready for requests',pendingRequests:'Pending requests',awaitingReview:'Awaiting manager review',cancelledBookings:'Cancelled bookings',upcomingOnly:'Upcoming requests only',todayRequests:"Today's requests",todayPending:'Pending for today',previous:'Previous',today:'Today',next:'Next',crewSubtitle:'Browse the production team by department.',expandAll:'Expand all',collapseAll:'Collapse',crewMembers:'crew members',departments:'departments',chooseRoom:'Choose a room',dateTime:'Date & time',yourDetails:'Your details',startTime:'Start time',productionName:'Production / program name',fullName:'Your full name',phone:'Phone number',notes:'Notes',sendRequest:'Send request',followUp:'Follow up',crewCredits:'Crew directory',pending:'Pending',cancelled:'Cancelled',available:'Available',booked:'Booked',unavailable:'Unavailable',date:'Date',duration:'Duration',hours1:'1 hour',hours2:'2 hours',hours3:'3 hours',hours4:'4 hours',hours6:'6 hours',fullDay:'8 hours (full day)',roomIntro:'No account needed. Pick a room and time, leave your details, and a manager will review your request and call to confirm.',notConfirmed:'Your request is not a booking until a manager approves it.',requestReceived:'Request received',managerReview:'A manager will review it and call you on the number below.'},
  am:{language:'ቋንቋ',studioSystem:'የስቱዲዮ አስተዳደር',broadcastPortal:'የብሮድካስት ፕሮዳክሽን ፖርታል',activeStudios:'ንቁ ስቱዲዮዎች',readyForRequests:'ጥያቄ ለመቀበል ዝግጁ',pendingRequests:'በመጠባበቅ ላይ ያሉ ጥያቄዎች',awaitingReview:'የአስተዳዳሪ ውሳኔ ይጠብቃሉ',cancelledBookings:'የተሰረዙ ቦታ ማስያዣዎች',upcomingOnly:'የሚቀጥሉ ጥያቄዎች ብቻ',todayRequests:'የዛሬ ጥያቄዎች',todayPending:'ለዛሬ በመጠባበቅ ላይ',previous:'ቀዳሚ',today:'ዛሬ',next:'ቀጣይ',crewSubtitle:'የፕሮዳክሽን ቡድኑን በዘርፍ ይመልከቱ።',expandAll:'ሁሉንም ክፈት',collapseAll:'ሁሉንም ዝጋ',crewMembers:'የቡድን አባላት',departments:'ዘርፎች',chooseRoom:'ስቱዲዮ ይምረጡ',dateTime:'ቀን እና ሰዓት',yourDetails:'የእርስዎ መረጃ',startTime:'የመጀመሪያ ሰዓት',productionName:'የፕሮግራም / ፕሮዳክሽን ስም',fullName:'ሙሉ ስም',phone:'ስልክ ቁጥር',notes:'ማስታወሻ',sendRequest:'ጥያቄ ላክ',followUp:'የጥያቄ ሁኔታ',crewCredits:'የቡድን ማውጫ',pending:'በመጠባበቅ ላይ',cancelled:'ተሰርዟል',available:'ክፍት',booked:'ተይዟል',unavailable:'አይገኝም',date:'ቀን',duration:'ቆይታ',hours1:'1 ሰዓት',hours2:'2 ሰዓት',hours3:'3 ሰዓት',hours4:'4 ሰዓት',hours6:'6 ሰዓት',fullDay:'8 ሰዓት (ሙሉ ቀን)',roomIntro:'መለያ መክፈት አያስፈልግም። ስቱዲዮና ሰዓት ይምረጡ፣ መረጃዎን ያስገቡ፤ አስተዳዳሪው ጥያቄዎን አይቶ ያነጋግርዎታል።',notConfirmed:'አስተዳዳሪው እስኪያጸድቀው ድረስ ጥያቄዎ የተረጋገጠ ቦታ ማስያዣ አይደለም።',requestReceived:'ጥያቄዎ ደርሷል',managerReview:'አስተዳዳሪው ጥያቄዎን አይቶ ከታች ባለው ስልክ ቁጥር ያነጋግርዎታል።'}
+ ,om:{language:'Afaan',studioSystem:'BULCHIINSA ISTOODIYOO',broadcastPortal:'PORTAALII OOMISHA BROODKAASTII',activeStudios:'Istoodiyoo hojii irra jiran',readyForRequests:'Gaaffii fudhachuuf qophaa’oo',pendingRequests:'Gaaffiiwwan eeggachaa jiran',awaitingReview:'Mirkaneessa hoogganaa eeggachaa jiru',cancelledBookings:'Ajajawwan haqaman',upcomingOnly:'Gaaffiiwwan dhufan qofa',todayRequests:'Gaaffiiwwan har’aa',todayPending:'Har’aaf kanneen eeggatan',previous:'Dura',today:'Har’a',next:'Itti aanu',crewSubtitle:'Garee oomishaa damee dameedhaan ilaalaa.',expandAll:'Hunda bani',collapseAll:'Hunda cufi',crewMembers:'miseensota garee',departments:'damee',chooseRoom:'Istoodiyoo filadhu',dateTime:'Guyyaa fi sa’aatii',yourDetails:'Odeeffannoo kee',startTime:'Sa’aatii jalqabaa',productionName:'Maqaa oomishaa / sagantaa',fullName:'Maqaa guutuu',phone:'Lakkoofsa bilbilaa',notes:'Yaadannoo',sendRequest:'Gaaffii ergi',followUp:'Hordoffii',crewCredits:'Tarree garee',pending:'Eeggachaa jira',cancelled:'Haqame',available:'Ni argama',booked:'Qabameera',unavailable:'Hin jiru',date:'Guyyaa',duration:'Turtii',hours1:'Sa’aatii 1',hours2:'Sa’aatii 2',hours3:'Sa’aatii 3',hours4:'Sa’aatii 4',hours6:'Sa’aatii 6',fullDay:'Sa’aatii 8 (guyyaa guutuu)',roomIntro:'Akkaawuntii hin barbaachisu. Istaadiyoo fi sa’aatii filadhu, odeeffannoo kee galchi; hoogganaan gaaffii kee ilaalee si qunnama.',notConfirmed:'Hanga hoogganaan mirkaneessutti gaaffiin kee ajaja mirkanaa’e miti.',requestReceived:'Gaaffiin kee nu gaheera',managerReview:'Hoogganaan gaaffii kee ilaalee lakkoofsa bilbilaa armaan gadii irratti si qunnama.'},
+ ti:{language:'ቋንቋ',studioSystem:'ምምሕዳር ስቱድዮ',broadcastPortal:'ፖርታል ፕሮዳክሽን ብሮድካስት',activeStudios:'ንጡፋት ስቱድዮታት',readyForRequests:'ሕቶታት ንምቕባል ድሉዋት',pendingRequests:'ኣብ ትጽቢት ዘለዉ ሕቶታት',awaitingReview:'ምርግጋጽ ኣመሓዳሪ ይጽበዩ',cancelledBookings:'ዝተሰረዙ ቦታ ምሕዛዝ',upcomingOnly:'ዝመጽኡ ሕቶታት ጥራይ',todayRequests:'ናይ ሎሚ ሕቶታት',todayPending:'ንሎሚ ኣብ ትጽቢት ዘለዉ',previous:'ዝሓለፈ',today:'ሎሚ',next:'ዝቕጽል',crewSubtitle:'ኣባላት ጋንታ ፕሮዳክሽን ብክፍሊ ርአዩ።',expandAll:'ኩሉ ክፈት',collapseAll:'ኩሉ ዕጸው',crewMembers:'ኣባላት ጋንታ',departments:'ክፍልታት',chooseRoom:'ስቱድዮ ምረጽ',dateTime:'ዕለትን ሰዓትን',yourDetails:'ዝርዝር ሓበሬታኻ',startTime:'መጀመርታ ሰዓት',productionName:'ስም ፕሮዳክሽን / ፕሮግራም',fullName:'ምሉእ ስም',phone:'ቁጽሪ ተሌፎን',notes:'መዘኻኸሪ',sendRequest:'ሕቶ ስደድ',followUp:'ምክትታል',crewCredits:'ዝርዝር ጋንታ',pending:'ኣብ ትጽቢት',cancelled:'ተሰሪዙ',available:'ይርከብ',booked:'ተሓዚዙ',unavailable:'ኣይርከብን',date:'ዕለት',duration:'ግዜ ቆይታ',hours1:'1 ሰዓት',hours2:'2 ሰዓት',hours3:'3 ሰዓት',hours4:'4 ሰዓት',hours6:'6 ሰዓት',fullDay:'8 ሰዓት (ምሉእ መዓልቲ)',roomIntro:'ኣካውንት ኣየድልን። ስቱድዮን ሰዓትን ምረጽ፣ ሓበሬታኻ ኣእቱ፤ ኣመሓዳሪ ሕቶኻ ርእዩ ክረኽበካ እዩ።',notConfirmed:'ኣመሓዳሪ ክሳብ ዘጽድቖ ሕቶኻ ዝተረጋገጸ ቦታ ምሕዛዝ ኣይኮነን።',requestReceived:'ሕቶኻ ተቐቢልናዮ',managerReview:'ኣመሓዳሪ ሕቶኻ ርእዩ በቲ ኣብ ታሕቲ ዘሎ ቁጽሪ ተሌፎን ክረኽበካ እዩ።'}
+
 };
 let currentLang='en';
 function applyLanguage(lang){
  currentLang=I18N[lang]?lang:'en';
  try{localStorage.setItem('fmc_language',currentLang)}catch(e){}
- document.documentElement.lang=currentLang==='am'?'am':'en';
+ document.documentElement.lang=({en:'en',am:'am',om:'om',ti:'ti'})[currentLang]||'en';
  document.querySelectorAll('[data-i18n]').forEach(node=>{const key=node.dataset.i18n;if(I18N[currentLang][key])node.textContent=I18N[currentLang][key];});
  document.querySelectorAll('[data-i18n-placeholder]').forEach(node=>{const key=node.dataset.i18nPlaceholder;if(I18N[currentLang][key])node.placeholder=I18N[currentLang][key];});
  const selector=$('languageSelect');if(selector)selector.value=currentLang;
@@ -1015,21 +1046,21 @@ function renderStats(){
 function renderCalendarStrip(){
  const strip=$('calendarStrip'),dateInput=$('date');if(!strip||!dateInput||!dateInput.value)return;
  const selected=new Date(dateInput.value+'T00:00:00'),frag=document.createDocumentFragment();
- $('calendarCaption').textContent=selected.toLocaleDateString(currentLang==='am'?'am-ET':'en-US',{month:'long',year:'numeric'});
+ $('calendarCaption').textContent=selected.toLocaleDateString(({am:'am-ET',om:'om-ET',ti:'ti-ET',en:'en-US'})[currentLang]||'en-US',{month:'long',year:'numeric'});
  for(let i=0;i<7;i++){
   const d=addDays(selected,i),iso=localDate(d),b=el('button','cal-day'+(i===0?' selected':''));
   b.type='button';b.disabled=iso<localDate()||iso>localDate(addDays(new Date(),MAX_DAYS));
   b.setAttribute('aria-pressed',String(i===0));
-  b.appendChild(el('span','dow',d.toLocaleDateString(currentLang==='am'?'am-ET':'en-US',{weekday:'short'})));
+  b.appendChild(el('span','dow',d.toLocaleDateString(({am:'am-ET',om:'om-ET',ti:'ti-ET',en:'en-US'})[currentLang]||'en-US',{weekday:'short'})));
   b.appendChild(el('span','num',String(d.getDate())));
-  b.appendChild(el('span','mon',d.toLocaleDateString(currentLang==='am'?'am-ET':'en-US',{month:'short'})));
+  b.appendChild(el('span','mon',d.toLocaleDateString(({am:'am-ET',om:'om-ET',ti:'ti-ET',en:'en-US'})[currentLang]||'en-US',{month:'short'})));
   b.addEventListener('click',()=>{dateInput.value=iso;startHour=null;renderCalendarStrip();refreshSlots();});
   frag.appendChild(b);
  }
  strip.replaceChildren(frag);
 }
 function shiftCalendar(days){const d=$('date');const next=addDays(new Date(d.value+'T00:00:00'),days);const iso=localDate(next);if(iso<localDate()||iso>localDate(addDays(new Date(),MAX_DAYS)))return;d.value=iso;startHour=null;renderCalendarStrip();refreshSlots();}
-function startSystemClock(){const tick=()=>{const node=$('systemClock');if(node)node.textContent=new Date().toLocaleTimeString(currentLang==='am'?'am-ET':'en-US',{hour12:false});};tick();setInterval(tick,1000);}
+function startSystemClock(){const tick=()=>{const node=$('systemClock');if(node)node.textContent=new Date().toLocaleTimeString(({am:'am-ET',om:'om-ET',ti:'ti-ET',en:'en-US'})[currentLang]||'en-US',{hour12:false});};tick();setInterval(tick,1000);}
 
 /* ---------- Crew credits ---------- */
 const CREW = {
@@ -1449,7 +1480,8 @@ function renderCrew(){
 
     const roleSpan = el('span','crew-role');
     roleSpan.appendChild(el('span','dot'));
-    const roleNames=currentLang==='am'?({'Light':'መብራት','Sound':'ድምፅ','Camera':'ካሜራ','Floor':'ፍሎር','Supervisor':'ተቆጣጣሪ','Vision Mixer':'ቪዥን ሚክሰር'}[role]||role):role;
+    const crewRoleNames={am:{'Light':'መብራት','Sound':'ድምፅ','Camera':'ካሜራ','Floor':'ፍሎር','Supervisor':'ተቆጣጣሪ','Vision Mixer':'ቪዥን ሚክሰር'},om:{'Light':'Ifa','Sound':'Sagalee','Camera':'Kaameraa','Floor':'Daree','Supervisor':'To’ataa','Vision Mixer':'Makaa Viizinii'},ti:{'Light':'መብራህቲ','Sound':'ድምጺ','Camera':'ካሜራ','Floor':'መድረኽ','Supervisor':'ተቖጻጻሪ','Vision Mixer':'ቪዥን ሚክሰር'}};
+    const roleNames=(crewRoleNames[currentLang]&&crewRoleNames[currentLang][role])||role;
     roleSpan.appendChild(document.createTextNode(roleNames));
     head.appendChild(roleSpan);
 
@@ -1482,7 +1514,7 @@ function renderCrew(){
     if(data.names.length){
       data.names.forEach(name => ul.appendChild(el('li','',name)));
     } else {
-      ul.appendChild(el('li','empty',currentLang==='am'?'ስም አልተዘረዘረም':'No names listed'));
+      ul.appendChild(el('li','empty',({am:'ስም ኣይተዘርዘረን',om:'Maqaan hin tarreeffamne',ti:'ስም ኣይተዘርዘረን',en:'No names listed'})[currentLang]));
     }
     body.appendChild(ul);
     group.appendChild(body);
