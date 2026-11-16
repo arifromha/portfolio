@@ -331,7 +331,7 @@ h1{
 
 /* ---------- Crew Credits (compact standalone sidebar box) ---------- */
 .crew{
-  padding:2rem;
+  padding:1.25rem;
   display:flex;flex-direction:column;
   min-height:0;
 }
@@ -658,18 +658,17 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
   .x{display:inline-flex}
 
   /* Sidebar column becomes a slide-in drawer */
- @media (max-width:960px){
   .side-col{
     position:fixed;
     top:0;
     right:0;
     bottom:0;
-    width:min(85vw, 340px);        /* ← was 92vw / 400px — narrower */
+    width:min(85vw, 340px);
     max-height:none;
-    padding:.85rem;                /* ← was 1rem — tighter padding */
-    gap:.75rem;                    /* ← was 1rem — tighter gap */
+    padding:.85rem;
+    gap:.75rem;
     overflow-y:auto;
-    border-radius:12px 0 0 12px;   /* ← was 14px — slightly tighter corner */
+    border-radius:12px 0 0 12px;
     transform:translateX(105%);
     transition:transform .3s cubic-bezier(.4,0,.2,1);
     z-index:50;
@@ -679,15 +678,18 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
     flex-direction:column;
   }
   .side-col.open{transform:none}
+  
   .side-col > .panel{
     position:static;
     max-height:none;
     background:var(--panel);
     border-radius:10px;
   }
-  .crew-panel{max-height:180px}    /* ← was 220px — more compact */
+  
+  .crew-panel{max-height:180px}
+  .crew{padding:1rem}
 }
-}
+
 @media (max-width:520px){
   body{padding:.9rem}
   .row2{grid-template-columns:1fr}
