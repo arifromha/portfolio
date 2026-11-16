@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FMC Studio — Request a Booking</title>
+<title>FMC Studio | Broadcast Booking Portal</title>
 <meta http-equiv="Content-Security-Policy"
       content="default-src 'self';
                script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
@@ -708,6 +708,96 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
     scroll-behavior:auto !important;
   }
 }
+
+
+/* ===== FMC BROADCAST CONTROL-ROOM THEME ===== */
+:root{
+ --bg:#070b13;--panel:rgba(13,20,32,.92);--panel-solid:#0b1220;
+ --border:rgba(148,163,184,.18);--border-strong:rgba(245,158,11,.52);
+ --cyan:#f59e0b;--cyan-soft:#fbbf24;--sky:#38bdf8;--emerald:#22c55e;
+ --amber:#f59e0b;--violet:#a78bfa;--rose:#fb7185;
+ --text:#f1f5f9;--muted:#aab6c7;--dim:#748198;
+ --display:'Plus Jakarta Sans',system-ui,sans-serif;
+ --room:#f59e0b;
+}
+body{padding:clamp(12px,2vw,28px);background:#070b13;}
+body::before{background:radial-gradient(ellipse 65% 45% at 12% 0%,rgba(245,158,11,.13),transparent 60%),radial-gradient(ellipse 55% 50% at 100% 8%,rgba(14,165,233,.12),transparent 58%),linear-gradient(180deg,#0b1220 0%,#070b13 55%,#080e18 100%);}
+body::after{opacity:.16;mix-blend-mode:screen;background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0,rgba(255,255,255,.035) 1px,transparent 1px,transparent 4px)}
+.wrap{max-width:1480px}
+.top{padding:16px 18px;border:1px solid rgba(148,163,184,.18);border-radius:18px;background:linear-gradient(115deg,rgba(18,29,46,.96),rgba(10,17,29,.92));box-shadow:0 18px 50px rgba(0,0,0,.32);margin-bottom:16px}
+.logo-wrap::before{background:conic-gradient(from 0deg,#f59e0b,#38bdf8,#fbbf24,#f59e0b);filter:blur(5px);opacity:.7}
+.logo-wrap::after{border-color:rgba(245,158,11,.7)}
+h1{font-family:var(--sans);font-size:clamp(1.05rem,2vw,1.4rem);letter-spacing:.09em;text-shadow:none}
+.brand p{font-size:.78rem;letter-spacing:.11em;text-transform:uppercase;color:#93a4ba}
+.tag{color:#fcd34d;background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.35)}
+.tag::before{background:#ef4444;box-shadow:0 0 8px #ef4444}
+.panel{border-radius:16px;background:linear-gradient(145deg,rgba(17,27,43,.96),rgba(10,17,29,.96));border-color:rgba(148,163,184,.18);box-shadow:0 16px 42px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.035)}
+.panel::before,.panel::after{border-color:rgba(245,158,11,.75)}
+.panel > .hairline{background:linear-gradient(90deg,transparent,#f59e0b,#38bdf8,transparent);opacity:.65}
+.intro{background:linear-gradient(110deg,rgba(245,158,11,.09),rgba(14,165,233,.055));border-color:rgba(245,158,11,.28);border-radius:12px}
+.intro svg{color:#fbbf24}.intro strong{color:#fcd34d}
+.layout{grid-template-columns:minmax(0,1fr) minmax(310px,390px);gap:16px}
+@media(min-width:1280px){.layout{grid-template-columns:minmax(0,1fr) minmax(360px,520px)}.side-col{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.sec{padding:clamp(14px,2vw,22px);border-radius:15px}
+.sec h2,.side-head h2,.crew-head-row h2{font-family:var(--sans);font-size:.78rem;letter-spacing:.13em;color:#fbbf24}
+.step-num{background:linear-gradient(135deg,#f59e0b,#fcd34d);color:#1b1202;box-shadow:0 0 0 4px rgba(245,158,11,.1)}
+.step-num.done{background:linear-gradient(135deg,#22c55e,#86efac);color:#052e16}
+label{letter-spacing:.09em;color:#aebbd0}
+input[type=text],input[type=tel],input[type=date],input[type=search],select,textarea{background:rgba(3,8,17,.58);border-color:rgba(148,163,184,.23);border-radius:10px}
+input:focus,select:focus,textarea:focus{border-color:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,.15);background:rgba(245,158,11,.035)}
+.chip{font-family:var(--sans);border-radius:11px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));}
+.chip.on{box-shadow:0 0 0 1px color-mix(in srgb,var(--rc) 35%,transparent),0 8px 24px color-mix(in srgb,var(--rc) 14%,transparent)}
+.slot{border-radius:9px}.slot.sel{background:linear-gradient(135deg,#f59e0b,#fcd34d);color:#201503;border-color:#fbbf24}
+.btn{font-family:var(--sans);letter-spacing:.09em;text-transform:uppercase;background:linear-gradient(110deg,#d97706,#f59e0b 52%,#fbbf24);color:#1c1304;box-shadow:0 10px 24px rgba(217,119,6,.2)}
+.btn:hover:not(:disabled){box-shadow:0 14px 30px rgba(217,119,6,.3)}
+.sidebtn{color:#fcd34d;border-color:rgba(245,158,11,.38);background:rgba(245,158,11,.09)}
+.side-head h2::before,.crew-head-row h2::before{background:#ef4444;box-shadow:0 0 9px #ef4444}
+.crew-group{border-radius:10px;background:rgba(255,255,255,.025)}
+.crew-role{font-family:var(--sans);letter-spacing:.06em}
+.crew-names li{border-radius:7px;padding:.25rem .55rem}
+footer{letter-spacing:.12em;color:#718096}
+
+/* Broadcast masthead, signal status and live dashboard */
+.broadcast-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:-3px 0 15px;padding:9px 13px;border:1px solid rgba(148,163,184,.15);border-radius:11px;background:rgba(12,20,33,.8);font:700 .68rem var(--mono);letter-spacing:.12em;color:#9aa9bd;text-transform:uppercase}
+.on-air{display:inline-flex;align-items:center;gap:8px;color:#fecaca}.on-air i{width:8px;height:8px;border-radius:50%;background:#ef4444;box-shadow:0 0 12px #ef4444;animation:signalPulse 1.6s infinite}
+.broadcast-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.broadcast-meta span{display:inline-flex;align-items:center;gap:6px}
+.lang-control{display:flex;align-items:center;gap:7px;color:#aab6c7;letter-spacing:.04em}
+.lang-control select{width:auto;min-width:115px;padding:.45rem 2rem .45rem .65rem;font-size:.75rem;border-color:rgba(245,158,11,.35)}
+@keyframes signalPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(239,68,68,.45)}50%{opacity:.55;box-shadow:0 0 0 6px rgba(239,68,68,0)}}
+.stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 15px}
+.stat-card{position:relative;overflow:hidden;padding:13px 15px;border:1px solid rgba(148,163,184,.17);border-radius:13px;background:linear-gradient(135deg,rgba(19,31,49,.96),rgba(11,18,30,.95));box-shadow:0 10px 25px rgba(0,0,0,.17);animation:riseIn .55s both}
+.stat-card:nth-child(2){animation-delay:.06s}.stat-card:nth-child(3){animation-delay:.12s}.stat-card:nth-child(4){animation-delay:.18s}
+.stat-card::after{content:'';position:absolute;right:-24px;top:-35px;width:95px;height:95px;border:1px solid rgba(245,158,11,.13);border-radius:50%;box-shadow:0 0 0 12px rgba(245,158,11,.025),0 0 0 24px rgba(245,158,11,.02)}
+.stat-label{font-size:.64rem;letter-spacing:.11em;text-transform:uppercase;color:#95a4b9;font-weight:700}
+.stat-value{font:800 clamp(1.25rem,2vw,1.75rem) var(--sans);color:#f8fafc;margin-top:4px;line-height:1.15}
+.stat-hint{font-size:.68rem;color:#718096;margin-top:3px}
+.stat-card:nth-child(2) .stat-value{color:#fbbf24}.stat-card:nth-child(3) .stat-value{color:#fb7185}.stat-card:nth-child(4) .stat-value{color:#38bdf8}
+@keyframes riseIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.calendar-tools{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:8px 0 12px}
+.calendar-nav{display:flex;align-items:center;gap:6px}
+.cal-btn{border:1px solid rgba(148,163,184,.22);border-radius:8px;padding:.48rem .68rem;background:rgba(255,255,255,.045);color:#dce5f1;font-size:.72rem;font-weight:700;cursor:pointer;transition:all .18s}
+.cal-btn:hover{border-color:rgba(245,158,11,.55);background:rgba(245,158,11,.1);color:#fcd34d;transform:translateY(-1px)}
+.cal-caption{font-size:.75rem;color:#fcd34d;font-weight:700;letter-spacing:.04em}
+.calendar-strip{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin:0 0 12px}
+.cal-day{min-width:0;border:1px solid rgba(148,163,184,.16);border-radius:9px;padding:8px 3px;background:rgba(255,255,255,.025);color:#cbd5e1;text-align:center;cursor:pointer;transition:all .18s}
+.cal-day .dow{display:block;font-size:.58rem;color:#8493a8;text-transform:uppercase;letter-spacing:.08em}
+.cal-day .num{display:block;font-size:.95rem;font-weight:800;margin-top:3px}
+.cal-day .mon{display:block;font-size:.56rem;color:#8493a8;margin-top:1px}
+.cal-day.selected{background:linear-gradient(160deg,rgba(245,158,11,.23),rgba(245,158,11,.08));border-color:rgba(245,158,11,.75);box-shadow:inset 0 0 0 1px rgba(245,158,11,.16);color:#fff}
+.cal-day.selected .dow,.cal-day.selected .mon{color:#fcd34d}
+.cal-day:disabled{opacity:.28;cursor:not-allowed}
+.crew-tools{display:flex;gap:7px;align-items:center;margin:.35rem 0 .65rem;flex-wrap:wrap}
+.crew-tools input{flex:1;min-width:130px;padding:.55rem .65rem;font-size:.78rem}
+.crew-action{border:1px solid rgba(148,163,184,.2);border-radius:8px;background:rgba(255,255,255,.04);padding:.48rem .6rem;color:#cbd5e1;font-size:.67rem;font-weight:700;cursor:pointer}
+.crew-action:hover{border-color:rgba(245,158,11,.5);color:#fcd34d}
+.crew-person-count{font-size:.66rem;color:#8493a8;margin:0 0 .55rem}
+.crew-group{animation:riseIn .3s both}
+.crew-body{animation:crewReveal .22s ease both}
+@keyframes crewReveal{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:1fr}}
+@media(max-width:520px){.top{padding:12px}.broadcast-strip{font-size:.59rem}.stats-grid{gap:7px}.stat-card{padding:10px}.calendar-strip{gap:4px}.cal-day{padding:7px 1px}.cal-day .dow{font-size:.52rem}.cal-day .num{font-size:.88rem}.calendar-tools{align-items:flex-start}.calendar-nav{width:100%;justify-content:space-between}.lang-control{width:100%;justify-content:space-between}}
+@media(prefers-reduced-motion:reduce){.stat-card,.crew-group,.crew-body{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -725,45 +815,67 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
         <p>Reserve a studio · Manager review within 24h</p>
       </div>
     </div>
+    <label class="lang-control" for="languageSelect"><span data-i18n="language">Language</span>
+      <select id="languageSelect" aria-label="Select language"><option value="en">English</option><option value="am">አማርኛ</option></select>
+    </label>
     <button class="sidebtn" id="sideOpen" type="button" aria-label="Open request status panel">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
       Requests <b id="sideCount">0</b>
     </button>
   </header>
 
+  <div class="broadcast-strip">
+    <div class="broadcast-meta"><span class="on-air"><i></i><b data-i18n="studioSystem">STUDIO OPERATIONS</b></span><span>FMC / BOOKING DESK</span><span id="systemClock">--:--:--</span></div>
+    <span data-i18n="broadcastPortal">BROADCAST PRODUCTION PORTAL</span>
+  </div>
+  <section class="stats-grid" aria-label="Studio dashboard statistics">
+    <article class="stat-card"><div class="stat-label" data-i18n="activeStudios">Active studios</div><div class="stat-value" id="statRooms">—</div><div class="stat-hint" data-i18n="readyForRequests">Ready for requests</div></article>
+    <article class="stat-card"><div class="stat-label" data-i18n="pendingRequests">Pending requests</div><div class="stat-value" id="statPending">—</div><div class="stat-hint" data-i18n="awaitingReview">Awaiting manager review</div></article>
+    <article class="stat-card"><div class="stat-label" data-i18n="cancelledBookings">Cancelled bookings</div><div class="stat-value" id="statCancelled">—</div><div class="stat-hint" data-i18n="upcomingOnly">Upcoming requests only</div></article>
+    <article class="stat-card"><div class="stat-label" data-i18n="todayRequests">Today's requests</div><div class="stat-value" id="statToday">—</div><div class="stat-hint" data-i18n="todayPending">Pending for today</div></article>
+  </section>
   <div class="layout">
     <div class="main">
       <div id="formView">
         <div class="intro">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-          <span>No account needed. Pick a room and time, leave your details, and a manager will review your request and call to confirm. <strong>Your request is not a booking until a manager approves it.</strong></span>
+          <span><span data-i18n="roomIntro">No account needed. Pick a room and time, leave your details, and a manager will review your request and call to confirm.</span> <strong data-i18n="notConfirmed">Your request is not a booking until a manager approves it.</strong></span>
         </div>
 
         <form id="form" novalidate autocomplete="off">
           <div class="sec panel">
             <span class="hairline"></span>
-            <h2><span class="step-num" id="stepRoomNum">1</span> Choose a room</h2>
+            <h2><span class="step-num" id="stepRoomNum">1</span> <span data-i18n="chooseRoom">Choose a room</span></h2>
             <div class="chips" id="rooms"></div>
           </div>
 
           <div class="sec panel">
             <span class="hairline"></span>
-            <h2><span class="step-num" id="stepTimeNum">2</span> Date &amp; time</h2>
+            <h2><span class="step-num" id="stepTimeNum">2</span> <span data-i18n="dateTime">Date &amp; time</span></h2>
             <div class="row2">
-              <div><label for="date">Date</label><input type="date" id="date"></div>
+              <div><label for="date" data-i18n="date">Date</label><input type="date" id="date"></div>
               <div>
-                <label for="dur">Duration</label>
+                <label for="dur" data-i18n="duration">Duration</label>
                 <select id="dur">
-                  <option value="1">1 hour</option>
-                  <option value="2">2 hours</option>
-                  <option value="3">3 hours</option>
-                  <option value="4">4 hours</option>
-                  <option value="6">6 hours</option>
-                  <option value="8">8 hours (full day)</option>
+                  <option value="1" data-i18n="hours1">1 hour</option>
+                  <option value="2" data-i18n="hours2">2 hours</option>
+                  <option value="3" data-i18n="hours3">3 hours</option>
+                  <option value="4" data-i18n="hours4">4 hours</option>
+                  <option value="6" data-i18n="hours6">6 hours</option>
+                  <option value="8" data-i18n="fullDay">8 hours (full day)</option>
                 </select>
               </div>
             </div>
-            <label>Start time <small id="slotRoom"></small></label>
+            <div class="calendar-tools">
+              <div class="calendar-nav">
+                <button class="cal-btn" id="calPrev" type="button" aria-label="Previous week">‹ <span data-i18n="previous">Previous</span></button>
+                <button class="cal-btn" id="calToday" type="button" data-i18n="today">Today</button>
+                <button class="cal-btn" id="calNext" type="button" aria-label="Next week"><span data-i18n="next">Next</span> ›</button>
+              </div>
+              <div class="cal-caption" id="calendarCaption">Select a date</div>
+            </div>
+            <div class="calendar-strip" id="calendarStrip" aria-label="Choose a date"></div>
+            <label><span data-i18n="startTime">Start time</span> <small id="slotRoom"></small></label>
             <div class="slots" id="slots"></div>
             <div class="legend">
               <span><i style="background:rgba(52,211,153,.5)"></i>Available</span>
@@ -775,14 +887,14 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
 
           <div class="sec panel">
             <span class="hairline"></span>
-            <h2><span class="step-num" id="stepDetailsNum">3</span> Your details</h2>
-            <label for="prod">Production / program name</label>
+            <h2><span class="step-num" id="stepDetailsNum">3</span> <span data-i18n="yourDetails">Your details</span></h2>
+            <label for="prod" data-i18n="productionName">Production / program name</label>
             <input id="prod" type="text" maxlength="120" placeholder="e.g. Morning Show interview">
             <div class="row2">
-              <div><label for="name">Your full name</label><input id="name" type="text" maxlength="80" autocomplete="name"></div>
-              <div><label for="phone">Phone number</label><input id="phone" type="tel" inputmode="tel" maxlength="20" placeholder="0911 23 45 67" autocomplete="tel"></div>
+              <div><label for="name" data-i18n="fullName">Your full name</label><input id="name" type="text" maxlength="80" autocomplete="name"></div>
+              <div><label for="phone" data-i18n="phone">Phone number</label><input id="phone" type="tel" inputmode="tel" maxlength="20" placeholder="0911 23 45 67" autocomplete="tel"></div>
             </div>
-            <label for="notes">Notes <small>— optional, equipment or guests</small></label>
+            <label for="notes"><span data-i18n="notes">Notes</span> <small>— optional, equipment or guests</small></label>
             <textarea id="notes" maxlength="500" placeholder="Anything a manager should know about your booking…"></textarea>
             <div class="hp" aria-hidden="true">
               <label>Leave this empty<input id="website" tabindex="-1" autocomplete="off"></label>
@@ -798,7 +910,7 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
 
           <button class="btn" id="submit" type="submit">
             <span class="btn-spinner" aria-hidden="true"></span>
-            <span class="btn-label">Send request</span>
+            <span class="btn-label" data-i18n="sendRequest">Send request</span>
           </button>
         </form>
       </div>
@@ -810,8 +922,8 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
             <polyline points="20 6 9 17 4 12"/>
           </svg>
         </div>
-        <h2>Request received</h2>
-        <p>A manager will review it and call you on the number below.</p>
+        <h2 data-i18n="requestReceived">Request received</h2>
+        <p data-i18n="managerReview">A manager will review it and call you on the number below.</p>
         <dl id="doneList"></dl>
         <p class="note">This is not a confirmed booking yet. If you don't hear back, please contact the studio directly.</p>
         <button class="btn" id="viewStatus" type="button">See my request status</button>
@@ -826,7 +938,7 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
       <aside class="side panel" id="side" aria-label="Request status">
         <span class="hairline"></span>
         <div class="side-head">
-          <h2>Follow up</h2>
+          <h2 data-i18n="followUp">Follow up</h2>
           <button class="x" id="sideClose" type="button" aria-label="Close panel">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
@@ -834,8 +946,8 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
         <p class="side-sub">Upcoming requests waiting for a manager's decision, and cancelled bookings.</p>
 
         <div class="tabs" role="tablist">
-          <button class="tab on" type="button" data-tab="pending" role="tab">Pending <b id="cPending">0</b></button>
-          <button class="tab cx" type="button" data-tab="cancelled" role="tab">Cancelled <b id="cCancelled">0</b></button>
+          <button class="tab on" type="button" data-tab="pending" role="tab"><span data-i18n="pending">Pending</span> <b id="cPending">0</b></button>
+          <button class="tab cx" type="button" data-tab="cancelled" role="tab"><span data-i18n="cancelled">Cancelled</span> <b id="cCancelled">0</b></button>
         </div>
 
         <input id="q" type="search" placeholder="Search name or production" maxlength="60" autocomplete="off" aria-label="Search requests">
@@ -850,9 +962,15 @@ footer{text-align:center;color:var(--dim);font-size:.78rem;margin:1.5rem 0 1rem;
       <aside class="crew panel" aria-label="Crew credits">
         <span class="hairline"></span>
         <div class="crew-head-row">
-          <h2>Crew credits</h2>
+          <h2 data-i18n="crewCredits">Crew directory</h2>
         </div>
-        <p class="crew-sub">Click a role to expand names.</p>
+        <p class="crew-sub" data-i18n="crewSubtitle">Browse the production team by department.</p>
+        <div class="crew-tools">
+          <input id="crewSearch" type="search" placeholder="Search crew or department…" aria-label="Search crew directory">
+          <button class="crew-action" id="crewExpand" type="button" data-i18n="expandAll">Expand all</button>
+          <button class="crew-action" id="crewCollapse" type="button" data-i18n="collapseAll">Collapse</button>
+        </div>
+        <div class="crew-person-count" id="crewCount">0 crew members · 0 departments</div>
         <div
           id="crewPanel"
           class="crew-panel"
@@ -878,6 +996,48 @@ const SKEY='sb_publishable_rFAc7fyGRDHr78wxTnJoCg_RGTak7mW';
 const ALL_ROOMS=['Studio A','Studio B','Studio C','PCR A','PCR B'];
 const ROOM_COLOR={'Studio A':'#4FC3F7','Studio B':'#FFD600','Studio C':'#00C853','PCR A':'#FF9800','PCR B':'#CE93D8'};
 const FIRST_START=6,LAST_END=23,MAX_DAYS=90,COOLDOWN_MS=15000,MAX_PENDING_NOTE=5;
+
+/* ---------- Language, dashboard and calendar presentation ---------- */
+const I18N={
+ en:{language:'Language',studioSystem:'STUDIO OPERATIONS',broadcastPortal:'BROADCAST PRODUCTION PORTAL',activeStudios:'Active studios',readyForRequests:'Ready for requests',pendingRequests:'Pending requests',awaitingReview:'Awaiting manager review',cancelledBookings:'Cancelled bookings',upcomingOnly:'Upcoming requests only',todayRequests:"Today's requests",todayPending:'Pending for today',previous:'Previous',today:'Today',next:'Next',crewSubtitle:'Browse the production team by department.',expandAll:'Expand all',collapseAll:'Collapse',crewMembers:'crew members',departments:'departments',chooseRoom:'Choose a room',dateTime:'Date & time',yourDetails:'Your details',startTime:'Start time',productionName:'Production / program name',fullName:'Your full name',phone:'Phone number',notes:'Notes',sendRequest:'Send request',followUp:'Follow up',crewCredits:'Crew directory',pending:'Pending',cancelled:'Cancelled',available:'Available',booked:'Booked',unavailable:'Unavailable',date:'Date',duration:'Duration',hours1:'1 hour',hours2:'2 hours',hours3:'3 hours',hours4:'4 hours',hours6:'6 hours',fullDay:'8 hours (full day)',roomIntro:'No account needed. Pick a room and time, leave your details, and a manager will review your request and call to confirm.',notConfirmed:'Your request is not a booking until a manager approves it.',requestReceived:'Request received',managerReview:'A manager will review it and call you on the number below.'},
+ am:{language:'ቋንቋ',studioSystem:'የስቱዲዮ አስተዳደር',broadcastPortal:'የብሮድካስት ፕሮዳክሽን ፖርታል',activeStudios:'ንቁ ስቱዲዮዎች',readyForRequests:'ጥያቄ ለመቀበል ዝግጁ',pendingRequests:'በመጠባበቅ ላይ ያሉ ጥያቄዎች',awaitingReview:'የአስተዳዳሪ ውሳኔ ይጠብቃሉ',cancelledBookings:'የተሰረዙ ቦታ ማስያዣዎች',upcomingOnly:'የሚቀጥሉ ጥያቄዎች ብቻ',todayRequests:'የዛሬ ጥያቄዎች',todayPending:'ለዛሬ በመጠባበቅ ላይ',previous:'ቀዳሚ',today:'ዛሬ',next:'ቀጣይ',crewSubtitle:'የፕሮዳክሽን ቡድኑን በዘርፍ ይመልከቱ።',expandAll:'ሁሉንም ክፈት',collapseAll:'ሁሉንም ዝጋ',crewMembers:'የቡድን አባላት',departments:'ዘርፎች',chooseRoom:'ስቱዲዮ ይምረጡ',dateTime:'ቀን እና ሰዓት',yourDetails:'የእርስዎ መረጃ',startTime:'የመጀመሪያ ሰዓት',productionName:'የፕሮግራም / ፕሮዳክሽን ስም',fullName:'ሙሉ ስም',phone:'ስልክ ቁጥር',notes:'ማስታወሻ',sendRequest:'ጥያቄ ላክ',followUp:'የጥያቄ ሁኔታ',crewCredits:'የቡድን ማውጫ',pending:'በመጠባበቅ ላይ',cancelled:'ተሰርዟል',available:'ክፍት',booked:'ተይዟል',unavailable:'አይገኝም',date:'ቀን',duration:'ቆይታ',hours1:'1 ሰዓት',hours2:'2 ሰዓት',hours3:'3 ሰዓት',hours4:'4 ሰዓት',hours6:'6 ሰዓት',fullDay:'8 ሰዓት (ሙሉ ቀን)',roomIntro:'መለያ መክፈት አያስፈልግም። ስቱዲዮና ሰዓት ይምረጡ፣ መረጃዎን ያስገቡ፤ አስተዳዳሪው ጥያቄዎን አይቶ ያነጋግርዎታል።',notConfirmed:'አስተዳዳሪው እስኪያጸድቀው ድረስ ጥያቄዎ የተረጋገጠ ቦታ ማስያዣ አይደለም።',requestReceived:'ጥያቄዎ ደርሷል',managerReview:'አስተዳዳሪው ጥያቄዎን አይቶ ከታች ባለው ስልክ ቁጥር ያነጋግርዎታል።'}
+};
+let currentLang='en';
+function applyLanguage(lang){
+ currentLang=I18N[lang]?lang:'en';
+ try{localStorage.setItem('fmc_language',currentLang)}catch(e){}
+ document.documentElement.lang=currentLang==='am'?'am':'en';
+ document.querySelectorAll('[data-i18n]').forEach(node=>{const key=node.dataset.i18n;if(I18N[currentLang][key])node.textContent=I18N[currentLang][key];});
+ document.querySelectorAll('[data-i18n-placeholder]').forEach(node=>{const key=node.dataset.i18nPlaceholder;if(I18N[currentLang][key])node.placeholder=I18N[currentLang][key];});
+ const selector=$('languageSelect');if(selector)selector.value=currentLang;
+ renderCalendarStrip();renderStats();renderCrew();
+}
+function tr(key){return (I18N[currentLang]&&I18N[currentLang][key])||I18N.en[key]||key;}
+function renderStats(){
+ const pending=sideRows.filter(b=>b.status==='pending'),cancelled=sideRows.filter(b=>b.status==='cancelled'),today=localDate();
+ if($('statRooms'))$('statRooms').textContent=String(activeRooms.length);
+ if($('statPending'))$('statPending').textContent=String(pending.length);
+ if($('statCancelled'))$('statCancelled').textContent=String(cancelled.length);
+ if($('statToday'))$('statToday').textContent=String(pending.filter(b=>b.date===today).length);
+}
+function renderCalendarStrip(){
+ const strip=$('calendarStrip'),dateInput=$('date');if(!strip||!dateInput||!dateInput.value)return;
+ const selected=new Date(dateInput.value+'T00:00:00'),frag=document.createDocumentFragment();
+ $('calendarCaption').textContent=selected.toLocaleDateString(currentLang==='am'?'am-ET':'en-US',{month:'long',year:'numeric'});
+ for(let i=0;i<7;i++){
+  const d=addDays(selected,i),iso=localDate(d),b=el('button','cal-day'+(i===0?' selected':''));
+  b.type='button';b.disabled=iso<localDate()||iso>localDate(addDays(new Date(),MAX_DAYS));
+  b.setAttribute('aria-pressed',String(i===0));
+  b.appendChild(el('span','dow',d.toLocaleDateString(currentLang==='am'?'am-ET':'en-US',{weekday:'short'})));
+  b.appendChild(el('span','num',String(d.getDate())));
+  b.appendChild(el('span','mon',d.toLocaleDateString(currentLang==='am'?'am-ET':'en-US',{month:'short'})));
+  b.addEventListener('click',()=>{dateInput.value=iso;startHour=null;renderCalendarStrip();refreshSlots();});
+  frag.appendChild(b);
+ }
+ strip.replaceChildren(frag);
+}
+function shiftCalendar(days){const d=$('date');const next=addDays(new Date(d.value+'T00:00:00'),days);const iso=localDate(next);if(iso<localDate()||iso>localDate(addDays(new Date(),MAX_DAYS)))return;d.value=iso;startHour=null;renderCalendarStrip();refreshSlots();}
+function startSystemClock(){const tick=()=>{const node=$('systemClock');if(node)node.textContent=new Date().toLocaleTimeString(currentLang==='am'?'am-ET':'en-US',{hour12:false});};tick();setInterval(tick,1000);}
 
 /* ---------- Crew credits ---------- */
 const CREW = {
@@ -947,6 +1107,7 @@ async function loadActiveRooms(){
       : ALL_ROOMS.slice();
 
     console.info('[FMC] Active rooms:', activeRooms);
+    renderStats();
   }catch(err){
     console.warn('[FMC] Could not load studio_status — falling back to all rooms:',err);
     activeRooms=ALL_ROOMS.slice();
@@ -1192,6 +1353,7 @@ async function loadSide(){
       return true;
     });
     sideOk=true;sideUpdated=new Date();
+    renderStats();
   }catch(e){
     console.error('Sidebar load failed:',e&&e.message?e.message:e);
     sideOk=false;
@@ -1200,6 +1362,7 @@ async function loadSide(){
 }
 function renderSide(){
   const pend=sideRows.filter(b=>b.status==='pending'),canc=sideRows.filter(b=>b.status==='cancelled');
+  renderStats();
   $('cPending').textContent=pend.length;$('cCancelled').textContent=canc.length;
   $('sideCount').textContent=pend.length;
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.tab===sideTab));
@@ -1270,7 +1433,10 @@ function renderCrew(){
   if(!panel) return;
 
   const frag = document.createDocumentFragment();
-  const entries = Object.entries(CREW);
+  const query=clean(($('crewSearch')&&$('crewSearch').value)||'').toLowerCase();
+  const entries = Object.entries(CREW).filter(([role,data])=>!query||role.toLowerCase().includes(query)||data.names.some(n=>n.toLowerCase().includes(query)));
+  const total=entries.reduce((sum,entry)=>sum+entry[1].names.length,0);
+  if($('crewCount'))$('crewCount').textContent=`${total} ${tr('crewMembers')} · ${entries.length} ${tr('departments')}`;
 
   if(!entries.length){
     frag.appendChild(el('div','note warn','No crew members listed yet.'));
@@ -1291,7 +1457,8 @@ function renderCrew(){
 
     const roleSpan = el('span','crew-role');
     roleSpan.appendChild(el('span','dot'));
-    roleSpan.appendChild(document.createTextNode(role));
+    const roleNames=currentLang==='am'?({'Light':'መብራት','Sound':'ድምፅ','Camera':'ካሜራ','Floor':'ፍሎር','Supervisor':'ተቆጣጣሪ','Vision Mixer':'ቪዥን ሚክሰር'}[role]||role):role;
+    roleSpan.appendChild(document.createTextNode(roleNames));
     head.appendChild(roleSpan);
 
     const rightSide = el('span');
@@ -1323,7 +1490,7 @@ function renderCrew(){
     if(data.names.length){
       data.names.forEach(name => ul.appendChild(el('li','',name)));
     } else {
-      ul.appendChild(el('li','empty','No names listed'));
+      ul.appendChild(el('li','empty',currentLang==='am'?'ስም አልተዘረዘረም':'No names listed'));
     }
     body.appendChild(ul);
     group.appendChild(body);
@@ -1338,6 +1505,7 @@ function renderCrew(){
   });
 
   panel.replaceChildren(frag);
+  if(query){panel.querySelectorAll('.crew-group').forEach(g=>{g.dataset.open='true';const h=g.querySelector('.crew-toggle');if(h)h.setAttribute('aria-expanded','true');});}
 }
 
 /* ---------- Start ---------- */
@@ -1346,7 +1514,14 @@ async function init(){
   buildRooms();
   const d=$('date'),today=localDate();
   d.min=today;d.max=localDate(addDays(new Date(),MAX_DAYS));d.value=today;
-  d.addEventListener('change',()=>{startHour=null;refreshSlots();});
+  d.addEventListener('change',()=>{startHour=null;renderCalendarStrip();refreshSlots();});
+  $('calPrev').addEventListener('click',()=>shiftCalendar(-7));
+  $('calNext').addEventListener('click',()=>shiftCalendar(7));
+  $('calToday').addEventListener('click',()=>{d.value=localDate();startHour=null;renderCalendarStrip();refreshSlots();});
+  $('languageSelect').addEventListener('change',e=>applyLanguage(e.target.value));
+  $('crewSearch').addEventListener('input',renderCrew);
+  $('crewExpand').addEventListener('click',()=>document.querySelectorAll('.crew-group').forEach(g=>{g.dataset.open='true';const h=g.querySelector('.crew-toggle');if(h)h.setAttribute('aria-expanded','true');}));
+  $('crewCollapse').addEventListener('click',()=>document.querySelectorAll('.crew-group').forEach(g=>{g.dataset.open='false';const h=g.querySelector('.crew-toggle');if(h)h.setAttribute('aria-expanded','false');}));
   $('dur').addEventListener('change',()=>{renderSlots();});
   ['prod','name','phone'].forEach(id=>$(id).addEventListener('input',updateSummary));
   $('form').addEventListener('submit',e=>{e.preventDefault();submit();});
@@ -1356,16 +1531,22 @@ async function init(){
     updateSummary();refreshSlots();window.scrollTo(0,0);
   });
   renderSlots();
+  renderCalendarStrip();
   initSide();
   renderCrew();
+  startSystemClock();
+  let savedLang='en';try{savedLang=localStorage.getItem('fmc_language')||'en'}catch(e){}applyLanguage(savedLang);
 }
 init().catch(err=>{
   console.error('[FMC] Boot failed:',err);
   activeRooms=ALL_ROOMS.slice();
   buildRooms();
   renderSlots();
+  renderCalendarStrip();
   initSide();
   renderCrew();
+  startSystemClock();
+  let savedLang='en';try{savedLang=localStorage.getItem('fmc_language')||'en'}catch(e){}applyLanguage(savedLang);
 });
 </script>
 </body>
